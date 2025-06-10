@@ -1,0 +1,11 @@
+{
+    "name": "kido/test",
+    "description": "composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kido\\Test\\": "src/"
+        }
+    },
+    "require": {}
+}
