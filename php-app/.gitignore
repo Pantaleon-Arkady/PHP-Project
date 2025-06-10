@@ -2,6 +2,7 @@
 /vendor
 /node_modules
 composer.lock
+/projectSrc/vendor/
 
 # Docker volumes
 dataDir/
