@@ -1,0 +1,18 @@
+# Dependency folders
+/vendor
+/node_modules
+composer.lock
+
+# Docker volumes
+dataDir/
+tmp/
+logs/
+
+# Env and secrets
+.env
+
+# OS and IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log
