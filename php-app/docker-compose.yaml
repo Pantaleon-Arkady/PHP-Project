@@ -18,3 +18,17 @@ services:
     volumes:
       - ./projectSrc:/var/www
     working_dir: /var/www
+
+  postgres:
+    container_name: db
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_DB=php-app
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=pguser
+    volumes:
+      - ./dataDir:/var/lib/postgresql/data:rw
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
