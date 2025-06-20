@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
 
 use Root\Controllers\General;
 use Root\Controllers\UsersLog;
