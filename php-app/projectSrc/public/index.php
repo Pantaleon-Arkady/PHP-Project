@@ -16,6 +16,9 @@ switch ($uri) {
     case '/register':
         $usersLog->Register();
         break;
+    case '/signing-up';
+        $usersLog->SignUp();
+        break;
 
 
     #General Stuff
