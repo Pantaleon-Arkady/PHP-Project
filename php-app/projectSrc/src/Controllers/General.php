@@ -1,6 +1,7 @@
 <?php
 
 namespace Root\Controllers;
+use Root\Database\Database;
 
 class General 
 {
