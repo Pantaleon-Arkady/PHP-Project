@@ -1,4 +1,5 @@
 <?php 
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,18 +41,12 @@
                 <a href="#" class="text-decoration-none me-2">Log In</a>
                 <span>or</span>
                 <a href="#" class="text-decoration-none ms-2">Sign Up</a>
-                <?php if (isset($_SESSION['registered'])): ?>
-                    <div class="alert alert-success">
-                        <strong>Success!</strong> You are now registered in Trial App Name.
-                    </div>
-                    <?php unset($_SESSION['registered']); ?>
-                <?php endif; ?>
             </div>
         </div>
         <div class="bg-light w-50 m-3 rounded d-flex justify-content-center align-items-center p-4">
             <div class="form-container w-100">
                 <h4 class="mb-4 text-center">Create an Account</h4>
-                <form method="POST" action="/signing-up">
+                <form method="POST" action="/signing-up" id="registerForm">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input
@@ -82,13 +77,36 @@
                             required
                         >
                     </div>
-                    <button type="submit" class="btn btn-dark w-100 mt-2">
+                    <button type="submit" class="btn btn-dark w-100 mt-2" id="submitBtn">
                         <span id="submitText">Register</span>
                         <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     </button>
                 </form>
+                <?php if (isset($_SESSION['registered'])): ?>
+                    <div class="alert alert-success py-3">
+                        <strong>Success!</strong> You are now registered in Trial App Name.
+                    </div>
+                    <?php unset($_SESSION['registered']); ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </body>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+        const text = document.getElementById('submitText');
+
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        text.textContent = 'Submitting...';
+
+        setTimeout(() => {
+            this.submit();
+        }, 2000);
+    });
+</script>
 </html>
