@@ -14,7 +14,9 @@ services:
 
   php-fpm:
     container_name: fpm
-    image: php:8.3-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./projectSrc:/var/www
     working_dir: /var/www
