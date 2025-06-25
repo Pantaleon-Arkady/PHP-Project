@@ -151,5 +151,20 @@ session_start();
             this.submit();
         }, 2000);
     });
+    document.getElementById('logInForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+        const text = document.getElementById('submitText');
+
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        text.textContent = 'Submitting...';
+
+        setTimeout(() => {
+            this.submit();
+        }, 2000);
+    });
 </script>
 </html>
