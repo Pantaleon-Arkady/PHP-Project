@@ -78,9 +78,9 @@ session_start();
                                 required
                             >
                         </div>
-                        <button type="submit" class="btn btn-dark w-100 mt-2" id="submitBtn">
-                            <span id="submitText">Register</span>
-                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        <button type="submit" class="btn btn-dark w-100 mt-2" id="registerBtn">
+                            <span id="registerText">Register</span>
+                            <span id="registerSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                     </form>
                     <?php if (isset($_SESSION['registered'])): ?>
@@ -114,9 +114,9 @@ session_start();
                                 required
                             >
                         </div>
-                        <button type="submit" class="btn btn-dark w-100 mt-2" id="submitBtn">
-                            <span id="submitText">Log In</span>
-                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        <button type="submit" class="btn btn-dark w-100 mt-2" id="logInBtn">
+                            <span id="logInText">Log In</span>
+                            <span id="logInSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                     </form>
                     <?php if (isset($_SESSION['registered'])): ?>
@@ -136,35 +136,42 @@ session_start();
     </div>
 </body>
 <script>
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        const btn = document.getElementById('submitBtn');
-        const spinner = document.getElementById('spinner');
-        const text = document.getElementById('submitText');
+            const btn = document.getElementById('registerBtn');
+            const spinner = document.getElementById('registerSpinner');
+            const text = document.getElementById('registerText');
 
-        btn.disabled = true;
-        spinner.classList.remove('d-none');
-        text.textContent = 'Submitting...';
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Submitting...';
 
-        setTimeout(() => {
-            this.submit();
-        }, 2000);
-    });
-    document.getElementById('logInForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+        });
+    }
 
-        const btn = document.getElementById('submitBtn');
-        const spinner = document.getElementById('spinner');
-        const text = document.getElementById('submitText');
+    const logInForm = document.getElementById('logInForm');
+    if (logInForm) {
+        logInForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        btn.disabled = true;
-        spinner.classList.remove('d-none');
-        text.textContent = 'Submitting...';
+            const btn = document.getElementById('logInBtn');
+            const spinner = document.getElementById('logInSpinner');
+            const text = document.getElementById('logInText');
 
-        setTimeout(() => {
-            this.submit();
-        }, 2000);
-    });
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Submitting...';
+
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+        });
+    }
 </script>
 </html>
