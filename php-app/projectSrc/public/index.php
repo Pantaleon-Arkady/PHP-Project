@@ -19,6 +19,12 @@ switch ($uri) {
     case '/signing-up';
         $usersLog->SignUp();
         break;
+    case '/logging-in':
+        $usersLog->LogIn();
+        break;
+    case '/home':
+        $usersLog->Home();
+        break;
 
 
     #General Stuff
