@@ -28,9 +28,12 @@ services:
       - POSTGRES_DB=php-app
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=pguser
-    volumes:
-      - ./dataDir:/var/lib/postgresql/data:rw
     ports:
       - target: 5432
         published: 5432
         protocol: tcp
+    volumes:
+      - ./docker/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./docker/database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    tmpfs:
+      - /var/lib/postgresql/data
