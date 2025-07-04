@@ -37,3 +37,10 @@ services:
       - ./docker/database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
     tmpfs:
       - /var/lib/postgresql/data
+
+  mailer:
+    container_name: mailer
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
