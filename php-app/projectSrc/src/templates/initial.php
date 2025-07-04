@@ -13,7 +13,8 @@
       <h1>Hello from your first template!</h1>
       <div class="container-fluid text-black bg-white rounded"> 
         <h2>Pages List</h2>
-        <a href="http://localhost:8080/register">Register</a>
+        <a href="http://localhost:8080/register">Register</a></br>
+        <a href="http://localhost:8080/home">Home</a>
       </div>
     </div>
   </body>
