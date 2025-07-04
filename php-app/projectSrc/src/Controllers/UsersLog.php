@@ -3,6 +3,7 @@
 namespace Root\Controllers;
 
 use FontLib\EOT\File;
+use Root\Controllers\Mailer;
 use Root\Database\Database;
 use \PDO;
 
@@ -27,6 +28,28 @@ class UsersLog
 
     }
 
+    protected function emailRegistration($email, $username) {
+
+        include_once __DIR__ . '/../Controllers/Mailer.php';
+
+        $emailTo = $email;
+        $emailFrom = 'register@email.com';
+        $subject = 'Registration';
+        $content = '
+        <html>
+        <body>
+            <h1>Welcome, ' . htmlspecialchars($username) . '!</h1>
+            <p>Click to verify: <a href="http://email.api:8080/verify">Verify</a></p>
+        </body>
+        </html>
+        ';
+
+        $sent = Mailer::send($emailTo, $emailFrom, $subject, $content);
+        if (!$sent) {
+            error_log('Email failed to send');
+        }
+    }
+
     public function SignUp()
     {
         session_start();
@@ -46,6 +69,8 @@ class UsersLog
                 'username' => $username,
                 'password' => $hashed_ps
             ]);
+
+            $this->emailRegistration($email, $username);
 
             $_SESSION['registered'] = true;
             
