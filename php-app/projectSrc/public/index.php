@@ -25,6 +25,9 @@ switch ($uri) {
     case '/home':
         $usersLog->Home();
         break;
+    case '/homepage':
+        $general->userHome();
+        break;
 
 
     #General Stuff
