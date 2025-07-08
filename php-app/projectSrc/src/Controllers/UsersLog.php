@@ -100,22 +100,18 @@ class UsersLog
 
             $user = $registerQuery->fetch(PDO::FETCH_ASSOC);
 
-            echo '<pre>';
-            print_r($user);
-            echo '</pre>';
+            // echo '<pre>';
+            // print_r($user);
+            // echo '</pre>';
 
             // $userId = $user['id'];
             $_SESSION['userId'] = $user['id'];
             $_SESSION['userInfo'] = $user;
 
-            $this->redirect('/home');
+            $this->redirect('/homepage');
         }
 
         return ob_get_clean();
-
-        
-
-        // include_once __DIR__ . '/../templates/home.php';
     }
 
     public function Home()
