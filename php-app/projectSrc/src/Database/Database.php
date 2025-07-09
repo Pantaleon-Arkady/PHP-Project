@@ -30,4 +30,23 @@ class Database
 
         return self::$instance;
     }
+
+    public static function fetchAssoc(string $query, array $params = []): array|false
+    {
+        $pdo = self::getConnection();
+
+        $statement = $pdo->prepare($query);
+        $statement->execute($params);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function fetchAll(string $query, array $params = []): array|false
+    {
+        $pdo = self::getConnection();
+        $statement = $pdo->prepare($query);
+        $statement->execute($params);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
