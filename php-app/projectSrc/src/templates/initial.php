@@ -14,7 +14,7 @@
       <div class="container-fluid text-black bg-white rounded"> 
         <h2>Pages List</h2>
         <a href="http://localhost:8080/register">Register</a></br>
-        <a href="http://localhost:8080/home">Home</a>
+        <a href="http://localhost:8080/homepage">Home</a>
       </div>
     </div>
   </body>
