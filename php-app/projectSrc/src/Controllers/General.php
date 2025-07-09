@@ -3,6 +3,7 @@
 namespace Root\Controllers;
 
 use Root\Database\Database;
+use Root\Database\BaseTable;
 use \PDO;
 
 class General 
@@ -31,12 +32,6 @@ class General
         $userQuery->execute(['id' => $userId]);
 
         $user = $userQuery->fetch(PDO::FETCH_ASSOC);
-
-        // echo 'home page fetch';
-
-        // echo '<pre>';
-        // print_r($user);
-        // echo '</pre>';
 
         include_once __DIR__ . '/../templates/home.php';
     }
