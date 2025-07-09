@@ -28,6 +28,9 @@
     <header class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="fw-bold fs-4">MyShop</div>
+            <div class="">
+                <?php echo $user['username']; ?>
+            </div>
             <nav class="d-flex gap-3">
                 <a href="http://localhost:8080/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
                 <a href="http://localhost:8080/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
