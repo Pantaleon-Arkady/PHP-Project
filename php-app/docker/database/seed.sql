@@ -2,25 +2,31 @@ TRUNCATE app_user RESTART IDENTITY;
 
 INSERT INTO app_user (email, username, password)
 VALUES 
+  ('bobross@email.com', 'Bob Ross', md5('practice')),
   ('first@email.com', 'first user', md5('password')),
   ('demo@demo.com', 'demo', md5('demo123')),
   ('test@test.com', 'test', md5('test123'));
 
 INSERT INTO app_user_posts (author, title, content, created_at)
 VALUES
-  (1,
-  'Title',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non lorem purus. Suspendisse bibendum mauris nunc. Praesent euismod pharetra eleifend.',
-  '2025-06-04 10:45:00'),
-  (1,
-  '2nd Post',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non lorem purus. Suspendisse bibendum mauris nunc. Praesent euismod pharetra eleifend.',
-  '2025-07-04 10:45:00'),
   (2,
   'Title',
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non lorem purus. Suspendisse bibendum mauris nunc. Praesent euismod pharetra eleifend.',
-  '2025-06-05 10:45:00'),
+  '2025-06-04 10:45:00'),
+  (2,
+  '2nd Post',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non lorem purus. Suspendisse bibendum mauris nunc. Praesent euismod pharetra eleifend.',
+  '2025-07-04 10:45:00'),
   (3,
+  'Title',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non lorem purus. Suspendisse bibendum mauris nunc. Praesent euismod pharetra eleifend.',
+  '2025-06-05 10:45:00'),
+  (4,
   'Trial Title',
   'Trial Post by Trial User',
-  '2025-07-05 10:45:00');
+  '2025-07-05 10:45:00'),
+  (1,
+  'Talent',
+  '"Talent is a pursued interest. Anything that you''re willing to practice, you can do."',
+  '2025-04-28 23:06:00');
+  ;
