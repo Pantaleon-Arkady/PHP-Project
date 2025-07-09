@@ -37,6 +37,7 @@
                 <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
+                <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
             </nav>
         </div>
     </header>
