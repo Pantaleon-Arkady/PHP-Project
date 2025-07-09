@@ -25,20 +25,22 @@
 </head>
 
 <body class="bg-light">
-    <header class="bg-dark text-white py-3">
+    <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <div class="fw-bold fs-4">MyShop</div>
-            <div class="">
-                <?php echo $user['username']; ?>
+        <span><?php echo $user['username']; ?></span>
+            <div class="d-flex align-items-center gap-3">
+                <div class="fw-bold fs-4">Trial App</div>
+                <a href="#" class="text-white text-decoration-none underline-hover" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
             </div>
             <nav class="d-flex gap-3">
-                <a href="http://localhost:8080/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
-                <a href="http://localhost:8080/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
+                <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
+                <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
             </nav>
         </div>
     </header>
+
     <?php if (isset($_GET['home']) && $_GET['home'] === 'shop'): ?>
         <main class="container my-5">
             <h2 class="mb-4">Featured Products</h2>
@@ -62,11 +64,39 @@
             <?php endforeach; ?>
         </main>
     <?php endif; ?>
+
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Create Post Form -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" action="/create-post.php" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createPostModalLabel">Create New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="postTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="postTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postText" class="form-label">Text</label>
+                        <textarea class="form-control" id="postText" name="text" rows="4" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark">Post</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
+</html>
+
 
 </html>
