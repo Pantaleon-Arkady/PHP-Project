@@ -100,11 +100,6 @@ class UsersLog
 
             $user = $registerQuery->fetch(PDO::FETCH_ASSOC);
 
-            // echo '<pre>';
-            // print_r($user);
-            // echo '</pre>';
-
-            // $userId = $user['id'];
             $_SESSION['userId'] = $user['id'];
             $_SESSION['userInfo'] = $user;
 
@@ -114,27 +109,15 @@ class UsersLog
         return ob_get_clean();
     }
 
-    public function Home()
+
+    public function logOut()
     {
         session_start();
-        
-        $userId = $_SESSION['userId'];
 
-        $userQuery = $this->connection->prepare(
-            'SELECT * FROM app_user WHERE id = :id'
-        );
+        unset($_SESSION['userId']);
 
-        $userQuery->execute(['id' => $userId]);
-
-        $user = $userQuery->fetch(PDO::FETCH_ASSOC);
-
-        echo 'home page fetch';
-
-        echo '<pre>';
-        print_r($user);
-        echo '</pre>';
-
-        include_once __DIR__ . '/../templates/home.php';
-
+        $this->redirect('/register');
+        die();
     }
+
 }
