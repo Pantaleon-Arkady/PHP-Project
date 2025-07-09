@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS app_user_posts (
     author INT NOT NULL,
     title TEXT,
     content TEXT NOT NULL,
-    created_at TIMESTAMP
+    created_at TIMESTAMP,
+    modified_at TIMESTAMP
 );
