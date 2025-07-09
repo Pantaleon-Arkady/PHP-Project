@@ -38,6 +38,15 @@ class General
             ['id' => $userId]
         );
 
+        $allPosts = Database::fetchAll(
+            'SELECT * FROM app_user_posts',
+            []
+        );
+
+        echo '<pre>';
+        print_r($allPosts);
+        echo '</pre>';
+
         include_once __DIR__ . '/../templates/home.php';
     }
 }
