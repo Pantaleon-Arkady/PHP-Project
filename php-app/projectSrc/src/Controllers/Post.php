@@ -31,7 +31,7 @@ class Post
                 app_user u
             ON
                 (p.author = u.id)
-            ORDER BY p.created_at DESC;',
+            ORDER BY p.id DESC;',
             []
         );
 
