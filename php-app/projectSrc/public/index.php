@@ -22,11 +22,11 @@ switch ($uri) {
     case '/logging-in':
         $usersLog->LogIn();
         break;
-    case '/home':
-        $usersLog->Home();
-        break;
     case '/homepage':
         $general->userHome();
+        break;
+    case '/logout':
+        $usersLog->logOut();
         break;
 
 
