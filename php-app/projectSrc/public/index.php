@@ -35,6 +35,9 @@ switch ($uri) {
     case '/create-post':
         $post->createPost();
         break;
+    case '/edit-post':
+        $post->editPost();
+        break;
     case '/delete-post':
         $post->deletePost();
         break;
