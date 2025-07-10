@@ -53,7 +53,7 @@ class Post
             $title = $_POST['title'];
             $content = $_POST['text'];
 
-            $insertPost = Database::insertQuery(
+            $insertPost = Database::crudQuery(
                 'INSERT INTO app_user_posts (author, title, content, created_at) VALUES (:author, :title, :content, :created_at)', 
                 [
                     'author' => $user,
@@ -63,6 +63,20 @@ class Post
                 ]
             );
         }
+
+        $this->redirect('/homepage?home=post');
+    }
+
+    public function deletePost()
+    {
+        $deleteId = $_GET["id"] ?? null;
+
+        $deletePost = Database::crudQuery(
+            'DELETE FROM app_user_posts WHERE id = :id',
+            [
+                'id' => $deleteId
+            ]
+        );
 
         $this->redirect('/homepage?home=post');
     }
