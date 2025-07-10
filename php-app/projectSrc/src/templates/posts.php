@@ -61,7 +61,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="content<?php echo $each_post['id']; ?>" class="form-label">Content</label>
-                    <textarea class="form-control" id="content<?php echo $each_post['id']; ?>" name="content" rows="4" required><?php echo htmlspecialchars($each_post['content']); ?></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="4" required><?php echo htmlspecialchars($each_post['content']); ?></textarea>
                 </div>
             </div>
             <div class="modal-footer">
