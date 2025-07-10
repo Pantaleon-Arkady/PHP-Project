@@ -120,7 +120,7 @@
             }, 2000);
         });
     }
-    
+
     const editForm = document.getElementById('editForm');
     if (editForm) {
         editForm.addEventListener('submit', function(e) {
@@ -138,6 +138,23 @@
                 this.submit();
             }, 2000);
         });
+    }
+
+    const deleteLink = document.getElementById('deleteLink');
+    if (deleteLink) {
+        deleteLink.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const spinner = document.getElementById('deleteSpinner');
+            const text = document.getElementById('deleteText');
+
+            spinner.classList.remove('d-none');
+            text.textContent = 'Deleting...';
+
+            setTimeout(() => {
+            window.location.href = deleteLink.href;
+            }, 2000);
+        });   
     }
 </script>
 

@@ -22,7 +22,12 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
                     <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
-                    <li><a href="/delete-post.php?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger">Delete</a></li>
+                    <li>
+                        <a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger" id="deleteLink">
+                            <span id="deleteText">Delete</span>
+                            <span id="deleteSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
