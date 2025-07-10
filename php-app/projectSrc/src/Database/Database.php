@@ -49,7 +49,7 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function insertQuery(string $query, array $params = []): bool
+    public static function crudQuery(string $query, array $params = []): bool
     {
         $pdo = self::getConnection();
         $statement = $pdo->prepare($query);
