@@ -49,4 +49,11 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function insertQuery(string $query, array $params = []): bool
+    {
+        $pdo = self::getConnection();
+        $statement = $pdo->prepare($query);
+        return $statement->execute($params);
+    }
+
 }
