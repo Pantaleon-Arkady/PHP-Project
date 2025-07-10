@@ -27,10 +27,12 @@
 <body class="bg-light">
     <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
-        <span><?php echo $user['username']; ?></span>
+            <span><?php echo $user['username']; ?></span>
             <div class="d-flex align-items-center gap-3">
                 <div class="fw-bold fs-4">Trial App</div>
-                <a href="#" class="text-white text-decoration-none underline-hover" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
+                <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
+                    <a href="#" class="text-white text-decoration-none underline-hover" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
+                <?php endif; ?>
             </div>
             <nav class="d-flex gap-3">
                 <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
@@ -60,7 +62,7 @@
         </main>
     <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
         <main class="container my-5">
-            <?php foreach($allPosts as $each_post): ?>
+            <?php foreach ($allPosts as $each_post): ?>
                 <?php include __DIR__ . '/../templates/posts.php'; ?>
             <?php endforeach; ?>
         </main>
@@ -73,7 +75,7 @@
     <!-- Create Post Form -->
     <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" action="/create-post" method="POST">
+            <form id="postForm" class="modal-content" action="/create-post" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createPostModalLabel">Create New Post</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -89,15 +91,56 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark">Post</button>
+                    <button type="submit" class="btn btn-dark" id="postBtn">
+                        <span id="postBtnText">Post</span>
+                        <span id="postSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 </body>
+<script>
+    const postForm = document.getElementById('postForm');
+    if (postForm) {
+        postForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-</html>
+            const btn = document.getElementById('postBtn');
+            const spinner = document.getElementById('postSpinner');
+            const text = document.getElementById('postBtnText');
+
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Creating Post...';
+
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+        });
+    }
+    
+    const editForm = document.getElementById('editForm');
+    if (editForm) {
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('editBtn');
+            const spinner = document.getElementById('editSpinner');
+            const text = document.getElementById('editBtnText');
+
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Saving Changes...';
+
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+        });
+    }
+</script>
+
 
 
 </html>
