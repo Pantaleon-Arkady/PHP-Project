@@ -73,7 +73,7 @@
     <!-- Create Post Form -->
     <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" action="/create-post.php" method="POST">
+            <form class="modal-content" action="/create-post" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createPostModalLabel">Create New Post</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

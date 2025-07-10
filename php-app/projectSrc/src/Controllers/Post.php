@@ -37,4 +37,9 @@ class Post
 
         return $allPosts;
     }
+
+    public function createPost()
+    {
+        echo 'creating a post';
+    }
 }
