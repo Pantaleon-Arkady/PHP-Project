@@ -15,6 +15,11 @@ class Post
         $this->connection = Database::getConnection();
     }
 
+    function redirect(string $path) {
+        header("Location: $path");
+        exit;
+    }
+
     public static function allPosts()
     {
         $allPosts = Database::fetchAll(
@@ -40,6 +45,25 @@ class Post
 
     public function createPost()
     {
-        echo 'creating a post';
+        session_start();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $user = $_SESSION['userId'];
+            $title = $_POST['title'];
+            $content = $_POST['text'];
+
+            $insertPost = Database::insertQuery(
+                'INSERT INTO app_user_posts (author, title, content, created_at) VALUES (:author, :title, :content, :created_at)', 
+                [
+                    'author' => $user,
+                    'title' => $title,
+                    'content' => $content,
+                    'created_at' => date('Y-m-d H:i:s')
+                ]
+            );
+        }
+
+        $this->redirect('/homepage?home=post');
     }
 }
