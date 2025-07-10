@@ -22,7 +22,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
                     <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
-                    <li><a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger">Delete</a></li>
+                    <li><a href="/delete-post.php?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger">Delete</a></li>
                 </ul>
             </div>
         </div>
@@ -42,14 +42,14 @@
 <!-- Form for Editing Post -->
 <div class="modal fade" id="editModal<?php echo $each_post['id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $each_post['id']; ?>" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="modal-content" method="POST" action="/edit-post.php">
+        <form class="modal-content" method="POST" action="/edit-post" id="editForm">
             <input type="hidden" name="post_id" value="<?php echo $each_post['id']; ?>">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel<?php echo $each_post['id']; ?>">Edit Post</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="hidden" name="post_id" value="<?php echo $each_post['id']; ?>">
+                <input type="hidden" name="post-id" value="<?php echo $each_post['id']; ?>">
                 <div class="mb-3">
                     <label for="title<?php echo $each_post['id']; ?>" class="form-label">Title</label>
                     <input type="text" class="form-control" id="title<?php echo $each_post['id']; ?>" name="title" value="<?php echo htmlspecialchars($each_post['title']); ?>" required>
@@ -60,7 +60,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-dark">Save Changes</button>
+                <button type="submit" class="btn btn-dark" id="editBtn">
+                    <span id="editBtnText">Save Changes</span>
+                    <span id="editSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </form>
