@@ -67,6 +67,28 @@ class Post
         $this->redirect('/homepage?home=post');
     }
 
+    public function editPost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $postId = $_POST['post-id'];
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+
+            $updatePost = Database::crudQuery(
+                'UPDATE app_user_posts SET title = :title, content = :content, modified_at = :modified_at WHERE id = :id',
+                [
+                    'title' => $title,
+                    'content' => $content,
+                    'modified_at' => date('Y-m-d H:i:s'),
+                    'id' => $postId
+                ]
+            );
+        }
+
+        $this->redirect('/homepage?home=post');
+    }
+
     public function deletePost()
     {
         $deleteId = $_GET["id"] ?? null;
