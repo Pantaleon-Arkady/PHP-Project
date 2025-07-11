@@ -28,4 +28,13 @@ class Shop
 
         return $allProducts;
     }
+
+    public static function productView()
+    {
+        $productId = $_GET["id"] ?? null;
+
+        // echo $product;
+
+        include __DIR__ . ('/../templates/product-view.php');
+    }
 }
