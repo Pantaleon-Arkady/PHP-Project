@@ -24,33 +24,6 @@
 <body class="bg-light">
     <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <?php //if (!$isLoggedIn): 
-            ?>
-            <div>
-                <a href="/register?register=login"><span>Log In</span></a>
-                <a href="/register?register=signup"><span>Sign Up</span></a>
-            </div>
-            <?php //else: 
-            ?>
-            <div class="d-flex align-items-center gap-3">
-                <div class="fw-bold fs-4">Trial App</div>
-                <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
-                    <a href="#" class="text-white text-decoration-none underline-hover" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
-                <?php endif; ?>
-            </div>
-            <nav class="d-flex gap-3">
-                <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
-                <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
-                <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
-                <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
-                <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
-            </nav>
-            <?php //endif; 
-            ?>
-        </div>
-    </header>
-    <header class="bg-dark text-white py-3 shadow">
-        <div class="container d-flex justify-content-between align-items-center">
             <span><?php echo $user['username']; ?></span>
             <div class="d-flex align-items-center gap-3">
                 <div class="fw-bold fs-4">Trial App</div>
@@ -72,9 +45,9 @@
         <main class="container my-5">
             <h2 class="mb-4">Featured Products</h2>
             <div class="row g-4">
-                <?php //foreach ($allProducts as $each_products): ?>
+                <?php foreach ($allProducts as $each_product): ?>
                     <?php include __DIR__ . '/../templates/products.php'; ?>
-                <?php //endforeach; ?>
+                <?php endforeach; ?>
             </div>
         </main>
     <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
