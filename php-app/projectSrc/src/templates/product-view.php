@@ -6,7 +6,6 @@ session_start();
 // if (isset($_SESSION['userId'])) {
 //     $isLoggedIn = true;
 // }
-
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ session_start();
 <body class="bg-light">
     <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <span><?php echo $user['username']; ?></span>
+            <span><?php //echo $user['username']; ?></span>
             <div class="d-flex align-items-center gap-3">
                 <div class="fw-bold fs-4">Trial App</div>
             </div>
@@ -44,37 +43,42 @@ session_start();
                 <div class="row">
                     <!-- Left: Product Image + Carousel -->
                     <div class="col-md-6 text-center">
-                        <img src="<?php //echo $product['main_image']; ?>" alt="Main Image" class="img-fluid rounded mb-3" style="max-height: 400px; object-fit: contain; background-color: #f8f9fa; width: 100%;">
+                        <img 
+                            id="mainProductImage"
+                            src="<?php echo $productImages[0]; ?>" alt="Main Image" 
+                            class="img-fluid rounded mb-3" 
+                            style="max-height: 400px; object-fit: contain; background-color: rgb(70, 70, 70); width: 100%;"
+                        >
 
                         <div class="d-flex justify-content-center gap-2">
-                            <?php //foreach ($product['images'] as $image): ?>
-                                <img src="<?php //echo $image; ?>" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover; cursor: pointer;" onclick="document.getElementById('mainProductImage').src=this.src">
-                            <?php //endforeach; ?>
+                            <?php foreach ($productImages as $image): ?>
+                                <img src="<?php echo $image; ?>" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover; cursor: pointer;" onclick="document.getElementById('mainProductImage').src=this.src">
+                            <?php endforeach; ?>
                         </div>
 
-                        <h4 class="mt-4 fw-bold"><?php //echo htmlspecialchars($product['name']); ?></h4>
+                        <h4 class="mt-4 fw-bold"><?php echo htmlspecialchars($product['name']); ?></h4>
                     </div>
 
                     <!-- Right: Product Info -->
                     <div class="col-md-6 d-flex flex-column justify-content-between">
                         <div>
                             <h5 class="fw-bold">Description</h5>
-                            <p class="text-muted"><?php //echo nl2br(htmlspecialchars($product['description'])); ?></p>
+                            <p class="text-muted"><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
 
                             <h5 class="fw-bold mt-4">Price</h5>
-                            <p class="fs-4 text-success fw-bold">$<?php //echo number_format($product['price'], 2); ?></p>
+                            <p class="fs-4 text-success fw-bold">$<?php echo number_format($product['price'], 2); ?></p>
 
                             <h5 class="fw-bold mt-4">Stock</h5>
-                            <p class="text-muted"><?php //echo $product['stock']; ?> available</p>
+                            <p class="text-muted"><?php echo $product['stock']; ?> available</p>
                         </div>
 
                         <div class="mt-4">
                             <form action="/add-to-cart" method="POST" class="d-inline">
-                                <input type="hidden" name="product_id" value="<?php //cho $product['id']; ?>">
+                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                                 <button type="submit" class="btn btn-outline-dark px-4">Add to Cart</button>
                             </form>
                             <form action="/buy-now" method="POST" class="d-inline ms-2">
-                                <input type="hidden" name="product_id" value="<?php //echo $product['id']; ?>">
+                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                                 <button type="submit" class="btn btn-dark px-4">Buy Now</button>
                             </form>
                         </div>
@@ -84,6 +88,13 @@ session_start();
         </div>
     </main>
 
+    <?php
+
+    echo '<pre>';
+    print_r($product);                             
+    echo '<pre>';
+
+    ?>
 
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
