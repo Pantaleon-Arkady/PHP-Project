@@ -35,6 +35,15 @@ class Shop
 
         // echo $product;
 
+        $product = Database::fetchAssoc(
+            'SELECT * FROM app_user_products WHERE id = :id',
+            [
+                'id' => $productId
+            ]
+        );
+
+        $productImages = json_decode($product['image_path'], true);
+
         include __DIR__ . ('/../templates/product-view.php');
     }
 }
