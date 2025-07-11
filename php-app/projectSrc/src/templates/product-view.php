@@ -1,6 +1,6 @@
 <?php
 
-// session_start();
+session_start();
 
 // $isLoggedIn = false;
 // if (isset($_SESSION['userId'])) {
