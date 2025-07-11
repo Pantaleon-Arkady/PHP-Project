@@ -5,6 +5,7 @@ namespace Root\Controllers;
 use Root\Database\Database;
 use Root\Database\BaseTable;
 use Root\Controllers\Post;
+use Root\Controllers\Shop;
 use \PDO;
 
 class General 
@@ -32,6 +33,7 @@ class General
         );
 
         $allPosts = Post::allPosts();
+        $allProducts = Shop::allProducts();
 
         include_once __DIR__ . '/../templates/home.php';
     }
