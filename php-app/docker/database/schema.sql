@@ -13,3 +13,14 @@ CREATE TABLE IF NOT EXISTS app_user_posts (
     created_at TIMESTAMP,
     modified_at TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS app_user_products {
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price NUMERIC(10, 2) NOT NULL,
+    stock INT DEFAULT 0,
+    image_path VARCHAR(255),
+    created_at DATE,
+    modified_at DATE
+}
