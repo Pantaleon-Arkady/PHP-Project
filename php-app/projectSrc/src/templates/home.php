@@ -2,13 +2,10 @@
 
 // session_start();
 
-// echo 'home';
-
-// echo 'userid:' . $_SESSION['userId'];
-
-// echo '<pre>';
-// print_r($_SESSION['userInfo']);
-// echo '</pre>';
+// $isLoggedIn = false;
+// if (isset($_SESSION['userId'])) {
+//     $isLoggedIn = true;
+// }
 
 ?>
 
@@ -25,6 +22,33 @@
 </head>
 
 <body class="bg-light">
+    <header class="bg-dark text-white py-3 shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+            <?php //if (!$isLoggedIn): 
+            ?>
+            <div>
+                <a href="/register?register=login"><span>Log In</span></a>
+                <a href="/register?register=signup"><span>Sign Up</span></a>
+            </div>
+            <?php //else: 
+            ?>
+            <div class="d-flex align-items-center gap-3">
+                <div class="fw-bold fs-4">Trial App</div>
+                <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
+                    <a href="#" class="text-white text-decoration-none underline-hover" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
+                <?php endif; ?>
+            </div>
+            <nav class="d-flex gap-3">
+                <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
+                <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
+                <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
+                <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
+                <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
+            </nav>
+            <?php //endif; 
+            ?>
+        </div>
+    </header>
     <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
             <span><?php echo $user['username']; ?></span>
@@ -48,15 +72,46 @@
         <main class="container my-5">
             <h2 class="mb-4">Featured Products</h2>
             <div class="row g-4">
+                <!-- Product 1 -->
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="card product-card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Name</h5>
-                            <p class="card-text text-success fw-bold">$19.99</p>
-                            <p class="card-text text-muted">In stock</p>
+                    <a href="/product?id=1" class="text-decoration-none text-dark">
+                        <div class="card product-card h-100">
+                            <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Product 1</h5>
+                                <p class="card-text text-success fw-bold">$49.99</p>
+                                <p class="card-text text-muted">12 in stock</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <a href="/product?id=2" class="text-decoration-none text-dark">
+                        <div class="card product-card h-100">
+                            <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Product 2</h5>
+                                <p class="card-text text-success fw-bold">$79.99</p>
+                                <p class="card-text text-muted">8 in stock</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <a href="/product?id=3" class="text-decoration-none text-dark">
+                        <div class="card product-card h-100">
+                            <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Product 3</h5>
+                                <p class="card-text text-success fw-bold">$39.99</p>
+                                <p class="card-text text-muted">5 in stock</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </main>
@@ -152,9 +207,9 @@
             text.textContent = 'Deleting...';
 
             setTimeout(() => {
-            window.location.href = deleteLink.href;
+                window.location.href = deleteLink.href;
             }, 2000);
-        });   
+        });
     }
 </script>
 
