@@ -5,12 +5,14 @@ $loader = require __DIR__ . '/../vendor/autoload.php';
 use Root\Controllers\General;
 use Root\Controllers\UsersLog;
 use Root\Controllers\Post;
+use Root\Controllers\Shop;
 
 $uri = strtok($_SERVER["REQUEST_URI"], '?');
 
 $general = new General();
 $usersLog = new UsersLog();
 $post = new Post();
+$shop = new Shop();
 
 switch ($uri) {
 
@@ -40,6 +42,11 @@ switch ($uri) {
         break;
     case '/delete-post':
         $post->deletePost();
+        break;
+
+    #Shop
+    case '/product-view':
+        $shop->productView();
         break;
 
 
