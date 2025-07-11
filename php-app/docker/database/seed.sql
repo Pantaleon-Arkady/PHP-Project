@@ -32,9 +32,9 @@ VALUES
 
 INSERT INTO app_user_products (name, description, price, stock, image_path, created_at)
 VALUES
-  ('HGUC - Gyan', 'Lorem ipsum dolor sit amet', 15, 23, '/files/002_boxart.png', '2025-07-11'),
-  ('HGUC - Hyaku-Shiki', 'Lorem ipsum dolor sit amet', 15, 23, '/files/005_boxart.png', '2025-07-11'),
-  ('HGUC - Gundam GP01', 'Lorem ipsum dolor sit amet', 15, 23, '/files/013_boxart.png', '2025-07-11'),
-  ('HGUC - Gundam GP01Fb', 'Lorem ipsum dolor sit amet', 15, 23, '/files/018_boxart.png', '2025-07-11'),
-  ('HGUC - Z''Gok', 'Lorem ipsum dolor sit amet', 15, 23, '/files/019_boxart.png', '2025-07-11'),
-  ('HGUC - GM', 'Lorem ipsum dolor sit amet', 15, 23, '/files/020_boxart.png', '2025-07-11');
+  ('HGUC - Gyan', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/002_boxart.png', '2025-07-11'),
+  ('HGUC - Hyaku-Shiki', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/005_boxart.png', '2025-07-11'),
+  ('HGUC - Gundam GP01', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/013_boxart.png', '2025-07-11'),
+  ('HGUC - Gundam GP01Fb', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/018_boxart.png', '2025-07-11'),
+  ('HGUC - Z''Gok', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/019_boxart.png', '2025-07-11'),
+  ('HGUC - GM', 'Lorem ipsum dolor sit amet', 15.00, 23, '/files/020_boxart.png', '2025-07-11');

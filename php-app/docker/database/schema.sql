@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS app_user_posts (
     modified_at TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS app_user_products {
+CREATE TABLE IF NOT EXISTS app_user_products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS app_user_products {
     image_path VARCHAR(255),
     created_at DATE,
     modified_at DATE
-}
+)
