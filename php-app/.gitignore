@@ -17,3 +17,5 @@ logs/
 .vscode/
 .idea/
 *.log
+
+/projectSrc/public/files
