@@ -76,7 +76,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <a href="/product?id=1" class="text-decoration-none text-dark">
                         <div class="card product-card h-100">
-                            <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product 1">
+                            <img src="/files/002_boxart.png" class="card-img-top product-img" alt="Product 1">
                             <div class="card-body">
                                 <h5 class="card-title">Product 1</h5>
                                 <p class="card-text text-success fw-bold">$49.99</p>
@@ -113,6 +113,9 @@
                         </div>
                     </a>
                 </div>
+                <?php //foreach ($allProducts as $each_products): ?>
+                    <?php include __DIR__ . '/../templates/products.php'; ?>
+                <?php //endforeach; ?>
             </div>
         </main>
     <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
