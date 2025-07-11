@@ -1,5 +1,5 @@
 <div class="col-sm-6 col-md-4 col-lg-3">
-    <a href="/product?id=<?php echo $each_product['id'] ?>" class="text-decoration-none text-dark">
+    <a href="/product-view?id=<?php echo $each_product['id'] ?>" class="text-decoration-none text-dark">
         <div class="card product-card h-100">
             <div class="image-wrapper">
                 <img src="<?php echo $each_product['image_path'] ?>" class="product-img" alt="Product 1">
