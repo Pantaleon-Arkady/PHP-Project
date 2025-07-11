@@ -1,11 +1,13 @@
 <div class="col-sm-6 col-md-4 col-lg-3">
-    <a href="/product?id=3" class="text-decoration-none text-dark">
+    <a href="/product?id=1" class="text-decoration-none text-dark">
         <div class="card product-card h-100">
-            <img src="https://via.placeholder.com/300" class="card-img-top product-img" alt="Product 3">
+            <div class="image-wrapper">
+                <img src="/files/002_boxart.png" class="product-img" alt="Product 1">
+            </div>
             <div class="card-body">
-                <h5 class="card-title">Product 3</h5>
-                <p class="card-text text-success fw-bold">$39.99</p>
-                <p class="card-text text-muted">5 in stock</p>
+                <h5 class="card-title">Product 1</h5>
+                <p class="card-text text-success fw-bold">$49.99</p>
+                <p class="card-text text-muted">12 in stock</p>
             </div>
         </div>
     </a>
