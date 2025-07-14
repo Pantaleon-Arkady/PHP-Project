@@ -101,9 +101,19 @@ class UsersLog
             $user = $registerQuery->fetch(PDO::FETCH_ASSOC);
 
             $_SESSION['userId'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['userRole'] = $user['role'];
             $_SESSION['userInfo'] = $user;
 
-            $this->redirect('/homepage');
+            if ($_SESSION['userRole'] == 'admin') {
+
+                $this->redirect('/homepage-admin');
+
+            } else {
+            
+                $this->redirect('/homepage');
+
+            }
         }
 
         return ob_get_clean();
