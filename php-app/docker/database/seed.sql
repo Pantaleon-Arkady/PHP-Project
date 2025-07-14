@@ -1,11 +1,12 @@
 TRUNCATE app_user RESTART IDENTITY;
 
-INSERT INTO app_user (email, username, password)
+INSERT INTO app_user (email, role, username, password)
 VALUES 
-  ('bobross@email.com', 'Bob Ross', md5('practice')),
-  ('first@email.com', 'first user', md5('password')),
-  ('demo@demo.com', 'demo', md5('demo123')),
-  ('test@test.com', 'test', md5('test123'));
+  ('bobross@email.com', 'user', 'Bob Ross', md5('practice')),
+  ('admin@shop.com', 'admin', 'admin', md5('admin123')),
+  ('first@email.com', 'user', 'first user', md5('password')),
+  ('demo@demo.com', 'user', 'demo', md5('demo123')),
+  ('test@test.com', 'user', 'test', md5('test123'));
 
 INSERT INTO app_user_posts (author, title, content, created_at)
 VALUES
