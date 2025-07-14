@@ -18,7 +18,7 @@ echo 'admin shop';
 <body class="bg-light">
     <header class="bg-dark text-white py-3 shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <span><?php echo $user['username']; ?></span>
+            <span><?php echo $_SESSION['username']; ?></span>
             <div class="d-flex align-items-center gap-3">
                 <div class="fw-bold fs-4">Trial App</div>
                 <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
@@ -26,8 +26,8 @@ echo 'admin shop';
                 <?php endif; ?>
             </div>
             <nav class="d-flex gap-3">
-                <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
-                <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
+                <a href="/homepage-admin?home=post" class="text-white text-decoration-none underline-hover">Home</a>
+                <a href="/homepage-admin?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
                 <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
@@ -40,7 +40,7 @@ echo 'admin shop';
             <h2 class="mb-4">Featured Products</h2>
             <div class="row g-4">
                 <?php foreach ($allProducts as $each_product): ?>
-                    <?php include __DIR__ . '/../templates/products.php'; ?>
+                    <?php include __DIR__ . '/../templates/products-admin.php'; ?>
                 <?php endforeach; ?>
             </div>
         </main>
