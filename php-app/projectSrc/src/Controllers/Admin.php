@@ -25,4 +25,9 @@ class Admin
         include __DIR__ . ('/../templates/home-admin.php');
 
     }
+
+    public function adminCreateProduct()
+    {
+        echo "creating product...";
+    }
 }
