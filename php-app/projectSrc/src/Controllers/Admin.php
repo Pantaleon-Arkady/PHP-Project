@@ -20,6 +20,8 @@ class Admin
     {
         session_start();
 
+        $allProducts = Shop::allProducts();
+
         include __DIR__ . ('/../templates/home-admin.php');
 
     }
