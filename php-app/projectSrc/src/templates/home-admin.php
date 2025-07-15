@@ -35,6 +35,39 @@
 
     <?php if (isset($_GET['home']) && $_GET['home'] === 'shop'): ?>
         <main class="container my-5">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Create New Product</h4>
+                    <form method="POST" action="/admin-create-product" enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="price" class="form-label">Price ($)</label>
+                                <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="stock" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="stock" name="stock" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="images" class="form-label">Product Images</label>
+                                <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*" required>
+                                <small class="text-muted">Upload up to 5 images.</small>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-success">Create Product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <h2 class="mb-4">Products List</h2>
             <div class="row g-4">
                 <?php foreach ($allProducts as $each_product): ?>
