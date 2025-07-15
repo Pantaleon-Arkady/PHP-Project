@@ -1,7 +1,5 @@
 <?php
 
-echo 'admin shop';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +35,7 @@ echo 'admin shop';
 
     <?php if (isset($_GET['home']) && $_GET['home'] === 'shop'): ?>
         <main class="container my-5">
-            <h2 class="mb-4">Featured Products</h2>
+            <h2 class="mb-4">Products List</h2>
             <div class="row g-4">
                 <?php foreach ($allProducts as $each_product): ?>
                     <?php include __DIR__ . '/../templates/products-admin.php'; ?>
