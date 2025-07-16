@@ -41,6 +41,9 @@ class General
 
     public static function uploadFile()
     {
+
+        // $downloadedFiles = [];
+
         $uploadedFiles = [
             'success' => [],
             'failed' => []
@@ -59,13 +62,13 @@ class General
                 $destinationPath = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($tmpPath, $destinationPath)) {
-
                     $uploadedFiles['success'][] = '/files/' . $newFileName;
                     $uploadedDestinations[] = $destinationPath;
                 } else {
                     $uploadedFiles['failed'][] = $fileName;
-                    // echo "Failed to move file: $fileName";
+                    echo "Failed to move file: $fileName<br>";
                 }
+
             } else {
                 $uploadedFiles['failed'] = $fileName;
                 echo "Upload error for file: $fileName";

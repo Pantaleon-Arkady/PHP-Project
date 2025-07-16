@@ -56,24 +56,24 @@ class Admin
         $price = (float) $_POST['price'];
         $images = $_FILES['images'];
 
-        echo 'product created: ' . $name . ', description: ' . $description . ', price: ' . $price . ', stocks: ' . $stocks;
-        echo '<br /><br /><br />';
-        echo 'images: ';
-        echo '<pre>';
-        print_r($images);
-        echo '</pre>';
+        $filePaths = isset($_FILES['images']) ? General::uploadFile() : [];
 
-        foreach ($_FILES['images']['name'] as $index => $fileName) {
-            $filePaths = isset($_FILES['images']) ? General::uploadFile(): [];
-        }
+        $imagePaths = json_encode($filePaths['success']);
 
-        echo '<br /><br /><br />';
-        echo 'array of image path:';
-        echo '<pre>';
-        print_r($filePaths);
-        echo '</pre>';
+        $query = Database::crudQuery(
+            'INSERT INTO app_user_products (name, description, price, stock, image_path, created_at)
+            VALUES (:name, :description, :price, :stock, :image_path, :created_at)',
+            [
+                'name' => $name, 
+                'description' => $description,
+                'price' => $price,
+                'stock' => $stocks,
+                'image_path' => $imagePaths,
+                'created_at' => date('Y-m-d H:i:s')
+            ]
+        );
 
-        echo $check = General::writableFolder();
+        $this->redirect('/homepage-admin?home=shop');
         
     }
 
