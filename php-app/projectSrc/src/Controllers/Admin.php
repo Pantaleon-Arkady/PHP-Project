@@ -5,6 +5,7 @@ namespace Root\Controllers;
 use Root\Database\Database;
 use Root\Controllers\Post;
 use Root\Controllers\Shop;
+use Root\Controllers\General;
 use \PDO;
 
 class Admin
@@ -53,8 +54,22 @@ class Admin
         $description = trim($_POST['description']);
         $stocks = (int) $_POST['stock'];
         $price = (float) $_POST['price'];
+        $images = $_FILES['images'];
 
         echo 'product created: ' . $name . ', description: ' . $description . ', price: ' . $price . ', stocks: ' . $stocks;
+        echo '<br /><br /><br />';
+        echo 'images: ';
+        echo '<pre>';
+        print_r($images);
+        echo '</pre>';
+
+        $uploadedFiles = [];
+
+        foreach ($_FILES['images']['name'] as $index => $fileName) {
+
+        }
+
+        echo $check = General::writableFolder();
         
     }
 
