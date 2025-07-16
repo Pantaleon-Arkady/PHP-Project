@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="images" class="form-label">Product Images</label>
-                                <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*" required>
+                                <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*">
                                 <small class="text-muted">Upload up to 5 images.</small>
                             </div>
                             <div class="col-12 text-end">

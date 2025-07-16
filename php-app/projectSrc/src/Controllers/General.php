@@ -8,7 +8,7 @@ use Root\Controllers\Post;
 use Root\Controllers\Shop;
 use \PDO;
 
-class General 
+class General
 {
     private $connection;
 
@@ -22,9 +22,10 @@ class General
         require __DIR__ . '/../templates/initial.php';
     }
 
-    public function userHome() {
+    public function userHome()
+    {
         session_start();
-        
+
         $userId = $_SESSION['userId'];
 
         $user = Database::fetchAssoc(
@@ -37,4 +38,5 @@ class General
 
         include_once __DIR__ . '/../templates/home.php';
     }
+
 }
