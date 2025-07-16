@@ -86,33 +86,4 @@
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
-
-    <!-- Create Post Form -->
-    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="postForm" class="modal-content" action="/create-post" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createPostModalLabel">Create New Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="postTitle" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="postTitle" name="title" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="postText" class="form-label">Text</label>
-                        <textarea class="form-control" id="postText" name="text" rows="4" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark" id="postBtn">
-                        <span id="postBtnText">Post</span>
-                        <span id="postSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </body>
