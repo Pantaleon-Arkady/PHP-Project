@@ -60,10 +60,10 @@ class General
 
                 if (move_uploaded_file($tmpPath, $destinationPath)) {
 
-                    $uploadedFiles['success'] = '/files/' . $newFileName;
+                    $uploadedFiles['success'][] = '/files/' . $newFileName;
                     $uploadedDestinations[] = $destinationPath;
                 } else {
-                    $uploadedFiles['failed'] = $fileName;
+                    $uploadedFiles['failed'][] = $fileName;
                     echo "Failed to move file: $fileName";
                 }
             } else {
