@@ -64,7 +64,7 @@ class General
                     $uploadedDestinations[] = $destinationPath;
                 } else {
                     $uploadedFiles['failed'][] = $fileName;
-                    echo "Failed to move file: $fileName";
+                    // echo "Failed to move file: $fileName";
                 }
             } else {
                 $uploadedFiles['failed'] = $fileName;
