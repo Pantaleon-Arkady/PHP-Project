@@ -63,11 +63,15 @@ class Admin
         print_r($images);
         echo '</pre>';
 
-        $uploadedFiles = [];
-
         foreach ($_FILES['images']['name'] as $index => $fileName) {
-
+            $filePaths = isset($_FILES['images']) ? General::uploadFile(): [];
         }
+
+        echo '<br /><br /><br />';
+        echo 'array of image path:';
+        echo '<pre>';
+        print_r($filePaths);
+        echo '</pre>';
 
         echo $check = General::writableFolder();
         
