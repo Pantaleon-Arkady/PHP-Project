@@ -83,10 +83,13 @@ class Admin
 
         $productId = $_GET['id'];
 
-        echo 'deleting prodcut with an id: ' . $productId;
-
         $query = Database::crudQuery(
-            ''
+            'DELETE FROM app_user_products WHERE id = :id',
+            [
+                'id' => $productId
+            ]
         );
+
+        $this->redirect('/homepage-admin?home=shop');
     }
 }
