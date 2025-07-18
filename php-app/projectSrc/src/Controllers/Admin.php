@@ -97,4 +97,20 @@ class Admin
 
         $this->redirect('/homepage-admin?home=shop');
     }
+
+    public function adminEditProduct()
+    {
+        $productId = $_GET['id'];
+
+        echo 'editing product with id: ' . $productId;
+
+        $product = Database::crudQuery(
+            'SELECT * FROM app_user_products WHERE id = :id',
+            [
+                'id' => $productId
+            ]
+        );
+
+        include __DIR__ . ('/../templates/edit-products.php');
+    }
 }

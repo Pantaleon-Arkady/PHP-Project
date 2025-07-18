@@ -7,6 +7,8 @@
 //     $isLoggedIn = true;
 // }
 
+print_r($user);
+
 ?>
 
 <!DOCTYPE html>
