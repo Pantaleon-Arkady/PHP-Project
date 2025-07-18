@@ -77,5 +77,16 @@ class Admin
         
     }
 
-    
+    public function adminDeleteProduct()
+    {
+        session_start();
+
+        $productId = $_GET['id'];
+
+        echo 'deleting prodcut with an id: ' . $productId;
+
+        $query = Database::crudQuery(
+            ''
+        );
+    }
 }

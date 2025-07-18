@@ -19,10 +19,7 @@ $productImages = json_decode($each_product['image_path'], true);
 
         <div class="text-end">
             <a href="/admin-edit-product?id=<?php echo $each_product['id']; ?>" class="btn btn-sm btn-outline-primary me-2">Edit</a>
-            <form method="POST" action="/admin-delete-product" class="d-inline">
-                <input type="hidden" name="id" value="<?php echo $each_product['id']; ?>">
-                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this product?')">Delete</button>
-            </form>
+            <a href="/admin-delete-product?id=<?php echo $each_product['id']; ?>" class="btn btn-sm btn-outline-danger me-2">Delete</a>
         </div>
     </div>
 </div>
