@@ -102,14 +102,16 @@ class Admin
     {
         $productId = $_GET['id'];
 
-        echo 'editing product with id: ' . $productId;
-
-        $product = Database::crudQuery(
+        $product = Database::fetchAssoc(
             'SELECT * FROM app_user_products WHERE id = :id',
             [
                 'id' => $productId
             ]
         );
+
+        echo '<pre>';
+        print_r($product);
+        echo '</pre>';
 
         include __DIR__ . ('/../templates/edit-products.php');
     }
