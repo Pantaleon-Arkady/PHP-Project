@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="container">
         <?php if (isset($_SESSION['updatedTable'])): ?>
             <div class="alert alert-success py-3">
-                <strong>Success!</strong> You have updated this product. <a href="/admin-view-product">View ?</a>
+                <strong>Success!</strong> You have updated this product. <a href="/admin-view-product?id=<?= htmlspecialchars($product['id']) ?>">View ?</a>
             </div>
             <?php unset($_SESSION['updatedTable']); ?>
         <?php endif; ?>
