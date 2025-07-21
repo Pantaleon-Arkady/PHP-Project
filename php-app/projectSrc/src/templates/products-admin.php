@@ -18,6 +18,7 @@ $productImages = json_decode($each_product['image_path'], true);
         </div>
 
         <div class="text-end">
+            <a href="/admin-view-product?id=<?php echo $each_product['id']; ?>" class="btn btn-sm btn-outline-success me-2">View Product</a>
             <a href="/admin-edit-product?id=<?php echo $each_product['id']; ?>" class="btn btn-sm btn-outline-primary me-2">Edit</a>
             <a href="/admin-delete-product?id=<?php echo $each_product['id']; ?>" class="btn btn-sm btn-outline-danger me-2">Delete</a>
         </div>
