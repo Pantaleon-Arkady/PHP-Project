@@ -32,6 +32,8 @@ class Admin
 
         $allProducts = Shop::allProducts();
 
+        $_SESSION['previousPage'] = '/homepage-admin?home=shop';
+
         include __DIR__ . ('/../templates/home-admin.php');
     }
 
@@ -101,6 +103,8 @@ class Admin
     public function adminEditProduct()
     {
         $productId = $_GET['id'];
+
+        $_SESSION['previousPage'] = "/admin-edit-product?id=$productId";
 
         $product = Database::fetchAssoc(
             'SELECT * FROM app_user_products WHERE id = :id',
@@ -190,6 +194,7 @@ class Admin
                     ]
                 );
 
+                $_SESSION['previousPage'] = "/admin-edit-product?id=$productId";
                 $_SESSION['updatedTable'] = true;
                 $this->redirect("/admin-edit-product?id=$productId");
             } else {
@@ -208,6 +213,7 @@ class Admin
                     ]
                 );
 
+                $_SESSION['previousPage'] = "/admin-edit-product?id=$productId";
                 $_SESSION['updatedTable'] = true;
                 $this->redirect("/admin-edit-product?id=$productId");
             }
@@ -216,5 +222,21 @@ class Admin
             $_SESSION['noChanges'] = true;
             $this->redirect("/admin-edit-product?id=$productId");
         }
+    }
+
+    public function adminViewProduct()
+    {
+        $productId = $_GET['id'] ?? null;
+
+        $product = Database::fetchAssoc(
+            'SELECT * FROM app_user_products WHERE id = :id',
+            [
+                'id' => $productId
+            ]
+        );
+
+        $productImages = json_decode($product['image_path'], true);
+
+        include __DIR__ . ('/../templates/admin-view-product.php');
     }
 }
