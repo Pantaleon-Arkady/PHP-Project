@@ -109,10 +109,58 @@ class Admin
             ]
         );
 
-        echo '<pre>';
-        print_r($product);
-        echo '</pre>';
-
         include __DIR__ . ('/../templates/edit-products.php');
+    }
+
+    public function adminUpdateProduct()
+    {
+        session_start();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo 'Wrong request chum';
+        }
+
+        $required = ['name', 'description', 'stock', 'price'];
+        foreach ($required as $field) {
+            if (empty($_POST[$field])) {
+                echo "Missing field: $field";
+                return;
+            }
+        }
+
+        $productId = $_POST['id'];
+        // for future advance coding, figure out hwo to compare arrays...
+        // then figure out a proper way on regulating images number and its assigned key...
+        $submittedData = [
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'stock' => (int) $_POST['stock'],
+            'price' => (float) $_POST['price'],
+        ];
+
+        $queriedData = Database::fetchAssoc(
+            'SELECT name, description, stock, price FROM app_user_products WHERE id = :id',
+            [
+                'id' => $productId
+            ]
+        );
+
+        if (!$queriedData) {
+            echo 'No product found.';
+            return;
+        }
+
+        $changes = false;
+        foreach ($submittedData as $key => $value) {
+            if ((string)$value !== (string)$queriedData[$key]) {
+                $changes = true;
+                echo 'There is a change made in ' . $key . '.';
+                // break;
+            } else {
+                echo 'No changes made in ' . $key . '.';
+                echo '<br /><br />';
+                echo '<a href="/admin-edit-product?id=' . $productId . '"></a>';
+            }
+        }  
     }
 }

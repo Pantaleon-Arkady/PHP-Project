@@ -71,7 +71,10 @@ switch ($uri) {
     case '/admin-edit-product':
         $admin->adminEditProduct();
         break;
-    case '/admin-delete-product':
+    case '/admin-update-product':
+        $admin->adminUpdateProduct();
+        break;
+    case '/admin-update-product':
         $admin->adminDeleteProduct();
         break;
 }
