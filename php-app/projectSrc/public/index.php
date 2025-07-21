@@ -65,6 +65,9 @@ switch ($uri) {
     case '/homepage-admin':
         $admin->adminHomePage();
         break;
+    case '/admin-view-product':
+        $admin->adminViewProduct();
+        break;
     case '/admin-create-product':
         $admin->adminCreateProduct();
         break;
