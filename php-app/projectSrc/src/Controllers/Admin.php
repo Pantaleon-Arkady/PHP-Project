@@ -138,12 +138,16 @@ class Admin
             'price' => (float) $_POST['price'],
         ];
 
+        $printSD = General::fastPrint($submittedData);
+
         $queriedData = Database::fetchAssoc(
             'SELECT name, description, stock, price FROM app_user_products WHERE id = :id',
             [
                 'id' => $productId
             ]
         );
+
+        $printQD = General::fastPrint($queriedData);
 
         if (!$queriedData) {
             echo 'No product found.';
