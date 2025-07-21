@@ -162,7 +162,7 @@ class Admin
         }
 
         if ($changes) {
-            if (empty($_FILES['images'])) {
+            if (empty($_FILES['images']['name'][0])) {
                 echo 'updating without image';
                 $updateTable = Database::crudQuery(
                     'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, modified_at = :date
