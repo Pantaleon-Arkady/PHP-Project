@@ -7,6 +7,7 @@ use Root\Controllers\Post;
 use Root\Controllers\Shop;
 use Root\Controllers\General;
 use \PDO;
+use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
 
 class Admin
 {
@@ -167,7 +168,7 @@ class Admin
                 break;
             }
         }
-        
+
         if (!$changes && !empty($submittedImages)) {
             if ($submittedImages !== $currentImages) {
                 $changes = true;
@@ -176,7 +177,6 @@ class Admin
 
         if ($changes) {
             if (empty($_FILES['images']['name'][0])) {
-                echo 'updating without image changes';
                 $updateTable = Database::crudQuery(
                     'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, modified_at = :date
                     WHERE id = :id',
@@ -189,8 +189,11 @@ class Admin
                         'id' => $productId
                     ]
                 );
+
+                $_SESSION['updatedTable'] = true;
+                $this->redirect("/admin-edit-product?id=$productId");
             } else {
-                echo 'updating with image changes';
+                // echo 'updating with image changes';
                 $updateTable = Database::crudQuery(
                     'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, image_path = :image_path, modified_at = :date
                     WHERE id = :id',
@@ -204,11 +207,14 @@ class Admin
                         'id' => $productId
                     ]
                 );
+
+                $_SESSION['updatedTable'] = true;
+                $this->redirect("/admin-edit-product?id=$productId");
             }
         } else {
-            echo 'No changes made';
-            echo '<br /><br />';
-            echo '<a href="/admin-edit-product?id=' . $productId . '">Go back?</a>';
+
+            $_SESSION['noChanges'] = true;
+            $this->redirect("/admin-edit-product?id=$productId");
         }
     }
 }

@@ -1,18 +1,34 @@
 <?php
 
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light p-4">
     <div class="container">
+        <?php if (isset($_SESSION['updatedTable'])): ?>
+            <div class="alert alert-success py-3">
+                <strong>Success!</strong> You have updated this product. <a href="/admin-view-product">View ?</a>
+            </div>
+            <?php unset($_SESSION['updatedTable']); ?>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['noChanges'])): ?>
+            <div class="alert alert-secondary py-3">
+                <strong>Note!</strong> You have not changed anything...
+            </div>
+            <?php unset($_SESSION['noChanges']); ?>
+        <?php endif; ?>
         <h2 class="mb-4">Edit Product</h2>
         <form action="/admin-update-product" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= htmlspecialchars($product['id']) ?>">
@@ -60,4 +76,5 @@
         </form>
     </div>
 </body>
+
 </html>
