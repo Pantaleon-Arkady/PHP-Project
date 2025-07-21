@@ -127,9 +127,8 @@ class Admin
             }
         }
 
+        // Data Retrieval excluding images
         $productId = $_POST['id'];
-        // for future advance coding, figure out hwo to compare arrays...
-        // then figure out a proper way on regulating images number and its assigned key...
         $submittedData = [
             'name' => $_POST['name'],
             'description' => $_POST['description'],
@@ -137,33 +136,43 @@ class Admin
             'price' => number_format($_POST['price'], 2, '.', '')
         ];
 
-        $printSD = General::fastPrint($submittedData);
-
         $queriedData = Database::fetchAssoc(
             'SELECT name, description, stock, price FROM app_user_products WHERE id = :id',
-            [
-                'id' => $productId
-            ]
+            ['id' => $productId]
         );
-
-        $printQD = General::fastPrint($queriedData);
 
         if (!$queriedData) {
             echo 'No product found.';
             return;
         }
 
+        //Data Retrieval for Images
+        $submittedImages = null;
+        if (!empty($_FILES['images']['name'][0])) {
+            $filePaths = isset($_FILES['images']) ? General::uploadFile() : [];
+            $imagePaths = json_encode($filePaths['success']);
+            $submittedImages = json_decode($imagePaths, true) ?? [];
+        }
+        $queriedImages = Database::fetchAssoc(
+            'SELECT image_path FROM app_user_products WHERE id = :id',
+            ['id' => $productId]
+        );
+
+        $currentImages = json_decode($queriedImages['image_path'], true) ?? [];
+
         $changes = false;
         foreach ($submittedData as $key => $value) {
             if ((string)$value !== (string)$queriedData[$key]) {
                 $changes = true;
                 break;
+            } elseif ($submittedImages !== $currentImages) {
+                $changes = true;
             }
         }
 
         if ($changes) {
             if (empty($_FILES['images']['name'][0])) {
-                echo 'updating without image';
+                echo 'updating without image changes';
                 $updateTable = Database::crudQuery(
                     'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, modified_at = :date
                     WHERE id = :id',
@@ -177,6 +186,20 @@ class Admin
                     ]
                 );
             } else {
+                echo 'updating with image changes';
+                $updateTable = Database::crudQuery(
+                    'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, image_path = :image_path, modified_at = :date
+                    WHERE id = :id',
+                    [
+                        'name' => $_POST['name'],
+                        'description' => $_POST['description'],
+                        'price' => (float) $_POST['price'],
+                        'stock' => (int) $_POST['stock'],
+                        'image_path' => $imagePaths,
+                        'date' => date('Y-m-d H:i:s'),
+                        'id' => $productId
+                    ]
+                );
             }
         } else {
             echo 'No changes made';
