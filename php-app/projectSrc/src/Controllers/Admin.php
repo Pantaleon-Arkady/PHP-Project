@@ -135,7 +135,7 @@ class Admin
             'name' => $_POST['name'],
             'description' => $_POST['description'],
             'stock' => (int) $_POST['stock'],
-            'price' => (float) $_POST['price'],
+            'price' => number_format($_POST['price'], 2, '.', '')
         ];
 
         $printSD = General::fastPrint($submittedData);
