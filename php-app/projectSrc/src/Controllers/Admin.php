@@ -165,7 +165,11 @@ class Admin
             if ((string)$value !== (string)$queriedData[$key]) {
                 $changes = true;
                 break;
-            } elseif ($submittedImages !== $currentImages) {
+            }
+        }
+        
+        if (!$changes && !empty($submittedImages)) {
+            if ($submittedImages !== $currentImages) {
                 $changes = true;
             }
         }
