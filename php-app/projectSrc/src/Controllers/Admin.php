@@ -19,7 +19,8 @@ class Admin
         $this->connection = Database::getConnection();
     }
 
-    function redirect(string $path) {
+    function redirect(string $path)
+    {
         header("Location: $path");
         exit;
     }
@@ -54,7 +55,6 @@ class Admin
         $description = trim($_POST['description']);
         $stocks = (int) $_POST['stock'];
         $price = (float) $_POST['price'];
-        $images = $_FILES['images'];
 
         $filePaths = isset($_FILES['images']) ? General::uploadFile() : [];
 
@@ -64,7 +64,7 @@ class Admin
             'INSERT INTO app_user_products (name, description, price, stock, image_path, created_at)
             VALUES (:name, :description, :price, :stock, :image_path, :created_at)',
             [
-                'name' => $name, 
+                'name' => $name,
                 'description' => $description,
                 'price' => $price,
                 'stock' => $stocks,
@@ -74,7 +74,6 @@ class Admin
         );
 
         $this->redirect('/homepage-admin?home=shop');
-        
     }
 
     public function adminDeleteProduct()
@@ -158,13 +157,31 @@ class Admin
         foreach ($submittedData as $key => $value) {
             if ((string)$value !== (string)$queriedData[$key]) {
                 $changes = true;
-                echo 'There is a change made in ' . $key . '.';
-                // break;
-            } else {
-                echo 'No changes made in ' . $key . '.';
-                echo '<br /><br />';
-                echo '<a href="/admin-edit-product?id=' . $productId . '"></a>';
+                break;
             }
-        }  
+        }
+
+        if ($changes) {
+            if (empty($_FILES['images'])) {
+                echo 'updating without image';
+                $updateTable = Database::crudQuery(
+                    'UPDATE app_user_products SET name = :name, description = :description, price = :price, stock = :stock, modified_at = :date
+                    WHERE id = :id',
+                    [
+                        'name' => $_POST['name'],
+                        'description' => $_POST['description'],
+                        'price' => (float) $_POST['price'],
+                        'stock' => (int) $_POST['stock'],
+                        'date' => date('Y-m-d H:i:s'),
+                        'id' => $productId
+                    ]
+                );
+            } else {
+            }
+        } else {
+            echo 'No changes made';
+            echo '<br /><br />';
+            echo '<a href="/admin-edit-product?id=' . $productId . '">Go back?</a>';
+        }
     }
 }
