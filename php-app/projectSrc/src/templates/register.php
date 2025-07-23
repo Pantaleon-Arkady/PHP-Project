@@ -139,7 +139,7 @@ session_start();
                     <h5 class="text-center mb-3">Verify</h5>
                     <form method="POST" action="/register-pin" id="pinForm">
                         <div class="mb-3">
-                            <input type="password" class="form-control" name="pin" maxlength="4" pattern="\d{4}" required placeholder="Enter PIN..." aria-label="PIN">
+                            <input type="password" class="form-control" name="pin" maxlength="6" pattern="\d{6}" required placeholder="Enter PIN..." aria-label="PIN">
                         </div>
                         <button type="submit" class="btn btn-dark w-100">Submit</button>
                     </form>
