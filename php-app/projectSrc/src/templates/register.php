@@ -1,8 +1,9 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Register Page</title>
@@ -28,20 +29,32 @@ session_start();
         .form-container {
             background-color: #f8f9fa;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             padding: 30px;
         }
     </style>
 </head>
+
 <body class="p-3 bg-dark">
     <div class="Main_div bg-secondary rounded d-flex flex-row justify-content-center align-items-center">
         <div class="bg-light w-50 m-3 rounded d-flex flex-column justify-content-center align-items-center text-center p-4">
-            <h2 class="mb-3">Trial App Name</h2>
-            <div>
-                <a href="http://localhost:8080/register?register=login" class="text-decoration-none me-2">Log In</a>
-                <span>or</span>
-                <a href="http://localhost:8080/register?register=signup" class="text-decoration-none ms-2">Sign Up</a>
-            </div>
+            <?php if (isset($_GET['register']) && $_GET['register'] === 'pin'): ?>
+                <h2 class="mb-3">Trial App Name</h2>
+                <div>
+                    <p>
+                        We sent a pin to your 
+                        <a href="http://localhost:8025/" target="_blank">email</a>
+                        please verify.
+                    </p>
+                </div>
+            <?php else: ?>
+                <h2 class="mb-3">Trial App Name</h2>
+                <div>
+                    <a href="http://localhost:8080/register?register=login" class="text-decoration-none me-2">Log In</a>
+                    <span>or</span>
+                    <a href="http://localhost:8080/register?register=signup" class="text-decoration-none ms-2">Sign Up</a>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="bg-light w-50 m-3 rounded d-flex justify-content-center align-items-center p-4">
             <?php if (isset($_GET['register']) && $_GET['register'] === 'signup'): ?>
@@ -55,8 +68,7 @@ session_start();
                                 class="form-control"
                                 id="username"
                                 name="username"
-                                required
-                            >
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
@@ -65,8 +77,7 @@ session_start();
                                 class="form-control"
                                 id="email"
                                 name="email"
-                                required
-                            >
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -75,8 +86,7 @@ session_start();
                                 class="form-control"
                                 id="password"
                                 name="password"
-                                required
-                            >
+                                required>
                         </div>
                         <button type="submit" class="btn btn-dark w-100 mt-2" id="registerBtn">
                             <span id="registerText">Register</span>
@@ -101,8 +111,7 @@ session_start();
                                 class="form-control"
                                 id="namemail"
                                 name="namemail"
-                                required
-                            >
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -111,8 +120,7 @@ session_start();
                                 class="form-control"
                                 id="password"
                                 name="password"
-                                required
-                            >
+                                required>
                         </div>
                         <button type="submit" class="btn btn-dark w-100 mt-2" id="logInBtn">
                             <span id="logInText">Log In</span>
@@ -126,6 +134,16 @@ session_start();
                         <?php unset($_SESSION['registered']); ?>
                     <?php endif; ?>
                 </div>
+            <?php elseif (isset($_GET['register']) && $_GET['register'] === 'pin'): ?>
+                <div class="form-container w-100 pin-form">
+                    <h5 class="text-center mb-3">Verify</h5>
+                    <form method="POST" action="/register-pin" id="pinForm">
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="pin" maxlength="4" pattern="\d{4}" required placeholder="Enter PIN..." aria-label="PIN">
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    </form>
+                </div>
             <?php else: ?>
                 <div class="form-container w-100 text-center">
                     <h4 class="mb-3">Welcome to Trial App Name</h4>
@@ -138,7 +156,7 @@ session_start();
 <script>
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
-        registerForm.addEventListener('submit', function (e) {
+        registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const btn = document.getElementById('registerBtn');
@@ -157,7 +175,7 @@ session_start();
 
     const logInForm = document.getElementById('logInForm');
     if (logInForm) {
-        logInForm.addEventListener('submit', function (e) {
+        logInForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const btn = document.getElementById('logInBtn');
@@ -174,4 +192,5 @@ session_start();
         });
     }
 </script>
+
 </html>

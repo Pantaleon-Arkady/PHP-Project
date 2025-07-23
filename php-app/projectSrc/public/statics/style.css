@@ -33,6 +33,22 @@ body {
     transform: scaleX(1);
 }
 
+/* Registration Styles */
+
+.pin-form {
+    max-width: 320px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  .form-control {
+    letter-spacing: 8px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
 /* Product Styles */
 
 .product-card {
