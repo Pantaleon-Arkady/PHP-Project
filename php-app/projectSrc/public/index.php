@@ -31,6 +31,9 @@ switch ($uri) {
     case '/homepage':
         $general->userHome();
         break;
+    case '/register-pin':
+        $usersLog->pinVerification();
+        break;
     case '/logout':
         $usersLog->logOut();
         break;
