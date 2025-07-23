@@ -50,6 +50,22 @@ class UsersLog
         }
     }
 
+    public function pinVerification()
+    {
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $pinSubmitted = intval($_POST['pin']);
+            $pinGenerated = intval($_SESSION['pin']);
+
+            // echo 'pin submitted: ' . $pinSubmitted . ', and pin generated: ' . $pinGenerated;
+            if ($pinSubmitted == $pinGenerated) {
+                
+            }
+
+        }
+    }
+
     public function SignUp()
     {
         session_start();
