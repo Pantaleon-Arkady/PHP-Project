@@ -28,7 +28,7 @@ class UsersLog
 
     }
 
-    protected function emailRegistration($email, $username) {
+    protected function emailRegistration($email, $username, $pin) {
 
         include_once __DIR__ . '/../Controllers/Mailer.php';
 
@@ -39,7 +39,7 @@ class UsersLog
         <html>
         <body>
             <h1>Welcome, ' . htmlspecialchars($username) . '!</h1>
-            <p>Click to verify: <a href="http://email.api:8080/verify">Verify</a></p>
+            <p>Your PIN: ' . $pin . '</p>
         </body>
         </html>
         ';
@@ -70,11 +70,15 @@ class UsersLog
                 'password' => $hashed_ps
             ]);
 
-            $this->emailRegistration($email, $username);
+            $pin = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            $_SESSION['pin'] = $pin;
+            $_SESSION['pin_expires'] = time() + 600;
+
+            $this->emailRegistration($email, $username, $pin);
 
             $_SESSION['registered'] = true;
             
-            $this->redirect('/register');
+            $this->redirect('/register?register=pin');
         }
         
     }
