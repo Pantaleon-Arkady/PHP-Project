@@ -42,7 +42,7 @@ session_start();
                 <h2 class="mb-3">Trial App Name</h2>
                 <div>
                     <p>
-                        We sent a pin to your 
+                        We sent a pin to your
                         <a href="http://localhost:8025/" target="_blank">email</a>
                         please verify.
                     </p>
@@ -127,12 +127,6 @@ session_start();
                             <span id="logInSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                     </form>
-                    <?php if (isset($_SESSION['registered'])): ?>
-                        <div class="alert alert-success py-3">
-                            <strong>Success!</strong> You are now registered in Trial App Name.
-                        </div>
-                        <?php unset($_SESSION['registered']); ?>
-                    <?php endif; ?>
                 </div>
             <?php elseif (isset($_GET['register']) && $_GET['register'] === 'pin'): ?>
                 <div class="form-container w-100 pin-form">
@@ -147,7 +141,14 @@ session_start();
             <?php else: ?>
                 <div class="form-container w-100 text-center">
                     <h4 class="mb-3">Welcome to Trial App Name</h4>
-                    <p class="text-muted">Please choose to <strong>Log In</strong> or <strong>Sign Up</strong> to continue.</p>
+                    <?php if (isset($_SESSION['registered'])): ?>
+                        <div class="alert alert-success py-3">
+                            <strong>Success!</strong> You are now registered in Trial App Name.
+                        </div>
+                        <?php unset($_SESSION['registered']); ?>
+                    <?php else: ?>
+                        <p class="text-muted">Please choose to <strong>Log In</strong> or <strong>Sign Up</strong> to continue.</p>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
         </div>

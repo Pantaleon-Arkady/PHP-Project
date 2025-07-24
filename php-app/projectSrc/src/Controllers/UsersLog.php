@@ -58,9 +58,10 @@ class UsersLog
             $pinSubmitted = intval($_POST['pin']);
             $pinGenerated = intval($_SESSION['pin']);
 
-            // echo 'pin submitted: ' . $pinSubmitted . ', and pin generated: ' . $pinGenerated;
             if ($pinSubmitted == $pinGenerated) {
-                
+
+                $_SESSION['registered'] = true;
+                $this->redirect('/register');
             }
 
         }
