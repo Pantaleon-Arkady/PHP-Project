@@ -108,7 +108,22 @@ class UsersLog
 
     public function qrVerification()
     {
-        echo 'verifying thru qr code';
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $tokenGot = intval($_GET['token']);
+            $pinGenerated = intval($_SESSION['pin']);
+
+            if ($tokenGot == $pinGenerated) {
+
+                $_SESSION['registered'] = true;
+                $this->redirect('/register');
+                
+            } else {
+                echo 'something i do not know went wrong...';
+            }
+
+        }
     }
 
     public function LogIn()
