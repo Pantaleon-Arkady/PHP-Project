@@ -28,6 +28,41 @@ class UsersLog
 
     }
 
+    public function SignUp()
+    {
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $email = $_POST['email'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $hashed_ps = md5($password);
+
+            $pin = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            $_SESSION['pin'] = $pin;
+            $_SESSION['pin_expires'] = time() + 600;
+
+            $qrcode = General::generateQrCodeBase64('localhost:8080/verifying?token=' . $pin . '');
+
+            // $registerQuery = $this->connection->prepare(
+            //     'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
+            // );
+
+            // $registerQuery->execute([
+            //     'email' => $email,
+            //     'username' => $username,
+            //     'password' => $hashed_ps
+            // ]);
+
+            $this->emailRegistration($email, $username, $pin, $qrcode);
+
+            $_SESSION['registered'] = true;
+            
+            $this->redirect('/register?register=pin');
+        }
+        
+    }
+
     protected function emailRegistration($email, $username, $pin, ?string $qrcode = null) {
 
         include_once __DIR__ . '/../Controllers/Mailer.php';
@@ -35,14 +70,18 @@ class UsersLog
         $emailTo = $email;
         $emailFrom = 'register@email.com';
         $subject = 'Registration';
-        $content = '
-        <html>
-        <body>
-            <h1>Welcome, ' . htmlspecialchars($username) . '!</h1>
-            <p>Your PIN: ' . $pin . '</p>
-        </body>
-        </html>
-        ';
+
+        $data = [
+            'email' => $email,
+            'username' => $username,
+            'pin' => $pin,
+            'qrcode' => $qrcode
+        ];
+
+        ob_start();
+        extract($data);
+        include __DIR__ . '/../templates/registration-email.php';
+        $content = ob_get_clean();
 
         $sent = Mailer::send($emailTo, $emailFrom, $subject, $content);
         if (!$sent) {
@@ -67,39 +106,9 @@ class UsersLog
         }
     }
 
-    public function SignUp()
+    public function qrVerification()
     {
-        session_start();
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-            $email = $_POST['email'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $hashed_ps = md5($password);
-
-            $pin = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-            $_SESSION['pin'] = $pin;
-            $_SESSION['pin_expires'] = time() + 600;
-
-            $qrcode = General::generateQrCodeBase64('localhost:8080/register');
-
-            // $registerQuery = $this->connection->prepare(
-            //     'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
-            // );
-
-            // $registerQuery->execute([
-            //     'email' => $email,
-            //     'username' => $username,
-            //     'password' => $hashed_ps
-            // ]);
-
-            $this->emailRegistration($email, $username, $pin);
-
-            $_SESSION['registered'] = true;
-            
-            $this->redirect('/register?register=pin');
-        }
-        
+        echo 'verifying thru qr code';
     }
 
     public function LogIn()
