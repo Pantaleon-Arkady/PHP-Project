@@ -25,6 +25,9 @@ switch ($uri) {
     case '/signing-up';
         $usersLog->SignUp();
         break;
+    case '/verifying':
+        $usersLog->qrVerification();
+        break;
     case '/logging-in':
         $usersLog->LogIn();
         break;
