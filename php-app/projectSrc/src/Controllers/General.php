@@ -3,9 +3,10 @@
 namespace Root\Controllers;
 
 use Root\Database\Database;
-use Root\Database\BaseTable;
 use Root\Controllers\Post;
 use Root\Controllers\Shop;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 use \PDO;
 
 class General
@@ -68,7 +69,6 @@ class General
                     $uploadedFiles['failed'][] = $fileName;
                     echo "Failed to move file: $fileName<br>";
                 }
-
             } else {
                 $uploadedFiles['failed'] = $fileName;
                 echo "Upload error for file: $fileName";
@@ -105,4 +105,10 @@ class General
         print_r($array);
         echo '</pre>';
     }
+
+    public static function generateQrCodeBase64(string $url): string
+    {
+        return (new QRCode)->render($url);
+    }
+
 }
