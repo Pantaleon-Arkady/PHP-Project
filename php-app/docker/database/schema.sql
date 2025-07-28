@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS app_user (
 
 CREATE TABLE IF NOT EXISTS app_user_posts (
     id SERIAL PRIMARY KEY,
-    author INT NOT NULL,
+    author INT NOT NULL REFERENCES app_user(id),
     title TEXT,
     content TEXT NOT NULL,
     created_at TIMESTAMP,
@@ -24,4 +24,13 @@ CREATE TABLE IF NOT EXISTS app_user_products (
     image_path VARCHAR(255),
     created_at DATE,
     modified_at DATE
-)
+);
+
+CREATE TABLE IF NOT EXISTS app_user_main_comments (
+    id SERIAL PRIMARY KEY,
+    post_id INT NOT NULL REFERENCES app_user_posts(id),
+    author INT NOT NULL REFERENCES app_user(id),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP,
+    modified_at TIMESTAMP
+);
