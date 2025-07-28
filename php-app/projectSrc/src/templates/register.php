@@ -43,7 +43,7 @@ session_start();
                 <div>
                     <p>
                         We sent a pin to your
-                        <a href="http://localhost:8025/" target="_blank">email</a>
+                        <a href="http://localhost:8025/" target="_blank" class="text-decoration-none">email</a>
                         please verify.
                     </p>
                 </div>
@@ -136,6 +136,11 @@ session_start();
                             <input type="password" class="form-control" name="pin" maxlength="6" pattern="\d{6}" required placeholder="Enter PIN..." aria-label="PIN">
                         </div>
                         <button type="submit" class="btn btn-dark w-100">Submit</button>
+                        <div class="m-2">
+                            <a href="http://localhost:8025/" target="_blank" class="text-decoration-none">
+                                Verify by QR Code?
+                            </a>
+                        </div>
                     </form>
                 </div>
             <?php else: ?>
