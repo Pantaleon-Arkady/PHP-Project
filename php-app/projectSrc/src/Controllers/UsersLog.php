@@ -28,7 +28,7 @@ class UsersLog
 
     }
 
-    protected function emailRegistration($email, $username, $pin) {
+    protected function emailRegistration($email, $username, $pin, ?string $qrcode = null) {
 
         include_once __DIR__ . '/../Controllers/Mailer.php';
 
@@ -77,19 +77,21 @@ class UsersLog
             $password = $_POST['password'];
             $hashed_ps = md5($password);
 
-            $registerQuery = $this->connection->prepare(
-                'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
-            );
-
-            $registerQuery->execute([
-                'email' => $email,
-                'username' => $username,
-                'password' => $hashed_ps
-            ]);
-
             $pin = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             $_SESSION['pin'] = $pin;
             $_SESSION['pin_expires'] = time() + 600;
+
+            $qrcode = General::generateQrCodeBase64('localhost:8080/register');
+
+            // $registerQuery = $this->connection->prepare(
+            //     'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
+            // );
+
+            // $registerQuery->execute([
+            //     'email' => $email,
+            //     'username' => $username,
+            //     'password' => $hashed_ps
+            // ]);
 
             $this->emailRegistration($email, $username, $pin);
 
