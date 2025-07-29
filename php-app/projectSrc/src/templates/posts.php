@@ -1,4 +1,4 @@
-<div class="d-flex mb-4 border rounded shadow-sm p-3 bg-white position-relative">
+<div class="d-flex flex-column mb-4 border rounded shadow-sm p-3 bg-white position-relative">
 
     <div class="me-3 text-center">
         <button class="btn btn-light p-0 d-block mb-1"><i class="bi bi-arrow-up"></i></button>
@@ -12,7 +12,7 @@
             <div class="d-flex align-items-center">
                 <img src="https://via.placeholder.com/24" class="rounded-circle me-2" alt="user-profile" />
                 <small class="text-muted">
-                    <?php echo $each_post['author'] ?> • <?php echo $each_post['date_posted'] ?>
+                    <?php echo $each_post['author'] ?> • <?php echo $each_post['created_at'] ?>
                 </small>
             </div>
 
@@ -37,10 +37,40 @@
         <img src="https://via.placeholder.com/600x300" class="img-fluid rounded mb-2" alt="post image" />
 
         <div class="d-flex text-muted small">
-            <div class="me-4"><i class="bi bi-chat"></i> 45 Comments</div>
-            <div class="me-4"><i class="bi bi-share"></i> Share</div>
-            <div><i class="bi bi-bookmark"></i> Save</div>
+            <div class="m-2">
+                <a class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" href="#comments-<?php echo $each_post['id']; ?>" role="button" aria-expanded="false" aria-controls="comments-<?php echo $each_post['id']; ?>">
+                    <i class="bi bi-chat-left-text"></i> Comments (<?php echo count($each_post['comments']); ?>)
+                </a>
+            </div>
+            <div class="m-2">
+                <a class="btn btn-sm btn-outline-secondary" href="" aria-expanded="false">
+                    <i class="bi bi-chat-left-text"></i> Share
+                </a>
+            </div>
+            <div class="m-2">
+                <a class="btn btn-sm btn-outline-secondary" href="" aria-expanded="false">
+                    <i class="bi bi-chat-left-text"></i> Save
+                </a>
+            </div>
         </div>
+<!-- Comments Section (collapsed) -->
+        <div class="collapse mt-2" id="comments-<?php echo $each_post['id']; ?>">
+            <?php if (!empty($each_post['comments'])): ?>
+                <div class="mt-2">
+                    <?php foreach ($each_post['comments'] as $comment): ?>
+                        <div class="border-start ps-3 mb-2">
+                            <div class="small text-muted mb-1">
+                                <?php echo htmlspecialchars($comment['author']) ?> • <?php echo htmlspecialchars($comment['created_at']) ?>
+                            </div>
+                            <div><?php echo nl2br(htmlspecialchars($comment['content'])) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="text-muted small">No comments yet.</div>
+            <?php endif; ?>
+        </div>
+
     </div>
 </div>
 
