@@ -39,3 +39,13 @@ VALUES
   ('HGUC - Gundam GP01', 'Lorem ipsum dolor sit amet', 15.00, 23, '["/files/013_boxart.png"]', '2025-07-11'),
   ('HGUC - Z''Gok', 'Lorem ipsum dolor sit amet', 15.00, 23, '["/files/019_boxart.png"]', '2025-07-11'),
   ('HGUC - GM', 'Lorem ipsum dolor sit amet', 15.00, 23, '["/files/020_boxart.png"]', '2025-07-11');
+
+INSERT INTO app_user_main_comments (post_id, author, content, created_at)
+VALUES
+  (5, 3, 'Trial Comments by First User', '2025-07-28'),
+  (5, 5, 'Trial Comment by Test User', '2025-07-28'),
+  (5, 4, 'Trial Comment by Demo User', '2025-07-28'),
+  (4, 3, 'Trial Comments by First User', '2025-07-28'),
+  (3, 3, 'Trial Comments by First User', '2025-07-28'),
+  (2, 3, 'Trial Comments by First User', '2025-07-28'),
+  (1, 3, 'Trial Comments by First User', '2025-07-28');
