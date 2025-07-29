@@ -23,22 +23,25 @@ class Post
     public static function allPosts()
     {
         $allPosts = Database::fetchAll(
-            'SELECT 
-                p.id AS id,
-                p.title AS title,
-                p.content AS content,
-                p.created_at AS date_posted,
-                p.author AS author_id,
-                u.username AS author
-            FROM
-                app_user_posts p
-            LEFT JOIN
-                app_user u
-            ON
-                (p.author = u.id)
-            ORDER BY p.id DESC;',
+            'SELECT p.id, p.title, p.content, p.created_at, u.username AS author
+             FROM app_user_posts p
+             LEFT JOIN app_user u ON p.author = u.id
+             ORDER BY p.id DESC;',
             []
         );
+        
+        foreach ($allPosts as &$post) {
+            $post['comments'] = Database::fetchAll(
+                'SELECT c.content, c.created_at, u.username AS author
+                 FROM app_user_main_comments c
+                 LEFT JOIN app_user u ON c.author = u.id
+                 WHERE c.post_id = ?
+                 ORDER BY c.created_at ASC;',
+                [$post['id']]
+            );
+        }
+        
+        
 
         return $allPosts;
     }
