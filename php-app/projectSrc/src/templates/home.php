@@ -54,9 +54,10 @@
         </main>
     <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
         <main class="container my-5">
-            <?php foreach ($allPosts as $each_post): ?>
-                <?php include __DIR__ . '/../templates/posts.php'; ?>
-            <?php endforeach; ?>
+            <?php //foreach ($allPosts as $each_post): ?>
+                <?php //include __DIR__ . '/../templates/posts.php'; ?>
+            <?php //endforeach; ?>
+            <pre><?php print_r($allPosts)  ?></pre>
         </main>
     <?php endif; ?>
 
