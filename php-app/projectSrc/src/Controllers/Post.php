@@ -108,6 +108,26 @@ class Post
 
     public function createComment()
     {
-        echo "creating comment";
+
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $postId = $_POST['post_id'];
+            $comment = $_POST['comment'];
+            $userId = $_SESSION['userId'];
+
+            $CrudQuery = Database::crudQuery(
+                'INSERT INTO app_user_main_comments (post_id, author, content, created_at) 
+                VALUES (:post_id, :author, :content, :created_at)',
+                [
+                    'post_id' => $postId,
+                    'author' => $userId,
+                    'content' => $comment,
+                    'created_at' => date('Y-m-d H:i:s')
+                ]
+            );
+
+            $this->redirect('/homepage?home=post');
+        }
     }
 }
