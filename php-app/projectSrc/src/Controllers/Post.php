@@ -4,6 +4,7 @@ namespace Root\Controllers;
 
 use Root\Database\Database;
 use Root\Database\BaseTable;
+use Root\Controllers\General;
 use \PDO;
 
 class Post 
@@ -32,7 +33,7 @@ class Post
         
         foreach ($allPosts as &$post) {
             $post['comments'] = Database::fetchAll(
-                'SELECT c.content, c.created_at, u.username AS author
+                'SELECT c.content, c.created_at, u.id AS author_id, u.username AS author
                  FROM app_user_main_comments c
                  LEFT JOIN app_user u ON c.author = u.id
                  WHERE c.post_id = ?
@@ -40,8 +41,6 @@ class Post
                 [$post['id']]
             );
         }
-        
-        
 
         return $allPosts;
     }
