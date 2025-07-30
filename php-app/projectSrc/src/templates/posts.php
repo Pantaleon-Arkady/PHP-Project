@@ -53,7 +53,7 @@
                 </a>
             </div>
         </div>
-<!-- Comments Section (collapsed) -->
+        <!-- Comments Section (collapsed) -->
         <div class="collapse mt-2" id="comments-<?php echo $each_post['id']; ?>">
             <?php if (!empty($each_post['comments'])): ?>
                 <div class="mt-2">
@@ -69,6 +69,16 @@
             <?php else: ?>
                 <div class="text-muted small">No comments yet.</div>
             <?php endif; ?>
+            <form method="POST" action="/create-comment">
+                <input type="hidden" name="post_id" value="<?php echo $each_post['id']; ?>">
+                <div class="d-flex flex-row">
+                    <textarea class="p-2" cols="50" rows="1" placeholder="Type a comment..."></textarea>
+                    <button type="submit" class="btn btn-dark" id="commentBtn">
+                        <span id="commentBtnText">Comment Post!</span>
+                        <span id="commentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
         </div>
 
     </div>
