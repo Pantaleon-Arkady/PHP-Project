@@ -69,10 +69,10 @@
             <?php else: ?>
                 <div class="text-muted small">No comments yet.</div>
             <?php endif; ?>
-            <form method="POST" action="/create-comment">
+            <form method="POST" action="/create-comment" id="commentForm">
                 <input type="hidden" name="post_id" value="<?php echo $each_post['id']; ?>">
                 <div class="d-flex flex-row">
-                    <textarea class="p-2" cols="50" rows="1" placeholder="Type a comment..."></textarea>
+                    <textarea class="p-2" cols="50" rows="1" name="comment" placeholder="Type a comment..."></textarea>
                     <button type="submit" class="btn btn-dark" id="commentBtn">
                         <span id="commentBtnText">Comment Post!</span>
                         <span id="commentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -114,3 +114,24 @@
         </form>
     </div>
 </div>
+
+<script>
+    const commentFrom = document.getElementById('commentForm');
+    if (commentFrom) {
+        commentFrom.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('commentBtn');
+            const spinner = document.getElementById('commentSpinner');
+            const text = document.getElementById('commentBtnText');
+
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Posting Comment...';
+
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+        });
+    }
+</script>
