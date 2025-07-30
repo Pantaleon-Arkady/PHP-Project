@@ -105,4 +105,9 @@ class Post
 
         $this->redirect('/homepage?home=post');
     }
+
+    public function createComment()
+    {
+        echo "creating comment";
+    }
 }
