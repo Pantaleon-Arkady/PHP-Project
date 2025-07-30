@@ -58,9 +58,27 @@
             <?php if (!empty($each_post['comments'])): ?>
                 <div class="mt-2">
                     <?php foreach ($each_post['comments'] as $comment): ?>
-                        <div class="border-start ps-3 mb-2">
-                            <div class="small text-muted mb-1">
-                                <?php echo htmlspecialchars($comment['author']) ?> • <?php echo htmlspecialchars($comment['created_at']) ?>
+                        <div class="border-start ps-3 mb-2 bg-light border rounded">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted mb-1">
+                                    <?php echo htmlspecialchars($comment['author']) ?> • <?php echo htmlspecialchars($comment['created_at']) ?>
+                                </div>
+                                <?php if ($comment['author_id'] == $_SESSION['userId']) : ?>
+                                    <div class="dropdown">
+                                        <a href="#" class="text-muted text-decoration-none" role="button" id="dropdownMenu<?php echo $each_post['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span><img src="/statics/vertical_three_dots.svg" /></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
+                                            <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
+                                            <li>
+                                                <a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger" id="deleteLink">
+                                                    <span id="deleteText">Delete</span>
+                                                    <span id="deleteSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div><?php echo nl2br(htmlspecialchars($comment['content'])) ?></div>
                         </div>
