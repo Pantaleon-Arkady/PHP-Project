@@ -24,7 +24,7 @@ class Post
     public static function allPosts()
     {
         $allPosts = Database::fetchAll(
-            'SELECT p.id, p.title, p.content, p.created_at, u.username AS author
+            'SELECT p.id, p.title, p.content, p.created_at, u.id AS author_id, u.username AS author
              FROM app_user_posts p
              LEFT JOIN app_user u ON p.author = u.id
              ORDER BY p.id DESC;',
@@ -33,7 +33,7 @@ class Post
         
         foreach ($allPosts as &$post) {
             $post['comments'] = Database::fetchAll(
-                'SELECT c.content, c.created_at, u.id AS author_id, u.username AS author
+                'SELECT c.content, c.created_at, c.id AS comment_id, u.id AS author_id, u.username AS author
                  FROM app_user_main_comments c
                  LEFT JOIN app_user u ON c.author = u.id
                  WHERE c.post_id = ?
