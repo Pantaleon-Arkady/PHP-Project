@@ -15,21 +15,22 @@
                     <?php echo $each_post['author'] ?> • <?php echo $each_post['created_at'] ?>
                 </small>
             </div>
-
-            <div class="dropdown">
-                <a href="#" class="text-muted text-decoration-none" role="button" id="dropdownMenu<?php echo $each_post['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span><img src="/statics/vertical_three_dots.svg" /></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
-                    <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
-                    <li>
-                        <a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger" id="deleteLink">
-                            <span id="deleteText">Delete</span>
-                            <span id="deleteSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <?php if ($each_post['author_id'] == $_SESSION['userId']) : ?>
+                <div class="dropdown">
+                    <a href="#" class="text-muted text-decoration-none" role="button" id="dropdownMenu<?php echo $each_post['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span><img src="/statics/vertical_three_dots.svg" /></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
+                        <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
+                        <li>
+                            <a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger" id="deleteLink">
+                                <span id="deleteText">Delete</span>
+                                <span id="deleteSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <?php endif; ?>
         </div>
 
         <h5 class="mb-1"><?php echo $each_post['title'] ?></h5>
@@ -65,13 +66,13 @@
                                 </div>
                                 <?php if ($comment['author_id'] == $_SESSION['userId']) : ?>
                                     <div class="dropdown">
-                                        <a href="#" class="text-muted text-decoration-none" role="button" id="dropdownMenu<?php echo $each_post['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a href="#" class="text-muted text-decoration-none" role="button" id="dropdownMenu<?php echo $comment['comment_id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span><img src="/statics/vertical_three_dots.svg" /></span>
                                         </a>
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $each_post['id']; ?>">
-                                            <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $each_post['id']; ?>">Edit</a></li>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu<?php echo $comment['comment_id']; ?>">
+                                            <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editCommentModal<?php echo $comment['comment_id']; ?>">Edit</a></li>
                                             <li>
-                                                <a href="/delete-post?id=<?php echo $each_post['id']; ?>" class="dropdown-item text-danger" id="deleteLink">
+                                                <a href="/delete-comment?id=<?php echo $comment['comment_id']; ?>" class="dropdown-item text-danger" id="deleteLink">
                                                     <span id="deleteText">Delete</span>
                                                     <span id="deleteSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                 </a>
