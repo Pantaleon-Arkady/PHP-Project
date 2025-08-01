@@ -87,7 +87,7 @@
                         <!-- Edit Comment Form -->
                         <div class="modal fade" id="editCommentModal<?php echo $comment['comment_id']; ?>" tabindex="-1" aria-labelledby="editCommentModalLabel<?php echo $comment['comment_id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
-                                <form class="modal-content" method="POST" action="/edit-comment">
+                                <form class="modal-content"  method="POST" action="/edit-comment" id="editCommentForm">
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCommentModalLabel<?php echo $comment['comment_id']; ?>">Edit Comment</h5>
@@ -100,9 +100,9 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-dark">
-                                            <span>Save Changes</span>
-                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        <button type="submit" class="btn btn-dark" id="editCommentBtn">
+                                            <span id="editCommentTxt">Save Changes</span>
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="editCommentSpinner"></span>
                                         </button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
@@ -178,6 +178,26 @@
             setTimeout(() => {
                 this.submit();
             }, 2000);
+        });
+    }
+
+    const editCommentForm = document.getElementById('editCommentForm');
+    if (editCommentForm) {
+        editCommentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('editCommentBtn');
+            const spinner = document.getElementById('editCommentSpinner');
+            const text = document.getElementById('editCommentTxt');
+
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            text.textContent = 'Saving Changes...';
+
+            setTimeout(() => {
+                this.submit();
+            }, 2000);
+
         });
     }
 </script>
