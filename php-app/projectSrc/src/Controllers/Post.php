@@ -129,4 +129,17 @@ class Post
             $this->redirect('/homepage?home=post');
         }
     }
+
+    public function editComment()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $commentId = $_POST['comment_id'];
+            $comment = $_POST['comment'];
+
+            echo 'comment: ' . $comment . ', on id: ' . $commentId;
+
+        }
+    }
 }
