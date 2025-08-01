@@ -38,21 +38,18 @@ class UsersLog
             $password = $_POST['password'];
             $hashed_ps = md5($password);
 
+            $_SESSION['userInfo'] = 
+            [
+                'email' => $email,
+                'username' => $username,
+                'password' => $hashed_ps
+            ];
+
             $pin = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             $_SESSION['pin'] = $pin;
             $_SESSION['pin_expires'] = time() + 600;
 
             $qrcode = General::generateQrCodeBase64('localhost:8080/verifying?token=' . $pin . '');
-
-            // $registerQuery = $this->connection->prepare(
-            //     'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
-            // );
-
-            // $registerQuery->execute([
-            //     'email' => $email,
-            //     'username' => $username,
-            //     'password' => $hashed_ps
-            // ]);
 
             $this->emailRegistration($email, $username, $pin, $qrcode);
 
@@ -99,6 +96,9 @@ class UsersLog
 
             if ($pinSubmitted == $pinGenerated) {
 
+                $user = $_SESSION['userInfo'];   
+                $this->createUser($user['email'], $user['username'], $user['password']);
+
                 $_SESSION['registered'] = true;
                 $this->redirect('/register');
             }
@@ -115,6 +115,9 @@ class UsersLog
             $pinGenerated = intval($_SESSION['pin']);
 
             if ($tokenGot == $pinGenerated) {
+                
+                $user = $_SESSION['userInfo'];   
+                $this->createUser($user['email'], $user['username'], $user['password']);
 
                 $_SESSION['registered'] = true;
                 $this->redirect('/register');
@@ -124,6 +127,19 @@ class UsersLog
             }
 
         }
+    }
+
+    public function createUser($email, $username, $password)
+    {
+        $registerQuery = $this->connection->prepare(
+            'INSERT INTO app_user (email, username, password) VALUES (:email, :username, :password)'
+        );
+
+        $registerQuery->execute([
+            'email' => $email,
+            'username' => $username,
+            'password' => $password
+        ]);
     }
 
     public function LogIn()
