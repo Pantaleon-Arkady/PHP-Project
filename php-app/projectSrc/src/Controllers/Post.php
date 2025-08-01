@@ -132,7 +132,6 @@ class Post
 
     public function editComment()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $commentId = $_POST['comment_id'];
@@ -151,5 +150,10 @@ class Post
 
             $this->redirect('/homepage?home=post');
         }
+    }
+
+    public function deleteComment()
+    {
+        echo 'deleting comment with id: ' . $_GET['id'];
     }
 }

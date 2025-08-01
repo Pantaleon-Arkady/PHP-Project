@@ -84,7 +84,7 @@
                             <div><?php echo nl2br(htmlspecialchars($comment['content'])) ?></div>
                         </div>
 
-                        <!-- Move the edit comment modal inside the loop -->
+                        <!-- Edit Comment Form -->
                         <div class="modal fade" id="editCommentModal<?php echo $comment['comment_id']; ?>" tabindex="-1" aria-labelledby="editCommentModalLabel<?php echo $comment['comment_id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" method="POST" action="/edit-comment">
