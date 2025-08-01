@@ -134,6 +134,32 @@
     </div>
 </div>
 
+<!-- Edit Comment Form -->
+<div class="modal fade" id="editCommentModal<?php echo $each_post['id']; ?>" tabindex="-1" aria-labelledby="editCommentModalLabel<?php echo $comment['comment_id']; ?>" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" method="POST" action="/edit-comment" id="editCommentForm">
+            <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCommentModalLalbel<?php echo $comment['comment_id'] ?>">Edit Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="comment<?php echo $comment['comment_id'] ?>" class="form-label" >Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4" ></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" id="editCommentBtn">
+                        <span id="editCommentBtnText">Save Changes</span>
+                        <span id="editCommentSpinner" class="spinner-border spinnder-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     const commentFrom = document.getElementById('commentForm');
     if (commentFrom) {
