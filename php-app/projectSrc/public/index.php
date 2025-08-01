@@ -54,6 +54,9 @@ switch ($uri) {
     case '/create-comment':
         $post->createComment();
         break;
+    case '/edit-comment':
+        $post->editComment();
+        break;
 
     #Shop
     case '/product-view':
