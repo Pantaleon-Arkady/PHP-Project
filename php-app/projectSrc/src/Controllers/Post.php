@@ -138,8 +138,18 @@ class Post
             $commentId = $_POST['comment_id'];
             $comment = $_POST['comment'];
 
-            echo 'comment: ' . $comment . ', on id: ' . $commentId;
+            $updateQuery = Database::crudQuery(
+              'UPDATE app_user_main_comments 
+              SET content = :content, modified_at = :modified_at 
+              WHERE id = :id',
+              [
+                'content' => $comment,
+                'modified_at' => date('Y-m-d H:i:s'),
+                'id' => $commentId
+              ]
+            );
 
+            $this->redirect('/homepage?home=post');
         }
     }
 }
