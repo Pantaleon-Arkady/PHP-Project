@@ -96,10 +96,9 @@ class Post
         $deleteId = $_GET["id"] ?? null;
 
         $deletePost = Database::crudQuery(
-            'DELETE FROM app_user_posts WHERE id = :id',
-            [
-                'id' => $deleteId
-            ]
+            'DELETE FROM app_user_posts 
+            WHERE id = :id',
+            ['id' => $deleteId]
         );
 
         $this->redirect('/homepage?home=post');
@@ -154,6 +153,14 @@ class Post
 
     public function deleteComment()
     {
-        echo 'deleting comment with id: ' . $_GET['id'];
+        $commentId = $_GET['id'];
+
+        $deleteQuery = Database::crudQuery(
+            'DELETE FROM app_user_main_comments
+            WHERE id = :id',
+            ['id' => $commentId]
+        );
+
+        $this->redirect('/homepage?home=post');
     }
 }
