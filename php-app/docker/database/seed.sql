@@ -1,4 +1,4 @@
-TRUNCATE app_user_main_comments, app_user_posts, app_user RESTART IDENTITY;
+TRUNCATE app_user_main_comments, app_user_posts, app_user, app_user_cart, app_user_cart_products RESTART IDENTITY;
 
 INSERT INTO app_user (email, role, username, password)
 VALUES 
@@ -49,3 +49,16 @@ VALUES
   (3, 3, 'Trial Comments by First User', '2025-07-28'),
   (2, 3, 'Trial Comments by First User', '2025-07-28'),
   (1, 3, 'Trial Comments by First User', '2025-07-28');
+
+INSERT INTO app_user_cart (user_id, created_at)
+VALUES
+  (1, '2025-08-02'),
+  (4, '2025-08-02');
+
+INSERT INTO app_user_cart_products (cart_id, product_id, quantity, created_at)
+VALUES
+  (1, 1, 1, '2025-08-02'),
+  (1, 4, 1, '2025-08-02'),
+  (1, 6, 2, '2025-08-02'),
+  (2, 3, 1, '2025-08-02'),
+  (2, 5, 3, '2025-08-02');
