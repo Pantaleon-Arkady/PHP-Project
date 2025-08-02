@@ -22,19 +22,43 @@ session_start();
 
 <body class="bg-light">
     <header class="bg-dark text-white py-3 shadow">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span><?php //echo $user['username']; ?></span>
-            <div class="d-flex align-items-center gap-3">
-                <div class="fw-bold fs-4">Trial App</div>
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <a class="navbar-brand fw-bold fs-4" href="#">Trial App</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=post">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=shop">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/logout">Logout</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                    <span><?php echo $user['username']; ?></span>
+
+                    <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
+                        <a href="#" class="text-white text-decoration-none underline-hover"
+                            data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
+                    <?php endif; ?>
+                </div>
             </div>
-            <nav class="d-flex gap-3">
-                <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
-                <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
-                <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
-                <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
-                <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
-            </nav>
-        </div>
+        </nav>
     </header>
 
     <main class="container my-5">
