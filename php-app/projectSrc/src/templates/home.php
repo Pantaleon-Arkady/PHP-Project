@@ -36,7 +36,7 @@
             <nav class="d-flex gap-3">
                 <a href="/homepage?home=post" class="text-white text-decoration-none underline-hover">Home</a>
                 <a href="/homepage?home=shop" class="text-white text-decoration-none underline-hover">Shop</a>
-                <a href="#" class="text-white text-decoration-none underline-hover">Cart</a>
+                <a href="/homepage?home=cart" class="text-white text-decoration-none underline-hover">Cart</a>
                 <a href="#" class="text-white text-decoration-none underline-hover">Profile</a>
                 <a href="/logout" class="text-white text-decoration-none underline-hover">Logout</a>
             </nav>
@@ -57,6 +57,15 @@
             <?php foreach ($allPosts as $each_post): ?>
                 <?php include __DIR__ . '/../templates/posts.php'; ?>
             <?php endforeach; ?>
+        </main>
+    <?php elseif (isset($_GET['home']) && $_GET['home'] === 'cart'): ?>
+        <main class="container my-5">
+            <?php foreach ($allCartProducts as $eachCP): ?>
+                <?php include __DIR__ . '/../templates/cart-view.php'; ?>
+            <?php endforeach; ?>
+            <pre>
+                <?php //print_r($allCartProducts) ?>
+            </pre>
         </main>
     <?php endif; ?>
 
