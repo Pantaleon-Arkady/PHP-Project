@@ -50,7 +50,7 @@ session_start();
                 </ul>
 
                 <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-                    <span><?php echo $user['username']; ?></span>
+                    <span><?php echo $_SESSION['username']; ?></span>
 
                     <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
                         <a href="#" class="text-white text-decoration-none underline-hover"
