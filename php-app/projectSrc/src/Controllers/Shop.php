@@ -82,6 +82,15 @@ class Shop
 
     public function addToCart()
     {
-        echo 'adding to cart';
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $productId = $_POST['product_id'];
+            $quantity = $_POST['quantity'];
+            $userId = $_SESSION['userId'];
+
+            echo "adding product with id: $productId, with a quantity of: $quantity. by user with id: $userId";
+
+        }
     }
 }
