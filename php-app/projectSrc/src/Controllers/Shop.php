@@ -89,17 +89,36 @@ class Shop
             $quantity = $_POST['quantity'];
             $userId = $_SESSION['userId'];
 
-            $userCartQuery = Database::fetchAll(
+            $userCartQuery = Database::fetchAssoc(
                 'SELECT * FROM app_user_cart WHERE user_id = :user_id',
-                ['user_id' => 5]
+                ['user_id' => $userId]
             );
 
             if ($userCartQuery) {
-                echo 'user cart exists';
+
+                $cartId = $userCartQuery['id'];
+                $this->ATCFunction($cartId, $productId, $quantity);
+                echo 'data insertion success!';
+
             } else {
-                echo 'user cart does not exist, please make a user cart to insert add to cart';
+                
             }
 
         }
+    }
+
+    public function ATCFunction($cartId, $productId, $quantity)
+    {
+
+        $atcQuery = Database::crudQuery(
+            'INSERT INTO app_user_cart_products (cart_id, product_id, quantity)
+            VALUES (:cart_id, :product_id, :quantity)',
+            [
+                'cart_id' => $cartId,
+                'product_id' => $productId,
+                'quantity' => $quantity
+            ]
+        );
+
     }
 }
