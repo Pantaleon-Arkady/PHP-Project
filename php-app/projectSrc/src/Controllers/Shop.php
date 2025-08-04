@@ -98,7 +98,8 @@ class Shop
 
                 $cartId = $userCartQuery['id'];
                 $this->ATCFunction($cartId, $productId, $quantity);
-                echo 'data insertion success!';
+                $this->stockReduction($productId, $quantity);
+                $this->redirect("/product-view?id=$productId");
 
             } else {
                 
@@ -119,6 +120,29 @@ class Shop
                 'quantity' => $quantity
             ]
         );
+    }
 
+    public function stockReduction($productId, $quantity)
+    {
+
+        $productQuery = Database::fetchAssoc(
+            'SELECT * FROM app_user_products
+            WHERE id = :id',
+            ['id' => $productId]
+        );
+
+        $updatedStock = intval($productQuery['stock']) - intval($quantity);
+
+        $updateQuery = Database::crudQuery(
+            'UPDATE app_user_products 
+            SET stock = :stock
+            WHERE id = :id',
+            [
+                'stock' => $updatedStock,
+                'id' => $productId
+            ]
+        );
+
+        return $updatedStock;
     }
 }
