@@ -96,10 +96,15 @@ session_start();
                             <p class="text-muted"><?php echo $product['stock']; ?> available</p>
                         </div>
 
-                        <div class="mt-4">
-                            <form action="/add-to-cart" method="POST" class="d-inline">
+                        <div class="mt-4 d-flex">
+                            <form action="/add-to-cart" method="POST" class="d-flex align-items-center flex-wrap flex-row">
                                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                                <button type="submit" class="btn btn-outline-dark px-4">Add to Cart</button>
+                                <div class="input-group" style="width: 110px; font-size: 0.9rem;">
+                                    <button type="button" class="btn btn-outline-secondary py-1 px-2" onclick="this.nextElementSibling.stepDown()">−</button>
+                                    <input type="number" name="quantity" value="1" min="1" max="<?php echo $product['stock'] ?>" class="border text-center" style="width: 40px; font-size: 0.9rem;">
+                                    <button type="button" class="btn btn-outline-secondary py-1 px-2" onclick="this.previousElementSibling.stepUp()">+</button>
+                                </div>
+                                <button type="submit" class="btn btn-outline-dark px-3 py-1">Add to Cart</button>
                             </form>
                             <form action="/buy-now" method="POST" class="d-inline ms-2">
                                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -111,15 +116,7 @@ session_start();
             </div>
         </div>
     </main>
-
-    <?php
-
-    echo '<pre>';
-    print_r($product);                             
-    echo '<pre>';
-
-    ?>
-
+    
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
