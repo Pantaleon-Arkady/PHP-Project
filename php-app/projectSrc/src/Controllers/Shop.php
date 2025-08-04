@@ -79,4 +79,9 @@ class Shop
 
         return $productsQuery;
     }
+
+    public function addToCart()
+    {
+        echo 'adding to cart';
+    }
 }

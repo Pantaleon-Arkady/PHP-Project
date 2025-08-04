@@ -65,7 +65,6 @@ session_start();
         <div class="row justify-content-center">
             <div class="col-lg-10 bg-white p-4 rounded shadow">
                 <div class="row">
-                    <!-- Left: Product Image + Carousel -->
                     <div class="col-md-6 text-center">
                         <img 
                             id="mainProductImage"
@@ -82,8 +81,6 @@ session_start();
 
                         <h4 class="mt-4 fw-bold"><?php echo htmlspecialchars($product['name']); ?></h4>
                     </div>
-
-                    <!-- Right: Product Info -->
                     <div class="col-md-6 d-flex flex-column justify-content-between">
                         <div>
                             <h5 class="fw-bold">Description</h5>
@@ -116,7 +113,6 @@ session_start();
             </div>
         </div>
     </main>
-    
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>

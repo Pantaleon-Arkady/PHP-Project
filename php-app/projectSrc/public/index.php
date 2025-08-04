@@ -65,6 +65,9 @@ switch ($uri) {
     case '/product-view':
         $shop->productView();
         break;
+    case '/add-to-cart':
+        $shop->addToCart();
+        break;
 
     #General Stuff
     case '/':
