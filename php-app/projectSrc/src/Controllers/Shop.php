@@ -89,7 +89,16 @@ class Shop
             $quantity = $_POST['quantity'];
             $userId = $_SESSION['userId'];
 
-            echo "adding product with id: $productId, with a quantity of: $quantity. by user with id: $userId";
+            $userCartQuery = Database::fetchAll(
+                'SELECT * FROM app_user_cart WHERE user_id = :user_id',
+                ['user_id' => 5]
+            );
+
+            if ($userCartQuery) {
+                echo 'user cart exists';
+            } else {
+                echo 'user cart does not exist, please make a user cart to insert add to cart';
+            }
 
         }
     }
