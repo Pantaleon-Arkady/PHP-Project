@@ -155,11 +155,9 @@ class Shop
 
                 $cartId = $UCQuery['id'];
 
-                echo "Users cart is now created, with an id: $cartId";
-
-                // $this->ATCFunction($cartId, $productId, $quantity);
-                // $this->stockReduction($productId, $quantity);
-                // $this->redirect("/product-view?id=$productId");
+                $this->ATCFunction($cartId, $productId, $quantity);
+                $this->stockReduction($productId, $quantity);
+                $this->redirect("/product-view?id=$productId");
 
             }
 
