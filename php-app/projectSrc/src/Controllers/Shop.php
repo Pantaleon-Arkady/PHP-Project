@@ -139,6 +139,28 @@ class Shop
             // If user does not have existing cart yet...
             } else {
 
+                $CUCQuery = Database::crudQuery(
+                    'INSERT INTO app_user_cart (user_id, created_at)
+                    VALUES (:user_id, :created_at)',
+                    [
+                        'user_id' => $userId,
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]
+                );
+
+                $UCQuery = Database::fetchAssoc(
+                    'SELECT * FROM app_user_cart WHERE user_id = :user_id',
+                    ['user_id' => $userId]
+                );
+
+                $cartId = $UCQuery['id'];
+
+                echo "Users cart is now created, with an id: $cartId";
+
+                // $this->ATCFunction($cartId, $productId, $quantity);
+                // $this->stockReduction($productId, $quantity);
+                // $this->redirect("/product-view?id=$productId");
+
             }
 
         }
