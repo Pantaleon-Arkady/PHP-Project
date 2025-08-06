@@ -109,8 +109,24 @@ class Shop
 
                 if ($ATCAQuery) {
 
-                    echo 'cart id with same product id already exists!!!';
-                    $newQuantity = intval($quantity) + $ATCAQuery['quantity'];
+                    $oldQuantity = $ATCAQuery['quantity'];
+                    $newQuantity = $quantity;
+
+                    $sumQuantity = intval($oldQuantity) + intval($newQuantity);
+
+                    $ATECQuery = Database::crudQuery(
+                        'UPDATE app_user_cart_products
+                        SET quantity = :quantity
+                        WHERE cart_id = :cart_id AND product_id = :product_id',
+                        [
+                            'quantity' => $sumQuantity,
+                            'cart_id' => $cartId,
+                            'product_id' => $productId
+                        ]
+                    );
+
+                    $this->stockReduction($productId, $quantity);
+                    $this->redirect("/product-view?id=$productId");
 
                 } else {
 
@@ -120,8 +136,9 @@ class Shop
 
                 }
 
+            // If user does not have existing cart yet...
             } else {
-                
+
             }
 
         }
