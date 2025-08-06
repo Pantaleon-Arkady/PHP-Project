@@ -97,9 +97,28 @@ class Shop
             if ($userCartQuery) {
 
                 $cartId = $userCartQuery['id'];
-                $this->ATCFunction($cartId, $productId, $quantity);
-                $this->stockReduction($productId, $quantity);
-                $this->redirect("/product-view?id=$productId");
+
+                $ATCAQuery = Database::fetchAssoc(
+                    'SELECT * FROM app_user_cart_products
+                    WHERE cart_id = :cart_id AND product_id = :product_id',
+                    [
+                        'cart_id' => $cartId,
+                        'product_id' => $productId
+                    ]
+                );
+
+                if ($ATCAQuery) {
+
+                    echo 'cart id with same product id already exists!!!';
+                    $newQuantity = intval($quantity) + $ATCAQuery['quantity'];
+
+                } else {
+
+                    $this->ATCFunction($cartId, $productId, $quantity);
+                    $this->stockReduction($productId, $quantity);
+                    $this->redirect("/product-view?id=$productId");
+
+                }
 
             } else {
                 
