@@ -81,13 +81,17 @@
         </main>
     <?php elseif (isset($_GET['home']) && $_GET['home'] === 'cart'): ?>
         <main class="container my-5">
-            <?php foreach ($allCartProducts as $eachCP): ?>
-                <?php include __DIR__ . '/../templates/cart-view.php'; ?>
-            <?php endforeach; ?>
-            <pre>
-                <?php //print_r($allCartProducts) 
-                ?>
-            </pre>
+            <?php if (count($allCartProducts) == 0): ?>
+                <div class="col-12">
+                    <div class="alert alert-primary">
+                        <strong>No Products Yet!</strong> You should try <a href="/homepage?home=shop" class="alert-link">adding products to cart first</a>.
+                    </div>
+                </div>
+            <?php else : ?>
+                <?php foreach ($allCartProducts as $eachCP): ?>
+                    <?php include __DIR__ . '/../templates/cart-view.php'; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </main>
     <?php endif; ?>
 
