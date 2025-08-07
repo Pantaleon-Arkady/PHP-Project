@@ -88,9 +88,19 @@
                     </div>
                 </div>
             <?php else : ?>
-                <?php foreach ($allCartProducts as $eachCP): ?>
-                    <?php include __DIR__ . '/../templates/cart-view.php'; ?>
-                <?php endforeach; ?>
+                <form action="/checkout-products" method="POST">
+                    <?php foreach ($allCartProducts as $eachCP): ?>
+                        <?php include __DIR__ . '/../templates/cart-view.php'; ?>
+                    <?php endforeach; ?>
+                    <div class="col-12">
+                        <div class="card mb-3 shadow-sm p-3 d-flex flex-row justify-content-end align-items-center">
+                            <button type="submit" class="btn btn-outline-dark" id="postBtn">
+                                <span id="postBtnText">Checkout Marked Items</span>
+                                <span id="postSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             <?php endif; ?>
         </main>
     <?php endif; ?>
