@@ -207,4 +207,17 @@ class Shop
 
         return $updatedStock;
     }
+
+    public function checkout()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $productId = $_POST['product_id'];
+
+            $print = General::fastPrint($productId);
+
+            echo 'checking out...';
+
+        }
+    }
 }
