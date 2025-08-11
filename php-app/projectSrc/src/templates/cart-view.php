@@ -20,7 +20,6 @@ $productImages = json_decode($eachCP['product_images'], true);
 
         <div class="text-end">
             <a href="/product-view?id=<?php echo $eachCP['product_id']; ?>" class="btn btn-sm btn-outline-success me-2">View Product</a>
-            <a href="/product-on-cart-checkout?id=<?php echo $eachCP['product_on_cart_id']; ?>" class="btn btn-sm btn-outline-primary me-2">Checkout</a>
             <a href="/product-on-cart-remove?id=<?php echo $eachCP['product_on_cart_id']; ?>" class="btn btn-sm btn-outline-danger me-2">Delete</a>
             <input type="checkbox" name="product_id[]" value="<?php echo $eachCP['product_id'] ?>" />
         </div>

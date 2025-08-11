@@ -88,7 +88,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <form action="/checkout-products" method="POST">
+                <form action="/checkout" method="POST">
                     <?php foreach ($allCartProducts as $eachCP): ?>
                         <?php include __DIR__ . '/../templates/cart-view.php'; ?>
                     <?php endforeach; ?>
@@ -103,6 +103,8 @@
                 </form>
             <?php endif; ?>
         </main>
+    <?php elseif (isset($_GET['home']) && $_GET['home'] === 'checkout'): ?>
+        <?php include __DIR__ . '/../templates/checkout.php' ?>
     <?php endif; ?>
 
     <footer class="bg-dark text-white text-center py-4 mt-auto">
