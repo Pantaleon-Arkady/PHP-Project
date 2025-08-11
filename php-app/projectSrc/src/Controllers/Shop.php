@@ -33,12 +33,7 @@ class Shop
     {
         $productId = $_GET["id"] ?? null;
 
-        $product = Database::fetchAssoc(
-            'SELECT * FROM app_user_products WHERE id = :id',
-            [
-                'id' => $productId
-            ]
-        );
+        $product = self::productQueryWithID($productId);
 
         $productImages = json_decode($product['image_path'], true);
 
@@ -186,14 +181,9 @@ class Shop
 
     public function stockReduction($productId, $quantity)
     {
+        $product = self::productQueryWithID($productId);
 
-        $productQuery = Database::fetchAssoc(
-            'SELECT * FROM app_user_products
-            WHERE id = :id',
-            ['id' => $productId]
-        );
-
-        $updatedStock = intval($productQuery['stock']) - intval($quantity);
+        $updatedStock = intval($product['stock']) - intval($quantity);
 
         $updateQuery = Database::crudQuery(
             'UPDATE app_user_products 
@@ -219,5 +209,15 @@ class Shop
             echo 'checking out...';
 
         }
+    }
+
+    public static function productQueryWithID($productId)
+    {
+        $product = Database::fetchAssoc(
+            'SELECT * FROM app_user_products WHERE id = :id',
+            ['id' => $productId]
+        );
+
+        return $product;
     }
 }
