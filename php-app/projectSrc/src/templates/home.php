@@ -63,24 +63,19 @@
             </div>
         </nav>
     </header>
-
-    <?php if (isset($_GET['home']) && $_GET['home'] === 'shop'): ?>
-        <main class="container my-5">
+    <main class="container my-5">
+        <?php if (isset($_GET['home']) && $_GET['home'] === 'shop'): ?>
             <h2 class="mb-4">Featured Products</h2>
             <div class="row g-4">
                 <?php foreach ($allProducts as $each_product): ?>
                     <?php include __DIR__ . '/../templates/products.php'; ?>
                 <?php endforeach; ?>
             </div>
-        </main>
-    <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
-        <main class="container my-5">
+        <?php elseif (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
             <?php foreach ($allPosts as $each_post): ?>
                 <?php include __DIR__ . '/../templates/posts.php'; ?>
             <?php endforeach; ?>
-        </main>
-    <?php elseif (isset($_GET['home']) && $_GET['home'] === 'cart'): ?>
-        <main class="container my-5">
+        <?php elseif (isset($_GET['home']) && $_GET['home'] === 'cart'): ?>
             <?php if (count($allCartProducts) == 0): ?>
                 <div class="col-12">
                     <div class="alert alert-primary">
@@ -102,10 +97,10 @@
                     </div>
                 </form>
             <?php endif; ?>
-        </main>
-    <?php elseif (isset($_GET['home']) && $_GET['home'] === 'checkout'): ?>
-        <?php include __DIR__ . '/../templates/checkout.php' ?>
-    <?php endif; ?>
+        <?php elseif (isset($_GET['home']) && $_GET['home'] === 'checkout'): ?>
+            <?php include __DIR__ . '/../templates/checkout.php' ?>
+        <?php endif; ?>
+    </main>
 
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
