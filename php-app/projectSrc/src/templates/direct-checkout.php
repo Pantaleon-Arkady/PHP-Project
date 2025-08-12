@@ -40,37 +40,73 @@
                 </ul>
 
                 <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-                    <span><?php //echo $user['username']; ?></span>
+                    <span><?php //echo $user['username']; 
+                            ?></span>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container my-5">
-        <?php foreach ($products as $product) : ?>
-            <?php $productImages = json_decode($product['image_path'], true); ?>
-            <div class="col-12">
-                <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
-                    <img src="<?php echo $productImages[0]; ?>" alt="Product Image"
-                        class="rounded me-3"
-                        style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
+        <?php $productImages = json_decode($product['image_path'], true); ?>
+        <div class="col-12">
+            <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+                <img src="<?php echo $productImages[0]; ?>" alt="Product Image"
+                    class="rounded me-3"
+                    style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
 
-                    <div class="flex-grow-1">
-                        <h5 class="mb-1"><?php echo $product['name']; ?></h5>
-                        <p class="mb-0 text-muted">Quantity: <?php echo $product['product_quantity']; ?> |
-                            Price: <span class="text-success fw-bold">$<?php echo number_format($product['price'], 2); ?></span> |
-                            Total: <span class="text-success fw-bold">$<?php echo (number_format($product['price'], 2) * $product['product_quantity']); ?></span>
+                <div class="flex-grow-1">
+                    <h5 class="mb-1"><?php echo $product['name']; ?></h5>
+                    <p class="text-muted fw-bold">Price: 
+                        <span class="text-success fw-bold" id="unit_price" data-price="<?php echo $product['price'] ?>">$ <?php echo $product['price'] ?></span>
+                    </p>
+                    <form method="POST">
+                        <div class="d-flex flex-row my-2">
+                            <label for="quantity" class="text-muted fw-bold">Quantity:</label>
+                            <div class="input-group mx-2" style="width: 110px; font-size: 0.9rem;">
+                                <button type="button" class="btn btn-outline-secondary py-1 px-2" onclick="this.nextElementSibling.stepDown()">−</button>
+                                <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?php echo $product['stock'] ?>" class="border text-center" style="width: 40px; font-size: 0.9rem;">
+                                <button type="button" class="btn btn-outline-secondary py-1 px-2" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                        </div>
+                        <p class="text-muted fw-bold">Total Price: 
+                            <span class="text-success fw-bold" id="total_price">$ <?php echo $product['price'] ?></span>
                         </p>
-                    </div>
+                        <input type="hidden" id="total_price_input" name="total_price" value="">
+                        <button class="btn btn-outline-dark" type="submit">Buy Now</button>
+                    </form>
                 </div>
             </div>
-        <?php endforeach; ?>
+        </div>
     </main>
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
 </body>
 <script>
+    const qtyInput = document.getElementById('quantity');
+    const unitPriceEl = document.getElementById('unit_price');
+    const totalPriceEl = document.getElementById('total_price');
+    const totalPriceInput = document.getElementById('total_price_input');
+
+    const unitPrice = parseFloat(unitPriceEl.dataset.price);
+
+    function updateTotal() {
+        let qty = parseInt(qtyInput.value) || 1;
+        let total = unitPrice * qty;
+        totalPriceEl.textContent = `$ ${total.toLocaleString()}`;
+
+        totalPriceInput.value = total;
+    }
+
+    document.querySelectorAll('.btn-outline-secondary').forEach(btn => {
+        btn.addEventListener('click', updateTotal);
+    });
+
+    qtyInput.addEventListener('input', updateTotal);
+
+    updateTotal();
 </script>
+
 
 
 
