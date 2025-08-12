@@ -203,17 +203,9 @@ class Shop
         session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $productIds[] = $_POST['product_id'];
+            $productId = $_POST['product_id'];
 
-            $products = null;
-
-            foreach ($productIds as $productId) {
-
-                $products[] = self::productQueryWithID($productId);
-
-            };
-
-            $print = General::fastPrint($products);
+            $product = self::productQueryWithID($productId);
 
             include __DIR__ . ('/../templates/direct-checkout.php');
 
