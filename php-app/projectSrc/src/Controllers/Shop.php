@@ -198,15 +198,24 @@ class Shop
         return $updatedStock;
     }
 
-    public function checkout()
+    public function directCheckout()
     {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $productId = $_POST['product_id'];
+            $productIds[] = $_POST['product_id'];
 
-            $print = General::fastPrint($productId);
+            $products = null;
 
-            echo 'checking out...';
+            foreach ($productIds as $productId) {
+
+                $products[] = self::productQueryWithID($productId);
+
+            };
+
+            $print = General::fastPrint($products);
+
+            include __DIR__ . ('/../templates/direct-checkout.php');
 
         }
     }
