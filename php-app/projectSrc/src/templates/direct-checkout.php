@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/statics/bootstrap.min.css">
+    <link rel="stylesheet" href="/statics/style.css">
+    <script src="/statics/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <header class="bg-dark text-white py-3 shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <a class="navbar-brand fw-bold fs-4" href="#">Trial App</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=post">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=shop">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="/logout">Logout</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                    <span><?php //echo $user['username']; ?></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container my-5">
+        <?php foreach ($products as $product) : ?>
+            <?php $productImages = json_decode($product['image_path'], true); ?>
+            <div class="col-12">
+                <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+                    <img src="<?php echo $productImages[0]; ?>" alt="Product Image"
+                        class="rounded me-3"
+                        style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
+
+                    <div class="flex-grow-1">
+                        <h5 class="mb-1"><?php echo $product['name']; ?></h5>
+                        <p class="mb-0 text-muted">Quantity: <?php echo $product['product_quantity']; ?> |
+                            Price: <span class="text-success fw-bold">$<?php echo number_format($product['price'], 2); ?></span> |
+                            Total: <span class="text-success fw-bold">$<?php echo (number_format($product['price'], 2) * $product['product_quantity']); ?></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </main>
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
+    </footer>
+</body>
+<script>
+</script>
+
+
+
+</html>
