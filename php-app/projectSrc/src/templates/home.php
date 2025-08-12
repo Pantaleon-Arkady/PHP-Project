@@ -97,11 +97,8 @@
                     </div>
                 </form>
             <?php endif; ?>
-        <?php elseif (isset($_GET['home']) && $_GET['home'] === 'checkout'): ?>
-            <?php include __DIR__ . '/../templates/checkout.php' ?>
         <?php endif; ?>
     </main>
-
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
