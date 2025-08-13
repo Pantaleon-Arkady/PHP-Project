@@ -112,4 +112,21 @@ class General
         return (new QRCode)->render($url);
     }
 
+    public static function generateCsrfToken($formPurpose, $userId) {
+
+        $mix = $formPurpose . $userId;
+        $token = md5($mix);
+        return $token;
+    }
+    
+    public static function validateCsrfToken($formPurpose, $sentToken, $userId) {
+
+        $mix = $formPurpose . $userId;
+        $createdToken = md5($mix);
+
+        if ($createdToken == $sentToken) {
+            return true;
+        }
+    }
+
 }
