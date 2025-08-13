@@ -55,7 +55,7 @@
                     style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
 
                 <div class="flex-grow-1">
-                    <h5 class="mb-1"><?php echo $product['name']; ?></h5>
+                    <h5 class="mb-1"><?php echo $product['name']; ?>, token: <?php echo $tokenSent; ?></h5>
                     <p class="text-muted fw-bold">Price: 
                         <span class="text-success fw-bold" id="unit_price" data-price="<?php echo $product['price'] ?>">$ <?php echo $product['price'] ?></span>
                     </p>
