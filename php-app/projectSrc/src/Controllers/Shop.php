@@ -31,11 +31,15 @@ class Shop
 
     public static function productView()
     {
+        session_start();
+
         $productId = $_GET["id"] ?? null;
 
         $product = self::productQueryWithID($productId);
 
         $productImages = json_decode($product['image_path'], true);
+
+        $token = General::generateCsrfToken('direct_checkout', $_SESSION['userId']);
 
         include __DIR__ . ('/../templates/product-view.php');
     }
@@ -202,6 +206,10 @@ class Shop
     {
         session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if (!General::validateCsrfToken('direct_checkout', $_POST['token'], $_SESSION['userId'])) {
+                die('Invalid CSRF token');
+            }
 
             $productId = $_POST['product_id'];
 
