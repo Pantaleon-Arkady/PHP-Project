@@ -46,6 +46,7 @@ class Shop
 
     public static function allCartProducts($userId)
     {
+        $token = General::generateCsrfToken('cart_checkout', $_SESSION['userId']);
 
         $cartQuery = Database::fetchAssoc(
             'SELECT * FROM app_user_cart WHERE user_id = :user_id',
@@ -76,7 +77,10 @@ class Shop
                 ['cart_id' => $cartId]
             );
 
-            return $productsQuery;
+            return [
+                'productsQuery' => $productsQuery,
+                'token' => $token
+            ];
 
         } else {
 
