@@ -83,7 +83,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <form action="/checkout" method="POST">
+                <form action="/cart-checkout" method="POST">
                     <?php foreach ($allCartProducts as $eachCP): ?>
                         <?php include __DIR__ . '/../templates/cart-view.php'; ?>
                     <?php endforeach; ?>

@@ -220,6 +220,11 @@ class Shop
         }
     }
 
+    public function cartCheckout()
+    {
+        echo 'checking out from cart...';
+    }
+
     public static function productQueryWithID($productId)
     {
         $product = Database::fetchAssoc(

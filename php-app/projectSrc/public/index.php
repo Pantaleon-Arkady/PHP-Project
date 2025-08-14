@@ -71,6 +71,9 @@ switch ($uri) {
     case '/direct-checkout':
         $shop->directCheckout();
         break;
+    case '/cart-checkout':
+        $shop->cartCheckout();
+        break;
 
     #General Stuff
     case '/':
