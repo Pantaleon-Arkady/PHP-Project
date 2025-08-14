@@ -1,14 +1,5 @@
 <?php
 
-// session_start();
-
-// $isLoggedIn = false;
-// if (isset($_SESSION['userId'])) {
-//     $isLoggedIn = true;
-// }
-
-// print_r($user);
-
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +79,10 @@
                         <?php include __DIR__ . '/../templates/cart-view.php'; ?>
                     <?php endforeach; ?>
                     <div class="col-12">
+                        <div>
+                            <p>Token : <?php echo $token;  ?></p>
+                            <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                        </div>
                         <div class="card mb-3 shadow-sm p-3 d-flex flex-row justify-content-end align-items-center">
                             <button type="submit" class="btn btn-outline-dark" id="postBtn">
                                 <span id="postBtnText">Checkout Marked Items</span>
