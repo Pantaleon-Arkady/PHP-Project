@@ -36,7 +36,9 @@ class General
 
         $allPosts = Post::allPosts();
         $allProducts = Shop::allProducts();
-        $allCartProducts = Shop::allCartProducts($userId);
+        $cartQuery = Shop::allCartProducts($userId);
+        $allCartProducts = $cartQuery['productsQuery'];
+        $token = $cartQuery['token'];
 
         include_once __DIR__ . '/../templates/home.php';
     }
