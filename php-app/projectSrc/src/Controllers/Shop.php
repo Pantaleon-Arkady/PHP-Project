@@ -226,7 +226,15 @@ class Shop
 
     public function cartCheckout()
     {
-        echo 'checking out from cart...';
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
+                die('Invalid CSRF token');
+            } else {
+                echo 'validated properly';
+            }
+        }
     }
 
     public static function productQueryWithID($productId)

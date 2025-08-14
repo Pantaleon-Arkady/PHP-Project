@@ -82,6 +82,7 @@
                         <div>
                             <p>Token : <?php echo $token;  ?></p>
                             <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                            <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>" />
                         </div>
                         <div class="card mb-3 shadow-sm p-3 d-flex flex-row justify-content-end align-items-center">
                             <button type="submit" class="btn btn-outline-dark" id="postBtn">
