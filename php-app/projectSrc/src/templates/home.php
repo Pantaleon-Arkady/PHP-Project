@@ -74,7 +74,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <form action="/cart-checkout" method="POST">
+                <form id="cartCheckout" action="/cart-checkout" method="POST">
                     <?php foreach ($allCartProducts as $eachCP): ?>
                         <?php include __DIR__ . '/../templates/cart-view.php'; ?>
                     <?php endforeach; ?>
@@ -183,6 +183,16 @@
             }, 2000);
         });
     }
+
+    document.getElementById('cartCheckout').addEventListener('submit', function(e) {
+        const checkboxes = document.querySelectorAll('input[name="product_id[]"]');
+        const checked = Array.from(checkboxes).some(cb => cb.checked);
+    
+        if (!checked) {
+            e.preventDefault();
+            alert('Please select at least one option.');
+        }
+    })
 </script>
 
 

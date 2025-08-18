@@ -234,6 +234,10 @@ class Shop
             } else {
                 echo 'validated properly';
             }
+
+            $productIds = $_POST['product_id'];
+
+            $print = General::fastPrint($productIds);
         }
     }
 
