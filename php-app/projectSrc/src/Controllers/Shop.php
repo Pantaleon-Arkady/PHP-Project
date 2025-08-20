@@ -246,6 +246,7 @@ class Shop
             }
 
             $print = General::fastPrint($products);
+
         }
     }
 
