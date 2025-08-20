@@ -238,6 +238,14 @@ class Shop
             $productIds = $_POST['product_id'];
 
             $print = General::fastPrint($productIds);
+
+            $products = [];
+
+            foreach ($productIds as $pId) {
+                $products[] = self::productQueryWithID($pId);
+            }
+
+            $print = General::fastPrint($products);
         }
     }
 
