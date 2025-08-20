@@ -80,7 +80,6 @@
                     <?php endforeach; ?>
                     <div class="col-12">
                         <div>
-                            <p>Token : <?php echo $token;  ?></p>
                             <input type="hidden" name="token" value="<?php echo $token; ?>" />
                             <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>" />
                         </div>
@@ -89,6 +88,8 @@
                                 <span id="postBtnText">Checkout Marked Items</span>
                                 <span id="postSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                             </button>
+                        </div>
+                        <div id="checkout-div">
                         </div>
                     </div>
                 </form>
@@ -190,9 +191,22 @@
     
         if (!checked) {
             e.preventDefault();
-            alert('Please select at least one option.');
+            popUpNotification('Please select at least one from the cart.', 'warning', 'checkout-div');
         }
     })
+
+    function popUpNotification(message, type, parentDiv) {
+        const container = document.getElementById(parentDiv);
+
+        container.innerHTML = "";
+
+        const notifDiv = document.createElement("div");
+        notifDiv.className = `alert alert-${type} d-flex flex-row`;
+        notifDiv.role = 'alert';
+        notifDiv.innerHTML = `<strong>${type.charAt(0).toUpperCase() + type.slice(1)}! </strong> ${message}<button type="button" class="btn-close d-flex flex-end mx-5" data-bs-dismiss="alert" aria-label="Close"></button>`;
+
+        container.appendChild(notifDiv);
+    }
 </script>
 
 
