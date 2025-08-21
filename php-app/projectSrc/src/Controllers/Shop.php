@@ -232,7 +232,7 @@ class Shop
                 die('Invalid CSRF token');
             }
 
-            echo 'validated properly';
+            // echo 'validated properly';
 
             $products = [];
 
@@ -246,7 +246,8 @@ class Shop
                 }
             }
 
-            General::fastPrint($products);
+            // General::fastPrint($products);
+            include __DIR__ . ('/../templates/cart-checkout.php');
         }
     }
 
