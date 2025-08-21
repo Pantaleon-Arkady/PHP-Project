@@ -20,7 +20,7 @@ $productImages = json_decode($eachCP['product_images'], true);
                 <div class="input-group mx-2" style="width: 110px; font-size: 0.9rem;">
                     <button type="button" class="btn btn-outline-secondary py-1 px-2">−</button>
                     <input type="number" 
-                           name="quantity[]" 
+                           name="products[<?php echo $eachCP['product_id']; ?>][quantity]" 
                            value="<?php echo $eachCP['product_quantity']; ?>" 
                            class="border text-center cart-qty" 
                            style="width: 40px; font-size: 0.9rem;">
@@ -30,13 +30,18 @@ $productImages = json_decode($eachCP['product_images'], true);
             Price: <span class="text-success fw-bold unit-price">$<?php echo number_format($eachCP['product_price'], 2); ?></span> |
             Total: <span class="text-success fw-bold total-price">$0.00</span>
 
-            <input type="hidden" name="total_price[]" class="total-price-input" value="" />
+            <input type="hidden" 
+                   name="products[<?php echo $eachCP['product_id']; ?>][total_price]" 
+                   class="total-price-input" 
+                   value="" />
         </div>
 
         <div class="text-end">
             <a href="/product-view?id=<?php echo $eachCP['product_id']; ?>" class="btn btn-sm btn-outline-success me-2">View Product</a>
             <a href="/product-on-cart-remove?id=<?php echo $eachCP['product_on_cart_id']; ?>" class="btn btn-sm btn-outline-danger me-2">Delete</a>
-            <input type="checkbox" name="product_id[]" value="<?php echo $eachCP['product_id'] ?>" />
+            <input type="checkbox" 
+                   name="products[<?php echo $eachCP['product_id']; ?>][selected]" 
+                   value="1" />
         </div>
     </div>
 </div>
