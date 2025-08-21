@@ -226,29 +226,30 @@ class Shop
 
     public function cartCheckout()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
                 die('Invalid CSRF token');
-            } else {
-                echo 'validated properly';
             }
 
-            $productIds = $_POST['product_id'];
-
-            $print = General::fastPrint($productIds);
+            echo 'validated properly';
 
             $products = [];
 
-            foreach ($productIds as $pId) {
-                $products[] = self::productQueryWithID($pId);
+            foreach ($_POST['products'] as $pId => $data) {
+                if (!empty($data['selected'])) { // only checked items
+                    $products[] = [
+                        'product'    => self::productQueryWithID($pId),
+                        'quantity'   => $data['quantity'],
+                        'totalPrice' => $data['total_price']
+                    ];
+                }
             }
 
-            $print = General::fastPrint($products);
-
+            General::fastPrint($products);
         }
     }
+
 
     public static function productQueryWithID($productId)
     {
