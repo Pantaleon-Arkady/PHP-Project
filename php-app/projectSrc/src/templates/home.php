@@ -130,6 +130,39 @@
     </div>
 </body>
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".cart-item").forEach(item => {
+            const qtyInput = item.querySelector(".cart-qty");
+            const unitPrice = parseFloat(item.dataset.unitPrice);
+            const totalPriceEl = item.querySelector(".total-price");
+            const totalPriceInput = item.querySelector(".total-price-input");
+
+            const updateTotal = () => {
+                let qty = parseInt(qtyInput.value) || 1;
+                let total = unitPrice * qty;
+                totalPriceEl.textContent = `$ ${total.toLocaleString()}`;
+                totalPriceInput.value = total;
+            };
+
+            const [minusBtn, plusBtn] = item.querySelectorAll(".btn-outline-secondary");
+
+            minusBtn.addEventListener("click", () => {
+                qtyInput.stepDown();
+                updateTotal();
+            });
+
+            plusBtn.addEventListener("click", () => {
+                qtyInput.stepUp();
+                updateTotal();
+            });
+
+            qtyInput.addEventListener("input", updateTotal);
+
+            updateTotal();
+        });
+    });
+
+
     const postForm = document.getElementById('postForm');
     if (postForm) {
         postForm.addEventListener('submit', function(e) {
@@ -188,7 +221,7 @@
     document.getElementById('cartCheckout').addEventListener('submit', function(e) {
         const checkboxes = document.querySelectorAll('input[name="product_id[]"]');
         const checked = Array.from(checkboxes).some(cb => cb.checked);
-    
+
         if (!checked) {
             e.preventDefault();
             popUpNotification('Please select at least one from the cart.', 'warning', 'checkout-div');
