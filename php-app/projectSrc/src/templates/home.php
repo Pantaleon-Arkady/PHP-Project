@@ -219,7 +219,7 @@
     }
 
     document.getElementById('cartCheckout').addEventListener('submit', function(e) {
-        const checkboxes = document.querySelectorAll('input[name="product_id[]"]');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="products"][name$="[selected]"]');
         const checked = Array.from(checkboxes).some(cb => cb.checked);
 
         if (!checked) {
