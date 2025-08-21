@@ -47,33 +47,37 @@
         </nav>
     </header>
     <main class="container my-5">
-        <?php foreach ($products as $product) : ?>
-            <?php $productImages = json_decode($product['product']['image_path'], true); ?>
-            <div class="col-12">
-                <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
-                    <img src="<?php echo $productImages[0]; ?>" alt="Product Image"
-                        class="rounded me-3"
-                        style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
+        <form method="POST" action="/finalize-checkout">
+            <?php foreach ($products as $product): ?>
+                <?php $productImages = json_decode($product['product']['image_path'], true); ?>
+                <div class="col-12">
+                    <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+                        <img src="<?php echo $productImages[0]; ?>" alt="Product Image"
+                            class="rounded me-3"
+                            style="width: 100px; height: 100px; object-fit: cover; background-color: #f8f9fa;">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-bold">Price:
+                                <span class="text-success fw-bold">$<?php echo $product['product']['price']; ?></span>
+                            </p>
+                            <p class="text-muted fw-bold">Quantity:
+                                <span class="text-success fw-bold"><?php echo $product['quantity']; ?></span>
+                            </p>
+                            <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][quantity]" value="<?php echo $product['quantity']; ?>">
+                            <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][total_price]" value="<?php echo $product['totalPrice']; ?>">
 
-                    <div class="flex-grow-1">
-                        <p class="text-muted fw-bold">Price: 
-                            <span class="text-success fw-bold" id="unit_price" data-price="<?php echo $product['product']['price'] ?>">$ <?php echo $product['product']['price'] ?></span>
-                        </p>
-                        <form method="POST">
-                            <p class="text-muted fw-bold">Quantity: 
-                                <span class="text-success fw-bold" id="quantity">$ <?php echo $product['quantity'] ?></span>
+                            <p class="text-muted fw-bold">Total Price:
+                                <span class="text-success fw-bold">$<?php echo $product['totalPrice']; ?></span>
                             </p>
-                            <input type="hidden" id="total_price_input" name="total_price" value="">
-                            <p class="text-muted fw-bold">Total Price: 
-                                <span class="text-success fw-bold" id="total_price">$ <?php echo $product['totalPrice'] ?></span>
-                            </p>
-                            <input type="hidden" id="total_price_input" name="total_price" value="">
-                            <button class="btn btn-outline-dark" type="submit">Buy Now</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
+            <div class="col-12">
+                <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+                    <button class="btn btn-outline-dark" type="submit">Buy All</button>
+                </div>
             </div>
-        <?php endforeach; ?>
+        </form>
     </main>
     <footer class="bg-dark text-white text-center py-4 mt-auto">
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>

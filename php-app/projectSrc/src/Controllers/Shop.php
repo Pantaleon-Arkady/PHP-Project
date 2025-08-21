@@ -232,12 +232,10 @@ class Shop
                 die('Invalid CSRF token');
             }
 
-            // echo 'validated properly';
-
             $products = [];
 
             foreach ($_POST['products'] as $pId => $data) {
-                if (!empty($data['selected'])) { // only checked items
+                if (!empty($data['selected'])) {
                     $products[] = [
                         'product'    => self::productQueryWithID($pId),
                         'quantity'   => $data['quantity'],
@@ -246,7 +244,6 @@ class Shop
                 }
             }
 
-            // General::fastPrint($products);
             include __DIR__ . ('/../templates/cart-checkout.php');
         }
     }
