@@ -58,7 +58,7 @@
                     <p class="text-muted fw-bold">Price: 
                         <span class="text-success fw-bold" id="unit_price" data-price="<?php echo $product['price'] ?>">$ <?php echo $product['price'] ?></span>
                     </p>
-                    <form method="POST">
+                    <form method="POST" action="/place-order">
                         <div class="d-flex flex-row my-2">
                             <label for="quantity" class="text-muted fw-bold">Quantity:</label>
                             <div class="input-group mx-2" style="width: 110px; font-size: 0.9rem;">
@@ -71,7 +71,7 @@
                             <span class="text-success fw-bold" id="total_price">$ <?php echo $product['price'] ?></span>
                         </p>
                         <input type="hidden" id="total_price_input" name="total_price" value="">
-                        <button class="btn btn-outline-dark" type="submit">Buy Now</button>
+                        <button class="btn btn-outline-dark" type="submit">Place Order</button>
                     </form>
                 </div>
             </div>

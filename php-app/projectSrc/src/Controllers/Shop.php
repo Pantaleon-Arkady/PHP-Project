@@ -248,6 +248,12 @@ class Shop
         }
     }
 
+    public function placeOrder()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo 'placing order';
+        }
+    }
 
     public static function productQueryWithID($productId)
     {

@@ -47,7 +47,7 @@
         </nav>
     </header>
     <main class="container my-5">
-        <form method="POST" action="/finalize-checkout">
+        <form method="POST" action="/place-order">
             <?php foreach ($products as $product): ?>
                 <?php $productImages = json_decode($product['product']['image_path'], true); ?>
                 <div class="col-12">
@@ -74,7 +74,7 @@
             <?php endforeach; ?>
             <div class="col-12">
                 <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
-                    <button class="btn btn-outline-dark" type="submit">Buy All</button>
+                    <button class="btn btn-outline-dark" type="submit">Place Order</button>
                 </div>
             </div>
         </form>
