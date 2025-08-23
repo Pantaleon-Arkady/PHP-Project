@@ -135,15 +135,14 @@ class Shop
                     );
 
                     $this->stockReduction($productId, $quantity);
-                    $this->redirect("/product-view?id=$productId");
 
                 } else {
 
                     $this->ATCFunction($cartId, $productId, $quantity);
                     $this->stockReduction($productId, $quantity);
-                    $this->redirect("/product-view?id=$productId");
-
+                    
                 }
+
 
             // If user does not have existing cart yet...
             } else {
@@ -166,9 +165,10 @@ class Shop
 
                 $this->ATCFunction($cartId, $productId, $quantity);
                 $this->stockReduction($productId, $quantity);
-                $this->redirect("/product-view?id=$productId");
 
             }
+
+            $this->redirect("/product-view?id=$productId");
 
         }
     }
@@ -269,11 +269,20 @@ class Shop
 
             } elseif ($checkoutType == 'cart') {
 
-                echo "checkout from cart...";
+                $order = [];
 
-            }
+                foreach ($_POST['products'] as $pId => $data) {
+                    $orders[] = [
+                        'id'        => $pId,
+                        'name'      => $data['name'],
+                        'quantity'  => $data['quantity'],
+                        'totalPrice'=> $data['total_price']
+                    ];
+                }
 
-            
+                General::fastPrint($orders);
+
+            }  
         }
     }
 
