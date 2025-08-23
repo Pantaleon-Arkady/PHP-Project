@@ -224,8 +224,6 @@ class Shop
                 $productId = $_POST['product_id'];
 
                 $product = self::productQueryWithID($productId);
-    
-                include __DIR__ . ('/../templates/direct-checkout.php');
 
             } elseif ($checkout == "cart") {
 
@@ -246,9 +244,9 @@ class Shop
                         ];
                     }
                 }
-    
-                include __DIR__ . ('/../templates/cart-checkout.php');
             }
+
+            include __DIR__ . ('/../templates/checkout.php');
         }
     }
 
