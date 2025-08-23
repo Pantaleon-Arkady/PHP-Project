@@ -231,7 +231,19 @@ class Shop
                     die('Invalid CSRF token');
                 }
 
-                echo "cart checkout";
+                $products = [];
+
+                foreach ($_POST['products'] as $pId => $data) {
+                    if (!empty($data['selected'])) {
+                        $products[] = [
+                            'product'    => self::productQueryWithID($pId),
+                            'quantity'   => $data['quantity'],
+                            'totalPrice' => $data['total_price']
+                        ];
+                    }
+                }
+    
+                include __DIR__ . ('/../templates/cart-checkout.php');
             }
         }
     }
