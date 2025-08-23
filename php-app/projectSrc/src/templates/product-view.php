@@ -104,7 +104,7 @@
                             <form action="/direct-checkout" method="POST" class="d-inline ms-2">
                                 <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
                                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                                <button type="submit" class="btn btn-dark px-4">Buy Now</button>
+                                <button type="submit" class="btn btn-dark px-4">Order Now</button>
                             </form>
                         </div>
                     </div>

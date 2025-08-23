@@ -1,4 +1,4 @@
-TRUNCATE app_user_main_comments, app_user_posts, app_user, app_user_cart, app_user_cart_products RESTART IDENTITY;
+TRUNCATE app_user_main_comments, app_user_posts, app_user, app_user_cart, app_user_cart_products, app_user_order, app_user_order_item RESTART IDENTITY;
 
 INSERT INTO app_user (email, role, username, password)
 VALUES 
