@@ -219,6 +219,8 @@ class Shop
                     die('Invalid CSRF token');
                 }
 
+                self::checkoutCart($_SESSION['userId']);
+
                 $productId = $_POST['product_id'];
 
                 $product = self::productQueryWithID($productId);
@@ -230,6 +232,8 @@ class Shop
                 if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
                     die('Invalid CSRF token');
                 }
+
+                self::checkoutCart($_POST['userId']);
 
                 $products = [];
 
@@ -246,6 +250,19 @@ class Shop
                 include __DIR__ . ('/../templates/cart-checkout.php');
             }
         }
+    }
+
+    public static function checkoutCart($userId)
+    {
+        Database::crudQuery(
+            'INSERT INTO app_user_cart (type, user_id, created_at)
+            VALUES (:type, :user_id, :created_at)',
+            [
+                'type' => 'checkout',
+                'user_id' => $userId,
+                'created_at' => date('Y-m-d')
+            ]
+        );
     }
 
     public function placeOrder()
