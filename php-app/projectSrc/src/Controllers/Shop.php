@@ -219,6 +219,8 @@ class Shop
 
             $product = self::productQueryWithID($productId);
 
+            General::fastPrint($product);
+
             include __DIR__ . ('/../templates/direct-checkout.php');
 
         }
@@ -252,6 +254,12 @@ class Shop
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo 'placing order';
+
+            $pName = $_POST['product_name'];
+            $totalPrice = $_POST['total_price'];
+            $quantity = $_POST['quantity'];
+
+            echo "order product: $pName, number: $quantity, and total price: $totalPrice";
         }
     }
 

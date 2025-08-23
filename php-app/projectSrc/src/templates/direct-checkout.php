@@ -71,6 +71,7 @@
                             <span class="text-success fw-bold" id="total_price">$ <?php echo $product['price'] ?></span>
                         </p>
                         <input type="hidden" id="total_price_input" name="total_price" value="">
+                        <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
                         <button class="btn btn-outline-dark" type="submit">Place Order</button>
                     </form>
                 </div>
