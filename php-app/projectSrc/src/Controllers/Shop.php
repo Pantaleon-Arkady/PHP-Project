@@ -206,6 +206,31 @@ class Shop
         return $updatedStock;
     }
 
+    public function checkout()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $checkout = $_POST['checkout_type'];
+
+            if ($checkout == "direct") {
+
+                if (!General::validateCsrfToken('direct_checkout', $_POST['token'], $_SESSION['userId'])) {
+                    die('Invalid CSRF token');
+                }
+
+                echo "direct checkout";
+            } elseif ($checkout == "cart") {
+
+                if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
+                    die('Invalid CSRF token');
+                }
+
+                echo "cart checkout";
+            }
+        }
+    }
+
     public function directCheckout()
     {
         session_start();
