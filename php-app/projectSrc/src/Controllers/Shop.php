@@ -248,50 +248,6 @@ class Shop
         }
     }
 
-    public function directCheckout()
-    {
-        session_start();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if (!General::validateCsrfToken('direct_checkout', $_POST['token'], $_SESSION['userId'])) {
-                die('Invalid CSRF token');
-            }
-
-            $productId = $_POST['product_id'];
-
-            $product = self::productQueryWithID($productId);
-
-            General::fastPrint($product);
-
-            include __DIR__ . ('/../templates/direct-checkout.php');
-
-        }
-    }
-
-    public function cartCheckout()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
-                die('Invalid CSRF token');
-            }
-
-            $products = [];
-
-            foreach ($_POST['products'] as $pId => $data) {
-                if (!empty($data['selected'])) {
-                    $products[] = [
-                        'product'    => self::productQueryWithID($pId),
-                        'quantity'   => $data['quantity'],
-                        'totalPrice' => $data['total_price']
-                    ];
-                }
-            }
-
-            include __DIR__ . ('/../templates/cart-checkout.php');
-        }
-    }
-
     public function placeOrder()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

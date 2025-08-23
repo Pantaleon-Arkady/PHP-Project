@@ -71,12 +71,6 @@ switch ($uri) {
     case '/checkout':
         $shop->checkout();
         break;
-    case '/direct-checkout':
-        $shop->directCheckout();
-        break;
-    case '/cart-checkout':
-        $shop->cartCheckout();
-        break;
     case '/place-order':
         $shop->placeOrder();
         break;
