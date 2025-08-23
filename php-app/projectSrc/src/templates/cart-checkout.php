@@ -62,6 +62,7 @@
                             <p class="text-muted fw-bold">Quantity:
                                 <span class="text-success fw-bold"><?php echo $product['quantity']; ?></span>
                             </p>
+                            <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][name]" value="<?php echo $product['product']['name'] ?>">
                             <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][quantity]" value="<?php echo $product['quantity']; ?>">
                             <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][total_price]" value="<?php echo $product['totalPrice']; ?>">
 
@@ -72,6 +73,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+            <input type="hidden" name="checkout" value="cart" />
             <div class="col-12">
                 <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
                     <button class="btn btn-outline-dark" type="submit">Place Order</button>

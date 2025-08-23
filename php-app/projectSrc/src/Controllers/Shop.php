@@ -253,13 +253,27 @@ class Shop
     public function placeOrder()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo 'placing order';
+            echo 'placing order<br/>';
 
-            $pName = $_POST['product_name'];
-            $totalPrice = $_POST['total_price'];
-            $quantity = $_POST['quantity'];
+            $checkoutType = $_POST['checkout'];
 
-            echo "order product: $pName, number: $quantity, and total price: $totalPrice";
+            if ($checkoutType == 'direct') {
+
+                echo "checkout directly";
+
+                $pName = $_POST['product_name'];
+                $totalPrice = $_POST['total_price'];
+                $quantity = $_POST['quantity'];
+
+                echo "order product: $pName, number: $quantity, and total price: $totalPrice";
+
+            } elseif ($checkoutType == 'cart') {
+
+                echo "checkout from cart...";
+
+            }
+
+            
         }
     }
 
