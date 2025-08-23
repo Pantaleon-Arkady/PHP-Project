@@ -219,7 +219,12 @@ class Shop
                     die('Invalid CSRF token');
                 }
 
-                echo "direct checkout";
+                $productId = $_POST['product_id'];
+
+                $product = self::productQueryWithID($productId);
+    
+                include __DIR__ . ('/../templates/direct-checkout.php');
+
             } elseif ($checkout == "cart") {
 
                 if (!General::validateCsrfToken('cart_checkout', $_POST['token'], $_POST['userId'])) {
