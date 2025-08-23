@@ -101,8 +101,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-outline-dark px-3 py-1">Add to Cart</button>
                             </form>
-                            <form action="/direct-checkout" method="POST" class="d-inline ms-2">
+                            <form action="/checkout" method="POST" class="d-inline ms-2">
                                 <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+                                <input type="hidden" name="checkout_type" value="direct"/>
                                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                                 <button type="submit" class="btn btn-dark px-4">Order Now</button>
                             </form>

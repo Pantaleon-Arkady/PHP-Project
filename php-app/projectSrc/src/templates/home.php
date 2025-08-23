@@ -74,7 +74,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <form id="cartCheckout" action="/cart-checkout" method="POST">
+                <form id="cartCheckout" action="/checkout" method="POST">
                     <?php foreach ($allCartProducts as $eachCP): ?>
                         <?php include __DIR__ . '/../templates/cart-view.php'; ?>
                     <?php endforeach; ?>
@@ -82,6 +82,7 @@
                         <div>
                             <input type="hidden" name="token" value="<?php echo $token; ?>" />
                             <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>" />
+                            <input type="hidden" name="checkout_type" value="cart"/>
                         </div>
                         <div class="card mb-3 shadow-sm p-3 d-flex flex-row justify-content-end align-items-center">
                             <button type="submit" class="btn btn-outline-dark" id="postBtn">
