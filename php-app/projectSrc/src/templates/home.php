@@ -36,7 +36,7 @@
                         <a class="nav-link text-white underline-hover" href="/homepage?home=cart">Cart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white underline-hover" href="#">Profile</a>
+                        <a class="nav-link text-white underline-hover" href="/homepage?home=profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white underline-hover" href="/logout">Logout</a>
@@ -95,6 +95,8 @@
                     </div>
                 </form>
             <?php endif; ?>
+        <?php elseif (isset($_GET['home']) && $_GET['home'] === 'profile'): ?>
+            <?php include __DIR__ . '/../templates/user-profile.php'; ?>
         <?php endif; ?>
     </main>
     <footer class="bg-dark text-white text-center py-4 mt-auto">
