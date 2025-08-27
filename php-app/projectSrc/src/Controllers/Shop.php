@@ -284,9 +284,23 @@ class Shop
                 ]
             );
 
+            General::fastPrint($checkoutCart);
+
             $cartId = $checkoutCart['id'];
 
             self::userOrder($cartId, $userId);
+
+            $order = Database::fetchAssoc(
+                'SELECT * FROM app_user_order
+                WHERE cart_id = :cart_id
+                AND user_id = :user_id',
+                [
+                    'cart_id' => $cartId,
+                    'user_id' => $userId
+                ]
+            );
+
+            General::fastPrint($order);
 
             if ($checkoutType == 'direct') {
 
@@ -332,6 +346,22 @@ class Shop
             [
                 'cart_id' => $cartId,
                 'user_id' => $userId,
+                'created_at' => date('Y-m-d')
+            ]
+        );
+    }
+
+    public static function userOrderItems($orderId, $productId, $price, $quantity, $totalPrice)
+    {
+        Database::crudQuery(
+            'INSERT INTO app_user_order_item (order_id, product_id, price, quantity, total_price, created_at)
+            VALUES (:order_id, :product_id, :price, :quantity, :total_price, :created_at)',
+            [
+                'order_id' => $orderId,
+                'product_id' => $productId,
+                'price' => $price,
+                'quantity' => $quantity,
+                'total_price' => $totalPrice,
                 'created_at' => date('Y-m-d')
             ]
         );
