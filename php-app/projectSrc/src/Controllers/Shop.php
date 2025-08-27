@@ -265,10 +265,27 @@ class Shop
 
     public function placeOrder()
     {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo 'placing order<br/>';
 
             $checkoutType = $_POST['checkout'];
+            $cartId = Database::fetchAssoc(
+                'SELECT *
+                FROM app_user_cart
+                WHERE type = :type
+                AND user_id = :user_id
+                ORDER BY id DESC
+                LIMIT 1;',
+                [
+                    'type' => 'checkout',
+                    'user_id' => $_SESSION['userId']
+                ]
+            );
+
+            $cart = General::fastPrint($cartId);
+
+            die($cart);
 
             if ($checkoutType == 'direct') {
 
@@ -283,6 +300,7 @@ class Shop
                     'quantity' => $quantity,
                     'totalPrice' => $totalPrice
                 ];
+
 
                 General::fastPrint($order);
 
@@ -303,6 +321,19 @@ class Shop
 
             }  
         }
+    }
+
+    public static function userOrder($cartId, $userId)
+    {
+        Database::crudQuery(
+            'INSERT INTO app_user_order (cart_id, user_id, created_at)
+            VALUES (:cart_id, :ser_id, :created_at)',
+            [
+                'cart_id' => $cartId,
+                'user_id' => $userId,
+                'created_at' => date('Y-m-d')
+            ]
+        );
     }
 
     public static function productQueryWithID($productId)

@@ -2,14 +2,17 @@
 // $orderPlaced = true;
 // $orderApproved = true;
 ?>
-<?php if ($orderPlaced ?? null) : ?>
+<?php if (isset($_SESSION['orderPlaced'])): ?>
     <div class="alert alert-info">
         <strong>Order Update!</strong> Your order has now been placed and being processed for approval.
     </div>
-<?php elseif ($orderApproved ?? null) : ?>
+    <?php unset($_SESSION['orderPlaced']); ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['orderApproved'])): ?>
     <div class="alert alert-success">
         <strong>Order Update!</strong> Your order is approved, you may check your email for more info.
     </div>
+    <?php unset($_SESSION['orderApproved']); ?>
 <?php endif; ?>
 <div class="container-sm border">
     <div class="row">
