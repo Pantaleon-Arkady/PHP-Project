@@ -121,5 +121,29 @@
         <p class="mb-0">&copy; 2025 Trial App. All rights reserved.</p>
     </footer>
 </body>
+<script>
+    const qtyInput = document.getElementById('quantity');
+    const unitPriceEl = document.getElementById('unit_price');
+    const totalPriceEl = document.getElementById('total_price');
+    const totalPriceInput = document.getElementById('total_price_input');
+
+    const unitPrice = parseFloat(unitPriceEl.dataset.price);
+
+    function updateTotal() {
+        let qty = parseInt(qtyInput.value) || 1;
+        let total = unitPrice * qty;
+        totalPriceEl.textContent = `$ ${total.toLocaleString()}`;
+
+        totalPriceInput.value = total;
+    }
+
+    document.querySelectorAll('.btn-outline-secondary').forEach(btn => {
+        btn.addEventListener('click', updateTotal);
+    });
+
+    qtyInput.addEventListener('input', updateTotal);
+
+    updateTotal();
+</script>
 
 </html>

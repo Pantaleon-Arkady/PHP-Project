@@ -278,7 +278,13 @@ class Shop
                 $totalPrice = $_POST['total_price'];
                 $quantity = $_POST['quantity'];
 
-                echo "order product: $pName, number: $quantity, and total price: $totalPrice";
+                $order = [
+                    'name' => $pName,
+                    'quantity' => $quantity,
+                    'totalPrice' => $totalPrice
+                ];
+
+                General::fastPrint($order);
 
             } elseif ($checkoutType == 'cart') {
 
