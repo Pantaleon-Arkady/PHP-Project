@@ -63,11 +63,11 @@
                                 <p class="text-muted fw-bold">Quantity:
                                     <span class="text-success fw-bold"><?php echo $product['quantity']; ?></span>
                                 </p>
-                                <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][name]" value="<?php echo $product['product']['name'] ?>">
+                                <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][id]" value="<?php echo $product['product']['id'] ?>">
+                                <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][name]" value="<?php echo $product['product']['name'] ?>">                                
                                 <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][price]" value="<?php echo $product['product']['price'] ?>">
                                 <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][quantity]" value="<?php echo $product['quantity']; ?>">
                                 <input type="hidden" name="products[<?php echo $product['product']['id']; ?>][total_price]" value="<?php echo $product['totalPrice']; ?>">
-
                                 <p class="text-muted fw-bold">Total Price:
                                     <span class="text-success fw-bold">$<?php echo $product['totalPrice']; ?></span>
                                 </p>
@@ -112,6 +112,7 @@
                             <input type="hidden" id="total_price_input" name="total_price" value="">
                             <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
                             <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>"/>
+                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                             <button class="btn btn-outline-dark" type="submit">Place Order</button>
                         </form>
                     </div>
