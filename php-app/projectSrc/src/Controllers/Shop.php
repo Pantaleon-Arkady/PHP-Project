@@ -267,10 +267,11 @@ class Shop
     {
         session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo 'placing order<br/>';
+
+            $userId = $_SESSION['userId'];
 
             $checkoutType = $_POST['checkout'];
-            $cartId = Database::fetchAssoc(
+            $checkoutCart = Database::fetchAssoc(
                 'SELECT *
                 FROM app_user_cart
                 WHERE type = :type
@@ -279,13 +280,13 @@ class Shop
                 LIMIT 1;',
                 [
                     'type' => 'checkout',
-                    'user_id' => $_SESSION['userId']
+                    'user_id' => $userId
                 ]
             );
 
-            $cart = General::fastPrint($cartId);
+            $cartId = $checkoutCart['id'];
 
-            die($cart);
+            self::userOrder($cartId, $userId);
 
             if ($checkoutType == 'direct') {
 
@@ -327,7 +328,7 @@ class Shop
     {
         Database::crudQuery(
             'INSERT INTO app_user_order (cart_id, user_id, created_at)
-            VALUES (:cart_id, :ser_id, :created_at)',
+            VALUES (:cart_id, :user_id, :created_at)',
             [
                 'cart_id' => $cartId,
                 'user_id' => $userId,
