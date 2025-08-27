@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS app_user_order (
     id SERIAL PRIMARY KEY,
     cart_id INT NOT NULL REFERENCES app_user_cart(id),
     user_id INT NOT NULL REFERENCES app_user(id),
+    status VARCHAR(255) DEFAULT 'pending',
     created_at DATE,
     modified_at DATE
 );
