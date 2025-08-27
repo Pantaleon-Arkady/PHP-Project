@@ -300,6 +300,8 @@ class Shop
                 ]
             );
 
+            $orderId = $order['id'];
+
             General::fastPrint($order);
 
             if ($checkoutType == 'direct') {
@@ -320,17 +322,15 @@ class Shop
                     'totalPrice' => $totalPrice
                 ];
 
+                self::userOrderItems($orderId, $productId, $price, $quantity, $totalPrice);
 
                 General::fastPrint($order);
 
             } elseif ($checkoutType == 'cart') {
 
-                $order = [];
-
                 foreach ($_POST['products'] as $pId => $data) {
                     $orders[] = [
-                        'id' => $pId,
-                        'product_id' => $data['id'],
+                        'product_id' => $pId,
                         'name' => $data['name'],
                         'price' => $data['price'],
                         'quantity' => $data['quantity'],
