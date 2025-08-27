@@ -309,9 +309,11 @@ class Shop
                 $pName = $_POST['product_name'];
                 $price = $_POST['product_price'];                
                 $quantity = $_POST['quantity'];
-                $totalPrice = $_POST['total_price'];              
+                $totalPrice = $_POST['total_price'];
+                $productId = $_POST['product_id'];
 
                 $order = [
+                    'product_id' => $productId,
                     'name' => $pName,
                     'price' => $price,
                     'quantity' => $quantity,
@@ -328,6 +330,7 @@ class Shop
                 foreach ($_POST['products'] as $pId => $data) {
                     $orders[] = [
                         'id' => $pId,
+                        'product_id' => $data['id'],
                         'name' => $data['name'],
                         'price' => $data['price'],
                         'quantity' => $data['quantity'],
