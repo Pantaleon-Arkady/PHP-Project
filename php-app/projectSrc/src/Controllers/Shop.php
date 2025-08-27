@@ -338,6 +338,16 @@ class Shop
                     ];
                 }
 
+                foreach ($orders as $order) {
+                    self::userOrderItems(
+                        $orderId,
+                        $order['product_id'],
+                        $order['price'],
+                        $order['quantity'],
+                        $order['totalPrice']
+                    );
+                };
+
                 General::fastPrint($orders);
 
             }  
