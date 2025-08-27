@@ -307,11 +307,13 @@ class Shop
                 echo "checkout directly";
 
                 $pName = $_POST['product_name'];
-                $totalPrice = $_POST['total_price'];
+                $price = $_POST['product_price'];                
                 $quantity = $_POST['quantity'];
+                $totalPrice = $_POST['total_price'];              
 
                 $order = [
                     'name' => $pName,
+                    'price' => $price,
                     'quantity' => $quantity,
                     'totalPrice' => $totalPrice
                 ];
@@ -325,10 +327,11 @@ class Shop
 
                 foreach ($_POST['products'] as $pId => $data) {
                     $orders[] = [
-                        'id'        => $pId,
-                        'name'      => $data['name'],
-                        'quantity'  => $data['quantity'],
-                        'totalPrice'=> $data['total_price']
+                        'id' => $pId,
+                        'name' => $data['name'],
+                        'price' => $data['price'],
+                        'quantity' => $data['quantity'],
+                        'totalPrice' => $data['total_price']
                     ];
                 }
 
