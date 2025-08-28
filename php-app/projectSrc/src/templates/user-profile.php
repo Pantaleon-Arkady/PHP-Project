@@ -2,6 +2,8 @@
 // $orderPlaced = true;
 // $orderApproved = true;
 ?>
+<!-- DISABLED -->
+<?php if (1 === 5): ?>
 <?php if (isset($_SESSION['orderPlaced'])): ?>
     <div class="alert alert-info alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
         <div>
@@ -10,6 +12,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php unset($_SESSION['orderPlaced']); ?>
+<?php endif; ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['orderApproved'])): ?>

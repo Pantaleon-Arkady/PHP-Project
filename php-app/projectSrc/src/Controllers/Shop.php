@@ -134,13 +134,9 @@ class Shop
                         ]
                     );
 
-                    $this->stockReduction($productId, $quantity);
-
                 } else {
 
                     $this->ATCFunction($cartId, $productId, $quantity);
-                    $this->stockReduction($productId, $quantity);
-                    
                 }
 
 
@@ -164,8 +160,6 @@ class Shop
                 $cartId = $UCQuery['id'];
 
                 $this->ATCFunction($cartId, $productId, $quantity);
-                $this->stockReduction($productId, $quantity);
-
             }
 
             $this->redirect("/product-view?id=$productId");
@@ -187,7 +181,7 @@ class Shop
         );
     }
 
-    public function stockReduction($productId, $quantity)
+    public static function stockReduction($productId, $quantity)
     {
         $product = self::productQueryWithID($productId);
 
@@ -270,8 +264,8 @@ class Shop
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $userId = $_SESSION['userId'];
-
             $checkoutType = $_POST['checkout'];
+
             $checkoutCart = Database::fetchAssoc(
                 'SELECT *
                 FROM app_user_cart
@@ -349,11 +343,12 @@ class Shop
                     );
                 };
 
+                
                 General::fastPrint($orders);
 
             }
 
-            $_SESSION['orderPlaced'] = true;
+            $_SESSION['orderApproved'] = true;
             ob_get_clean();
             $this->redirect("/homepage?home=profile");
         }
@@ -386,6 +381,8 @@ class Shop
                 'created_at' => date('Y-m-d')
             ]
         );
+
+        self::stockReduction($productId, $quantity);
     }
 
     public static function productQueryWithID($productId)
