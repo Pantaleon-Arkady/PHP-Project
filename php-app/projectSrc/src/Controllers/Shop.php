@@ -266,6 +266,7 @@ class Shop
     public function placeOrder()
     {
         session_start();
+        ob_start();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $userId = $_SESSION['userId'];
@@ -350,7 +351,11 @@ class Shop
 
                 General::fastPrint($orders);
 
-            }  
+            }
+
+            $_SESSION['orderPlaced'] = true;
+            ob_get_clean();
+            $this->redirect("/homepage?home=profile");
         }
     }
 

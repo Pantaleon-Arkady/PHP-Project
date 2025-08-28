@@ -4,7 +4,10 @@
 ?>
 <?php if (isset($_SESSION['orderPlaced'])): ?>
     <div class="alert alert-info">
-        <strong>Order Update!</strong> Your order has now been placed and being processed for approval.
+        <div class="row">
+            <strong>Order Update!</strong> Your order has now been placed and being processed for approval.
+            <button type="button" class="btn-close d-flex flex-end mx-5" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
     <?php unset($_SESSION['orderPlaced']); ?>
 <?php endif; ?>
