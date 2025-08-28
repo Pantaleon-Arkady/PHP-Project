@@ -189,10 +189,12 @@ class Shop
 
         $updateQuery = Database::crudQuery(
             'UPDATE app_user_products 
-            SET stock = :stock
+            SET stock = :stock,
+            modified_at = :modified_at
             WHERE id = :id',
             [
                 'stock' => $updatedStock,
+                'modified_at' => date('Y-m-d'),
                 'id' => $productId
             ]
         );
