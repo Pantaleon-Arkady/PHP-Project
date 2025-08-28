@@ -3,17 +3,21 @@
 // $orderApproved = true;
 ?>
 <?php if (isset($_SESSION['orderPlaced'])): ?>
-    <div class="alert alert-info">
-        <div class="row">
-            <strong>Order Update!</strong> Your order has now been placed and being processed for approval.
-            <button type="button" class="btn-close d-flex flex-end mx-5" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-info alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+        <div>
+            <strong>Order Update!</strong> Your order has now been placed and is being processed for approval.
         </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php unset($_SESSION['orderPlaced']); ?>
 <?php endif; ?>
+
 <?php if (isset($_SESSION['orderApproved'])): ?>
-    <div class="alert alert-success">
-        <strong>Order Update!</strong> Your order is approved, you may check your email for more info.
+    <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+        <div>
+            <strong>Order Update!</strong> Your order is approved, you may check your email for more info.
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php unset($_SESSION['orderApproved']); ?>
 <?php endif; ?>
