@@ -311,13 +311,13 @@ class Shop
                 $totalPrice = $_POST['total_price'];
                 $productId = $_POST['product_id'];
 
-                $order = [
+                $orders = [0 => [
                     'product_id' => $productId,
                     'name' => $pName,
                     'price' => $price,
                     'quantity' => $quantity,
                     'totalPrice' => $totalPrice
-                ];
+                ]];
 
                 self::userOrderItems($orderId, $productId, $price, $quantity, $totalPrice);
 
@@ -350,9 +350,42 @@ class Shop
 
             }
 
+            $orderData = $orders;
+
+            $user = Database::fetchAssoc(
+                'SELECT * FROM app_user WHERE id = :id',
+                ['id' => $userId]
+            );
+
+            $userDetails = [
+                'email' => $user['email'],
+                'username' => $user['username']
+            ];
+
+
+            $this->orderInvoice($userDetails, $orderData);
             $_SESSION['orderApproved'] = true;
             ob_get_clean();
             $this->redirect("/homepage?home=profile");
+        }
+    }
+
+    protected function orderInvoice($userData, $orderData)
+    {
+        include_once __DIR__ . '/../Controllers/Mailer.php';
+
+        $emailTo = $userData['email'];
+        $username = $userData['username'];
+        $emailFrom = 'register@email.com';
+        $subject = 'Order Invoice';
+
+        ob_start();
+        include __DIR__ . '/../templates/order-invoice.php';
+        $content = ob_get_clean();
+
+        $sent = Mailer::send($emailTo, $emailFrom, $subject, $content);
+        if (!$sent) {
+            error_log('Email failed to send');
         }
     }
 
