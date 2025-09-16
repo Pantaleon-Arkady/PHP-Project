@@ -71,3 +71,8 @@ CREATE TABLE IF NOT EXISTS app_user_order_item (
     created_at DATE,
     modified_at DATE
 );
+
+CREATE TABLE IF NOT EXISTS react_php_mixed (
+    id SERIAL PRIMARY KEY,
+    task TEXT NOT NULL
+);

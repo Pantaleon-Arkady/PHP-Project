@@ -62,3 +62,11 @@ VALUES
   (1, 6, 2, '2025-08-02'),
   (2, 3, 1, '2025-08-02'),
   (2, 5, 3, '2025-08-02');
+
+INSERT INTO react_php_mixed (task)
+VALUES
+  ('first task from php database - lorem ipsum dolor'),
+  ('second task from php database - lorem ipsum dolor'),
+  ('third task from php database - lorem ipsum dolor'),
+  ('fourth task from php database - lorem ipsum dolor'),
+  ('fifth task from php database - lorem ipsum dolor');
