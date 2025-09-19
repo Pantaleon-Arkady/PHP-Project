@@ -8,6 +8,8 @@ use Root\Controllers\Post;
 use Root\Controllers\Shop;
 use Root\Controllers\Admin;
 
+use Root\Controllers\Tasks;
+
 $uri = strtok($_SERVER["REQUEST_URI"], '?');
 
 $general = new General();
@@ -15,6 +17,7 @@ $usersLog = new UsersLog();
 $post = new Post();
 $shop = new Shop();
 $admin = new Admin();
+$tasks = new Tasks();
 
 switch ($uri) {
 
@@ -103,5 +106,12 @@ switch ($uri) {
         break;
     case '/admin-update-product':
         $admin->adminDeleteProduct();
+        break;
+
+
+    // React connection
+
+    case '/tasks':
+        $tasks->listTasks();
         break;
 }
