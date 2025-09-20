@@ -70,3 +70,11 @@ VALUES
   ('third task from php database - lorem ipsum dolor'),
   ('fourth task from php database - lorem ipsum dolor'),
   ('fifth task from php database - lorem ipsum dolor');
+
+INSERT INTO api_reminders (reminders, due_date)
+VALUES
+  ('first api reminder, adding more words to see how it fits well', '2025-09-21 12:00:00'),
+  ('second api reminder, adding more words to see how it fits well', '2025-09-21 12:00:00'),
+  ('third api reminder, adding more words to see how it fits well', '2025-09-21 12:00:00'),
+  ('fourth api reminder, adding more words to see how it fits well', '2025-09-21 12:00:00'),
+  ('fifth api reminder, adding more words to see how it fits well', '2025-09-21 12:00:00');
