@@ -4,7 +4,7 @@ namespace Root\Controllers;
 
 use Root\Database\Database;
 
-class Tasks {
+class APIData {
     public function listTasks() {
         header("Access-Control-Allow-Origin: http://localhost:3000");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");

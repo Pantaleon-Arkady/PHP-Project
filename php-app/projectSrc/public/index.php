@@ -8,7 +8,7 @@ use Root\Controllers\Post;
 use Root\Controllers\Shop;
 use Root\Controllers\Admin;
 
-use Root\Controllers\Tasks;
+use Root\Controllers\APIData;
 
 $uri = strtok($_SERVER["REQUEST_URI"], '?');
 
@@ -17,7 +17,7 @@ $usersLog = new UsersLog();
 $post = new Post();
 $shop = new Shop();
 $admin = new Admin();
-$tasks = new Tasks();
+$apiData = new APIData();
 
 switch ($uri) {
 
@@ -112,6 +112,6 @@ switch ($uri) {
     // React connection
 
     case '/tasks':
-        $tasks->listTasks();
+        $apiData->listTasks();
         break;
 }
