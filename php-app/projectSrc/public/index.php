@@ -114,4 +114,7 @@ switch ($uri) {
     case '/tasks':
         $apiData->listTasks();
         break;
+    case '/api-data/reminders':
+        $apiData->remindersList();
+        break;
 }
