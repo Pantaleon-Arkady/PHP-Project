@@ -68,7 +68,8 @@ session_start();
                                 class="form-control"
                                 id="username"
                                 name="username"
-                                required>
+                                required />
+                            <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
@@ -77,7 +78,8 @@ session_start();
                                 class="form-control"
                                 id="email"
                                 name="email"
-                                required>
+                                required />
+                            <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -86,7 +88,8 @@ session_start();
                                 class="form-control"
                                 id="password"
                                 name="password"
-                                required>
+                                required />
+                            <div class="invalid-feedback"></div>
                         </div>
                         <button type="submit" class="btn btn-dark w-100 mt-2" id="registerBtn">
                             <span id="registerText">Register</span>
@@ -160,10 +163,65 @@ session_start();
     </div>
 </body>
 <script>
+    function showError(input, message) {
+        input.classList.add("is-invalid");
+        input.nextElementSibling.textContent = message;
+    }
+
+    function clearError(input) {
+        input.classList.remove("is-invalid");
+        input.nextElementSibling.textContent = "";
+    }
+
+    function validateRegisterForm(form) {
+        let valid = true;
+
+        const username = form.querySelector("#username");
+        const email = form.querySelector("#email");
+        const password = form.querySelector("#password");
+
+        if (!username.value.trim()) {
+            showError(username, "Username is required");
+            valid = false;
+        } else if (username.value.trim().length < 3) {
+            showError(username, "At least 3 characters");
+            valid = false;
+        } else {
+            clearError(username);
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim()) {
+            showError(email, "Email is required");
+            valid = false;
+        } else if (!emailPattern.test(email.value)) {
+            showError(email, "Enter a valid email");
+            valid = false;
+        } else {
+            clearError(email);
+        }
+
+        if (!password.value.trim()) {
+            showError(password, "Password is required");
+            valid = false;
+        } else if (password.value.length < 6) {
+            showError(password, "At least 6 characters");
+            valid = false;
+        } else {
+            clearError(password);
+        }
+
+        return valid;
+    }
+
+    
+
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            if (!validateRegisterForm(this)) return;
 
             const btn = document.getElementById('registerBtn');
             const spinner = document.getElementById('registerSpinner');
