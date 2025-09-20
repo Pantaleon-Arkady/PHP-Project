@@ -76,3 +76,9 @@ CREATE TABLE IF NOT EXISTS react_php_mixed (
     id SERIAL PRIMARY KEY,
     task TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS api_reminders (
+    id SERIAL PRIMARY KEY,
+    reminders TEXT NOT NULL,
+    due_date TIMESTAMP
+);
