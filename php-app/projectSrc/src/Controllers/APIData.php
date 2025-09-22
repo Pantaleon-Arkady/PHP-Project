@@ -5,17 +5,23 @@ namespace Root\Controllers;
 use Root\Database\Database;
 
 class APIData {
-    private function addHeaders()
-    {
+    private function addHeaders(string $mode = "full")
+{
+    if ($mode === "full") {
         header("Access-Control-Allow-Origin: http://localhost:3000");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type");
-        header('Content-Type: application/json');
+        header("Content-Type: application/json");
     }
+
+    if ($mode === "jsonOnly") {
+        header("Content-Type: application/json");
+    }
+}
 
     public function listTasks() 
     {
-        $this->addHeaders();
+        $this->addHeaders("full");
 
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             http_response_code(200);
@@ -40,7 +46,7 @@ class APIData {
 
     public function remindersList() 
     {
-        $this->addHeaders();
+        $this->addHeaders("full");
 
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             http_response_code(200);
@@ -65,6 +71,6 @@ class APIData {
 
     public function deleteTask()
     {
-        header("");
+        header("jsonOnly");
     }
 }
