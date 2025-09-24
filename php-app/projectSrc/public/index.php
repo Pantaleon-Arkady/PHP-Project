@@ -111,9 +111,21 @@ switch ($uri) {
 
     // React connection
 
+    //Task
     case '/tasks':
-        $apiData->listTasks();
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            $apiData->handlePreflight();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $apiData->listTasks();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $apiData->deleteTask();
+        } else {
+            http_response_code(405);
+            echo json_encode(["success" => false, "error" => "Method not allowed"]);
+        }
         break;
+    
+    // Reminder    
     case '/api-data/reminders':
         $apiData->remindersList();
         break;
