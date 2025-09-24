@@ -49,11 +49,12 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function crudQuery(string $query, array $params = []): bool
+    public static function crudQuery(string $query, array $params = []): \PDOStatement
     {
         $pdo = self::getConnection();
         $statement = $pdo->prepare($query);
-        return $statement->execute($params);
+        $statement->execute($params);
+        return $statement;
     }
 
 }
