@@ -41,6 +41,28 @@ class APIData
         }
     }
 
+    public function listData()
+    {
+        $this->addHeaders("full");
+
+        try {
+            $table = $this->getTableFromUri();
+
+            $rows = Database::fetchAll("SELECT * FROM {$table} ORDER BY id DESC");
+
+            echo json_encode([
+                'success' => true,
+                'data' => $rows
+            ]);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function listTasks()
     {
         $this->addHeaders("full");
