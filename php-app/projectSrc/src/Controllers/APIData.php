@@ -28,6 +28,19 @@ class APIData
         exit;
     }
 
+    private function getTableFromUri(): string
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+
+        if (strpos($uri, 'tasks') !== false) {
+            return 'react_php_mixed';
+        } elseif (strpos($uri, 'reminders') !== false) {
+            return 'api_reminders';
+        } else {
+            throw new Exception("Unknown resource type");
+        }
+    }
+
     public function listTasks()
     {
         $this->addHeaders("full");
