@@ -127,6 +127,15 @@ switch ($uri) {
     
     // Reminder    
     case '/api-data/reminders':
-        $apiData->remindersList();
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            $apiData->handlePreflight();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $apiData->remindersList();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $apiData->deleteReminder();
+        } else {
+            http_response_code(405);
+            echo json_encode(["success" => false, "error" => "Method not allowed"]);
+        }
         break;
 }
