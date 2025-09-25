@@ -118,7 +118,7 @@ switch ($uri) {
     //Task
     case '/tasks':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $apiData->listTasks();
+            $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteTask();
         } else {
@@ -128,7 +128,7 @@ switch ($uri) {
         break;
     
     // Reminder    
-    case '/api-data/reminders':
+    case '/reminders':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->remindersList();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
