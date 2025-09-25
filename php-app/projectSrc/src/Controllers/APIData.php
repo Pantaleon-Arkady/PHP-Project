@@ -63,55 +63,14 @@ class APIData
         }
     }
 
-    public function deleteTask()
+    public function deleteData()
     {
         $this->addHeaders("full");
 
-        try {
-            if ($_SERVER["REQUEST_METHOD"] !== "DELETE") {
-                http_response_code(405);
-                echo json_encode(["success" => false, "error" => "Method not allowed"]);
-                exit;
-            }
-
-            parse_str($_SERVER['QUERY_STRING'] ?? '', $query);
-            $taskId = isset($query['id']) ? (int) $query['id'] : 0;
-
-            if ($taskId <= 0) {
-                http_response_code(400);
-                echo json_encode(["success" => false, "error" => "Task ID is required"]);
-                exit;
-            }
-
-            $stmt = Database::crudQuery(
-                "DELETE FROM react_php_mixed WHERE id = :id",
-                ['id' => $taskId]
-            );
-
-            if ($stmt->rowCount() > 0) {
-                echo json_encode([
-                    "success" => true,
-                    "message" => "Task deleted"
-                ]);
-            } else {
-                http_response_code(404);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "Task not found"
-                ]);
-            }
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                "success" => false,
-                "error" => $e->getMessage()
-            ]);
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
         }
-    }
-
-    public function deleteReminder()
-    {
-        $this->addHeaders("full");
 
         try {
             if ($_SERVER["REQUEST_METHOD"] !== "DELETE") {
@@ -121,29 +80,31 @@ class APIData
             }
 
             parse_str($_SERVER['QUERY_STRING'] ?? '', $query);
-            $taskId = isset($query['id']) ? (int) $query['id'] : 0;
+            $id = isset($query['id']) ? (int) $query['id'] : 0;
 
-            if ($taskId <= 0) {
+            if ($id <= 0) {
                 http_response_code(400);
-                echo json_encode(["success" => false, "error" => "Task ID is required"]);
+                echo json_encode(["success" => false, "error" => "ID is required"]);
                 exit;
             }
 
+            $table = $this->getTableFromUri();
+
             $stmt = Database::crudQuery(
-                "DELETE FROM api_reminders WHERE id = :id",
-                ['id' => $taskId]
+                "DELETE FROM {$table} WHERE id = :id",
+                ['id' => $id]
             );
 
             if ($stmt->rowCount() > 0) {
                 echo json_encode([
                     "success" => true,
-                    "message" => "Task deleted"
+                    "message" => ucfirst($table) . " entry deleted"
                 ]);
             } else {
                 http_response_code(404);
                 echo json_encode([
                     "success" => false,
-                    "error" => "Task not found"
+                    "error" => "Entry not found"
                 ]);
             }
         } catch (Exception $e) {

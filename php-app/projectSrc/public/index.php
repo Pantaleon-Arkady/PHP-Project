@@ -120,7 +120,7 @@ switch ($uri) {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            $apiData->deleteTask();
+            $apiData->deleteData();
         } else {
             http_response_code(405);
             echo json_encode(["success" => false, "error" => "Method not allowed"]);
@@ -132,7 +132,7 @@ switch ($uri) {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            $apiData->deleteReminder();
+            $apiData->deleteData();
         } else {
             http_response_code(405);
             echo json_encode(["success" => false, "error" => "Method not allowed"]);
