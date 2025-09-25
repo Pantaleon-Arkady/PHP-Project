@@ -32,11 +32,6 @@ class APIData
     {
         $this->addHeaders("full");
 
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(200);
-            exit;
-        }
-
         try {
             $tasks = Database::fetchAll("SELECT * FROM react_php_mixed ORDER BY id DESC");
 
@@ -57,11 +52,6 @@ class APIData
     {
         $this->addHeaders("full");
 
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(200);
-            exit;
-        }
-
         try {
             $reminders = Database::fetchAll("SELECT * FROM api_reminders ORDER BY id DESC");
 
@@ -81,11 +71,6 @@ class APIData
     public function deleteTask()
     {
         $this->addHeaders("full");
-
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(200);
-            exit;
-        }
 
         try {
             if ($_SERVER["REQUEST_METHOD"] !== "DELETE") {
@@ -132,11 +117,6 @@ class APIData
     public function deleteReminder()
     {
         $this->addHeaders("full");
-
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(200);
-            exit;
-        }
 
         try {
             if ($_SERVER["REQUEST_METHOD"] !== "DELETE") {

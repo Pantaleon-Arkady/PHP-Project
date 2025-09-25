@@ -19,6 +19,10 @@ $shop = new Shop();
 $admin = new Admin();
 $apiData = new APIData();
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    $apiData->handlePreflight();
+}
+
 switch ($uri) {
 
     #Users Log
@@ -113,9 +117,7 @@ switch ($uri) {
 
     //Task
     case '/tasks':
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            $apiData->handlePreflight();
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->listTasks();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteTask();
@@ -127,9 +129,7 @@ switch ($uri) {
     
     // Reminder    
     case '/api-data/reminders':
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            $apiData->handlePreflight();
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->remindersList();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteReminder();
