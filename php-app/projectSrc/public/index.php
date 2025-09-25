@@ -130,7 +130,7 @@ switch ($uri) {
     // Reminder    
     case '/reminders':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $apiData->remindersList();
+            $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteReminder();
         } else {

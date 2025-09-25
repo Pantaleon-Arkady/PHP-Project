@@ -63,46 +63,6 @@ class APIData
         }
     }
 
-    public function listTasks()
-    {
-        $this->addHeaders("full");
-
-        try {
-            $tasks = Database::fetchAll("SELECT * FROM react_php_mixed ORDER BY id DESC");
-
-            echo json_encode([
-                'success' => true,
-                'data' => $tasks
-            ]);
-        } catch (\Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'success' => false,
-                'error' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function remindersList()
-    {
-        $this->addHeaders("full");
-
-        try {
-            $reminders = Database::fetchAll("SELECT * FROM api_reminders ORDER BY id DESC");
-
-            echo json_encode([
-                'success' => true,
-                'data' => $reminders
-            ]);
-        } catch (\Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'success' => false,
-                'error' => $e->getMessage()
-            ]);
-        }
-    }
-
     public function deleteTask()
     {
         $this->addHeaders("full");
