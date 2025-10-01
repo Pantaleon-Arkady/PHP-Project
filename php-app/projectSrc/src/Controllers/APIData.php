@@ -139,10 +139,13 @@ class APIData
             );
 
             $newId = Database::lastInsertId("{$table}_id_seq");
+            error_log("lastInsertId returned: " . $newId);
 
-            $newTask = Database::fetchAssoc("SELECT * FROM {$table} WHERE id = :id", [
-                'id' => $newId
-            ]);
+            $newTask = Database::fetchAssoc(
+                "SELECT * FROM {$table} WHERE id = :id", 
+                ['id' => $newId]
+            );
+            error_log("Fetched new task: " . json_encode($newTask));
 
             echo json_encode([
                 "success" => true,
