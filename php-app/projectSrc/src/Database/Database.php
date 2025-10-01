@@ -5,7 +5,7 @@ namespace Root\Database;
 use PDO;
 use PDOException;
 
-class Database 
+class Database
 {
     private static ?PDO $instance = null;
 
@@ -57,4 +57,11 @@ class Database
         return $statement;
     }
 
+    public static function lastInsertId(?string $sequence = null): string
+    {
+        $pdo = self::getConnection();
+        return $sequence
+            ? $pdo->lastInsertId($sequence)
+            : $pdo->lastInsertId();
+    }
 }
