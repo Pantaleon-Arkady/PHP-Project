@@ -115,4 +115,46 @@ class APIData
             ]);
         }
     }
+
+    public function createData()
+    {
+        $this->addHeaders("full");
+
+        try {
+            $table = $this->getTableFromUri();
+            $input = json_decode(file_get_contents("php://input"), true);
+
+            if (empty($input['task'])) {
+                http_response_code(400);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Task field is required"
+                ]);
+                return;
+            }
+
+            Database::crudQuery(
+                "INSERT INTO {$table} (task) VALUES (:task)",
+                ['task' => $input['task']]
+            );
+
+            $newId = Database::lastInsertId("{$table}_id_seq");
+
+            $newTask = Database::fetchAssoc("SELECT * FROM {$table} WHERE id = :id", [
+                'id' => $newId
+            ]);
+
+            echo json_encode([
+                "success" => true,
+                "data" => $newTask
+            ]);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+        }
+    }
+    
 }
