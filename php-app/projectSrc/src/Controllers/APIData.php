@@ -22,7 +22,8 @@ class APIData
         }
     }
 
-    public function handlePreflight() {
+    public function handlePreflight()
+    {
         $this->addHeaders("full");
         http_response_code(200);
         exit;
@@ -142,7 +143,7 @@ class APIData
             error_log("lastInsertId returned: " . $newId);
 
             $newTask = Database::fetchAssoc(
-                "SELECT * FROM {$table} WHERE id = :id", 
+                "SELECT * FROM {$table} WHERE id = :id",
                 ['id' => $newId]
             );
             error_log("Fetched new task: " . json_encode($newTask));
@@ -159,5 +160,66 @@ class APIData
             ]);
         }
     }
-    
+
+    public function updateData()
+    {
+        $this->addHeaders("full");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+
+        try {
+            if ($_SERVER["REQUEST_METHOD"] !== "PUT") {
+                http_response_code(405);
+                echo json_encode(["success" => false, "error" => "Method not allowed"]);
+                exit;
+            }
+
+            $table = $this->getTableFromUri();
+            $input = json_decode(file_get_contents("php://input"), true);
+
+            $id = isset($input['id']) ? (int) $input['id'] : 0;
+            $task = $input['task'] ?? null;
+
+            if ($id <= 0 || empty($task)) {
+                http_response_code(400);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "ID and Task are required"
+                ]);
+                return;
+            }
+
+            $stmt = Database::crudQuery(
+                "UPDATE {$table} SET task = :task WHERE id = :id",
+                ['task' => $task, 'id' => $id]
+            );
+
+            if ($stmt->rowCount() > 0) {
+                $updatedTask = Database::fetchAssoc(
+                    "SELECT * FROM {$table} WHERE id = :id",
+                    ['id' => $id]
+                );
+
+                echo json_encode([
+                    "success" => true,
+                    "data" => $updatedTask
+                ]);
+            } else {
+                http_response_code(404);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Entry not found or no changes made"
+                ]);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+        }
+    }
 }
