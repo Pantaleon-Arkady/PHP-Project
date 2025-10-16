@@ -121,6 +121,8 @@ switch ($uri) {
             $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $apiData->createData();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+            $apiData->updateData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteData();
         } else {
@@ -128,13 +130,15 @@ switch ($uri) {
             echo json_encode(["success" => false, "error" => "Method not allowed"]);
         }
         break;
-    
-    // Reminder    
+
+    // Reminder API
     case '/reminders':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $apiData->listData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $apiData->createData();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+            $apiData->updateData();
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $apiData->deleteData();
         } else {
