@@ -29,8 +29,8 @@
         <div class="col-1 col-md-3 border p-4">
             <div class="ratio ratio-1x1">
                 <button class="profile_button rounded-circle btn p-0 bg-transparent"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#profileImageModal">
+                    data-bs-toggle="modal"
+                    data-bs-target="#setProfileModal">
                     <img src="image.jpg" class="w-100 h-100 object-fit-cover rounded-circle" />
                 </button>
             </div>
@@ -41,14 +41,36 @@
 
 <!-- Profile Form -->
 
-<div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="createPostModalLabel">Set Profile Image</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="setProfileModal" tabindex="-1" aria-labelledby="setProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="setProfileLabel">Set Profile Image</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <label for="profile-image" class="form-label d-block">Upload a profile image</label>
+                <div class="border border-2 rounded-3 p-4 bg-light text-center position-relative">
+                    <input type="file" id="profile-image" name="profile-image" class="d-none" accept="image/*">
+                    <label for="profile-image" class="btn btn-dark px-4">Choose Image</label>
+                    <p class="mt-2 text-muted small" id="file-name">No file chosen</p>
                 </div>
+                <small class="text-muted d-block mt-2">Upload an image that has 1:1 length and width.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark" id="setProfileBtn">
+                    <span id="setProfileBtnText">Set Profile</span>
+                    <span id="setProfileSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script>
+document.getElementById('profile-image').addEventListener('change', function() {
+  const fileName = this.files[0]?.name || 'No file chosen';
+  document.getElementById('file-name').textContent = fileName;
+});
+</script>
