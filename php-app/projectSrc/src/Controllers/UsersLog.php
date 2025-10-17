@@ -193,4 +193,11 @@ class UsersLog
         die();
     }
 
+    public function userProfileImage()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo 'uploading profile...';
+        }
+    }
+
 }

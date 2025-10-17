@@ -44,6 +44,9 @@ switch ($uri) {
     case '/register-pin':
         $usersLog->pinVerification();
         break;
+    case '/user-profile-image':
+        $usersLog->userProfileImage();
+        break;
     case '/logout':
         $usersLog->logOut();
         break;
