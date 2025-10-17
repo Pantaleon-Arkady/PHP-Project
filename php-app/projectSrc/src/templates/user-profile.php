@@ -43,18 +43,20 @@
 
 <div class="modal fade" id="setProfileModal" tabindex="-1" aria-labelledby="setProfileLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="modal-content">
+        <form class="modal-content" method="POST" action="/user-profile-image" enctype="multipart/form-data" id="setProfileForm">
             <div class="modal-header">
                 <h4 class="modal-title" id="setProfileLabel">Set Profile Image</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <label for="profile-image" class="form-label d-block">Upload a profile image</label>
+
                 <div class="border border-2 rounded-3 p-4 bg-light text-center position-relative">
-                    <input type="file" id="profile-image" name="profile-image" class="d-none" accept="image/*">
+                    <input type="file" id="profile-image" name="profile-image[]" class="d-none" accept="image/*">
                     <label for="profile-image" class="btn btn-dark px-4">Choose Image</label>
                     <p class="mt-2 text-muted small" id="file-name">No file chosen</p>
                 </div>
+
                 <small class="text-muted d-block mt-2">Upload an image that has 1:1 length and width.</small>
             </div>
             <div class="modal-footer">
@@ -69,8 +71,21 @@
 </div>
 
 <script>
-document.getElementById('profile-image').addEventListener('change', function() {
-  const fileName = this.files[0]?.name || 'No file chosen';
-  document.getElementById('file-name').textContent = fileName;
-});
+    const profileInput = document.getElementById('profile-image');
+    const fileNameDisplay = document.getElementById('file-name');
+    const form = document.getElementById('setProfileForm');
+
+    profileInput.addEventListener('change', function() {
+        const fileName = this.files[0]?.name || 'No file chosen';
+        fileNameDisplay.textContent = fileName;
+    });
+
+    form.addEventListener('submit', function(event) {
+        if (profileInput.files.length === 0) {
+            event.preventDefault();
+            fileNameDisplay.textContent = "⚠️ Please choose an image before submitting.";
+            fileNameDisplay.classList.remove('text-muted');
+            fileNameDisplay.classList.add('text-danger', 'fw-semibold');
+        }
+    });
 </script>
