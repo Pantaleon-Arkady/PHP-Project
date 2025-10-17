@@ -52,7 +52,7 @@
                 <label for="profile-image" class="form-label d-block">Upload a profile image</label>
 
                 <div class="border border-2 rounded-3 p-4 bg-light text-center position-relative">
-                    <input type="file" id="profile-image" name="profile-image[]" class="d-none" accept="image/*">
+                    <input type="file" id="profile-image" name="images[]" class="d-none" accept="image/*">
                     <label for="profile-image" class="btn btn-dark px-4">Choose Image</label>
                     <p class="mt-2 text-muted small" id="file-name">No file chosen</p>
                 </div>
