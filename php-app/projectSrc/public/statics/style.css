@@ -84,3 +84,13 @@ body {
     line-height: 1;
 }
 
+/* Profile */
+
+.profile_button {
+    border: 2px black solid;
+}
+
+.profile_button:hover {
+    border: 3px green solid
+}
+
