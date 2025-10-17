@@ -28,9 +28,27 @@
     <div class="row">
         <div class="col-1 col-md-3 border p-4">
             <div class="ratio ratio-1x1">
-                <img src="image.jpg" class="rounded-circle border object-fit-cover w-100 h-100" />
+                <button class="profile_button rounded-circle btn p-0 bg-transparent"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#profileImageModal">
+                    <img src="image.jpg" class="w-100 h-100 object-fit-cover rounded-circle" />
+                </button>
             </div>
         </div>
         <div class="col-12 col-md-9 border">Other stuff</div>
     </div>
+</div>
+
+<!-- Profile Form -->
+
+<div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="createPostModalLabel">Set Profile Image</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </form>
+        </div>
 </div>
