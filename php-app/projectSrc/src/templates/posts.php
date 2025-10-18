@@ -1,3 +1,9 @@
+<?
+$userProfile = !empty($each_post['user_profile'])
+    ? json_decode($each_post['user_profile'])[0]
+    : '/files/default_profile.jpg';
+?>
+
 <div class="d-flex flex-column mb-4 border rounded shadow-sm p-3 bg-white position-relative">
 
     <div class="me-3 text-center">
@@ -10,7 +16,10 @@
     <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start mb-2">
             <div class="d-flex align-items-center">
-                <img src="https://via.placeholder.com/24" class="rounded-circle me-2" alt="user-profile" />
+                <img src="<?php echo $userProfile ?>"
+                    alt="user-profile"
+                    class="profile-img me-2 rounded-circle border border-2 border-light shadow-sm" 
+                />
                 <small class="text-muted">
                     <?php echo $each_post['author'] ?> • <?php echo $each_post['created_at'] ?>
                 </small>
@@ -87,7 +96,7 @@
                         <!-- Edit Comment Form -->
                         <div class="modal fade" id="editCommentModal<?php echo $comment['comment_id']; ?>" tabindex="-1" aria-labelledby="editCommentModalLabel<?php echo $comment['comment_id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
-                                <form class="modal-content"  method="POST" action="/edit-comment" id="editCommentForm">
+                                <form class="modal-content" method="POST" action="/edit-comment" id="editCommentForm">
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCommentModalLabel<?php echo $comment['comment_id']; ?>">Edit Comment</h5>
