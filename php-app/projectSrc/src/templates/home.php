@@ -44,6 +44,10 @@
                 </ul>
 
                 <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                    <img src="<?php echo htmlspecialchars($profileImage[0]); ?>"
+                        alt="Profile Image"
+                        class="rounded-circle object-fit-cover border border-2 border-light"
+                        style="width: 40px; height: 40px;">
                     <span><?php echo $user['username']; ?></span>
 
                     <?php if (isset($_GET['home']) && $_GET['home'] === 'post'): ?>
@@ -82,7 +86,7 @@
                         <div>
                             <input type="hidden" name="token" value="<?php echo $token; ?>" />
                             <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>" />
-                            <input type="hidden" name="checkout_type" value="cart"/>
+                            <input type="hidden" name="checkout_type" value="cart" />
                         </div>
                         <div class="card mb-3 shadow-sm p-3 d-flex flex-row justify-content-end align-items-center">
                             <button type="submit" class="btn btn-outline-dark" id="postBtn">

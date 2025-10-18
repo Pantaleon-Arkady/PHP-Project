@@ -193,4 +193,23 @@ class UsersLog
         die();
     }
 
+    public function userProfileImage()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $filePath = isset($_FILES['images']) ? General::uploadFile() : [];
+
+            $imagePath = json_encode($filePath['success']);
+
+            $sqlstmnt = Database::crudQuery(
+                'UPDATE app_user SET profile_path = :profile_path WHERE id = :id',
+                [
+                    'profile_path' => $imagePath,
+                    'id' => $_SESSION['userId']
+                ]
+            );
+        }
+    }
+
 }

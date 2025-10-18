@@ -84,6 +84,14 @@ body {
     line-height: 1;
 }
 
+.profile-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+}
+
 /* Profile */
 
 .profile_button {

@@ -34,6 +34,11 @@ class General
             ['id' => $userId]
         );
 
+        if ($user['profile_path']) {
+            $profileImage = json_decode($user['profile_path'], true);
+        }
+        $trialString = 'trial string';
+
         $allPosts = Post::allPosts();
         $allProducts = Shop::allProducts();
         $cartQuery = Shop::allCartProducts($userId);
