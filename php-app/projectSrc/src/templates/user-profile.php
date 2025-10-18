@@ -31,7 +31,7 @@
                 <button class="profile_button rounded-circle btn p-0 bg-transparent"
                     data-bs-toggle="modal"
                     data-bs-target="#setProfileModal">
-                    <img src="image.jpg" class="w-100 h-100 object-fit-cover rounded-circle" />
+                    <img src="<?php echo htmlspecialchars($profileImage[0]); ?>" class="w-100 h-100 object-fit-cover rounded-circle" />
                 </button>
             </div>
         </div>
